@@ -78,7 +78,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7117051846489887532}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3beab3a7f6edba4bb2b01e559706558, type: 3}
+  m_Script: {fileID: 11500000, guid: a4afe8271e1bcd246a0a9f446918ea3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isLadder: 0
@@ -87,9 +87,9 @@ MonoBehaviour:
   feetPos: {fileID: 7117051845332749309}
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   canHold: 0
-  jumpSound: {fileID: 8300000, guid: 05fdd0fc0a3748c499d79916b002b537, type: 3}
+  jumpSound: {fileID: 8300000, guid: ba7917860c96de5419dd4ad522f233b3, type: 3}
 --- !u!212 &7117051846489887531
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -131,12 +131,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 987432558c5423745858d38eac7b5d30, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5f3d03bbe31f418438ee9eb669f27800, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.44, y: 1.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -151,7 +151,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 7117051846489887532}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 6c55445ac112c664b932ffd42688e6a0, type: 2}
+  m_Material: {fileID: 6200000, guid: 64390198ae5b7424fadddd605fe72ade, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -189,7 +189,7 @@ Animator:
   m_GameObject: {fileID: 7117051846489887532}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4f43af84bd813b042a3c6cd01c119c80, type: 2}
+  m_Controller: {fileID: 9100000, guid: a859f23ab08f5b44a85440b384d20a64, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
