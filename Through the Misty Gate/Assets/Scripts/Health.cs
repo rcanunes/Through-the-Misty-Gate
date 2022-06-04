@@ -21,8 +21,6 @@ public class Health : MonoBehaviour
     void Start()
     {
         curHealth = maxHealth;
-        m1Image = GameObject.FindGameObjectWithTag("M1").GetComponent<Image>();
-        m2Image = GameObject.FindGameObjectWithTag("M2").GetComponent<Image>();
     }
 
     // Update is called once per frame
