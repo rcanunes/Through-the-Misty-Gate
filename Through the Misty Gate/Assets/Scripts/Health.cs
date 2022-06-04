@@ -31,7 +31,13 @@ public class Health : MonoBehaviour
         
     }
 
-    public void AddHealth(int hp) {
-        curHealth += hp;
+    public void HealEntity(int hp) {
+        curHealth = (curHealth + hp < maxHealth) ? curHealth + hp : maxHealth;
+        healthBar.SetHealth(curHealth);
+    }
+
+    public void DamageEntity(int hp) {
+        curHealth = (curHealth - hp > 0) ? curHealth - hp : 0;
+        healthBar.SetHealth(curHealth);
     }
 }
