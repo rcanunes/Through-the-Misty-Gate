@@ -6,14 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour
 {
-    public float maxHealth = 100.0f;
-    public float curHealth = 0.0f;
-    public float burstRate = 1.5f;
-    private float nextBurst = 0.0f;
-    private float nextDamage = 0.0f;
-    public float damageRate = 2.0f;
-    public Image m1Image;
-    public Image m2Image;
+    private float curHealth;
+
+    public Health(float maxHp) {
+        maxHealth = maxHp;
+    }
 
     public HealthBar healthBar;
 
@@ -27,6 +24,12 @@ public class Health : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public float maxHealth { get; set;}
+
+    public float GetCurrentHealth() {
+        return curHealth;
     }
 
     public void HealEntity(int hp) {
