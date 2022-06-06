@@ -3,29 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class UI_HotKeyBarSpellSlot : MonoBehaviour, IDragHandler, IDropHandler, IEndDragHandler, IBeginDragHandler
-{ 
-    private HotKeySystem.HotKeyAbility hotKeyAbility;
+public class UI_SpellBookSlot : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHandler
+{
     private Canvas canvas;
     private CanvasGroup canvasGroup;
     private RectTransform rectTransform;
     private Vector2 startAnchoredPosition;
-    private int abilityIndex;
-    private HotKeySystem hotKeySystem;
+
+    private SpellBookSystem spellBookSystem;
+    public UI_ItemManager.HotKeyAbility hotKeyAbility;
 
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
-
         canvas = GetComponentInParent<Canvas>();
         canvasGroup = GetComponent<CanvasGroup>();
     }
-    public void SetUp(int index, HotKeySystem hotKeySystem, HotKeySystem.HotKeyAbility hotKeyAbility)
+
+    public UI_ItemManager.HotKeyAbility GetSpell()
     {
-        this.hotKeyAbility = hotKeyAbility;
-        this.abilityIndex = index;
-        this.hotKeySystem = hotKeySystem;
+        return hotKeyAbility;
     }
+
 
     public void OnDrag(PointerEventData eventData)
     {
@@ -33,23 +32,12 @@ public class UI_HotKeyBarSpellSlot : MonoBehaviour, IDragHandler, IDropHandler, 
 
     }
 
-    public int GetAbilityIndex()
+    public void SetUp(SpellBookSystem spellBookSystem, UI_ItemManager.HotKeyAbility hotKeyAbility)
     {
-        return abilityIndex;
+        this.hotKeyAbility = hotKeyAbility;
+        this.spellBookSystem = spellBookSystem;
     }
 
-    public void OnDrop(PointerEventData eventData)
-    {
-        if (eventData.pointerDrag != null)
-        {
-            UI_HotKeyBarSpellSlot uiHotKeyBarSpellSlot = eventData.pointerDrag.GetComponent<UI_HotKeyBarSpellSlot>();
-            if(uiHotKeyBarSpellSlot != null)
-            {
-                hotKeySystem.SwapAbility(abilityIndex, uiHotKeyBarSpellSlot.GetAbilityIndex());
-            }
-        }
-
-    }
 
     private void Start()
     {
@@ -61,6 +49,7 @@ public class UI_HotKeyBarSpellSlot : MonoBehaviour, IDragHandler, IDropHandler, 
         rectTransform.anchoredPosition = startAnchoredPosition;
         canvasGroup.alpha = 1;
         canvasGroup.blocksRaycasts = true;
+        spellBookSystem.InvokeOnSpellChange();
     }
 
     public void OnBeginDrag(PointerEventData eventData)

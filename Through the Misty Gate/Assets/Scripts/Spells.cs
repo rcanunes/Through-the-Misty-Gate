@@ -10,7 +10,9 @@ public class Spells : MonoBehaviour
         Fireball,
         Shield,
         LightSword,
-        Boost
+        Boost,
+        SoundWave,
+        HydroPump
     }
 
     public Spell currentSpell = Spell.Fireball;
@@ -30,6 +32,12 @@ public class Spells : MonoBehaviour
                 break;
             case Spell.Boost:
                 Debug.Log("Boost");
+                break;
+            case Spell.SoundWave:
+                Debug.Log("SoundWave");
+                break;   
+            case Spell.HydroPump:
+                Debug.Log("HydroPump ");
                 break;
             default:
                 break;

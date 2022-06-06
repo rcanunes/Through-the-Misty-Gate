@@ -11,6 +11,9 @@ public class SpellsAssetContainer : MonoBehaviour
     public Sprite ShieldSprite;
     public Sprite BoostSprite;
     public Sprite LightSwordSprite;
+    public Sprite DefaultImage;
+    public Sprite HydropumpSprite;
+    public Sprite SoundwaveSprite;
 
     private void Awake()
     {
