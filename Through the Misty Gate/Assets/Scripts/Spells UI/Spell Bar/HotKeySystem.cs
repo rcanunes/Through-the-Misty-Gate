@@ -190,6 +190,7 @@ public class HotKeySystem {
     {
         if (spellA == null || spellB == null)
         {
+            Debug.Log("Something was Null");
             return;
         }
 
@@ -198,6 +199,7 @@ public class HotKeySystem {
             int indexA = spells.IndexOf(spellA);
             int indexB = spells.IndexOf(spellB);
 
+            Debug.Log("Swapping" + indexA.ToString() + " " + indexB.ToString());
 
             UI_ItemManager.HotKeyAbility ability = spells[indexA];
             spells[indexA] = spells[indexB];

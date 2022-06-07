@@ -59,6 +59,7 @@ public class UI_HotKeyBarSpellSlot : MonoBehaviour, IDragHandler, IDropHandler, 
             {
                 if (hotKeyAbility == null)
                 {
+                    Debug.Log("Adding Spell");
 
                     hotKeySystem.AddSpell(uiSpellBookSlot.GetSpell());
                 }
