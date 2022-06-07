@@ -29,8 +29,6 @@ public abstract class OffensiveSpell : BaseSpell {
         return this.areaOfEffect;
     }
 
-    public abstract void Cast();
-
     protected IEnumerator ChargeAttack()
     {
         yield return new WaitForSeconds(chargeTime);

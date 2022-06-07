@@ -8,6 +8,4 @@ public abstract class DefensiveSpell : BaseSpell {
     : base(name, cooldown, castTime, immobileCast) {
         
     }
-
-    public abstract void Cast();
 }
