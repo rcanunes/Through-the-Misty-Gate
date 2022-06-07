@@ -48,11 +48,11 @@ ExportedObj/
 *.VC.db
 
 # Unity3D generated meta files
-*.pidb.meta
-*.pdb.meta
-*.mdb.meta
-*.cs.meta
-*.meta
+# *.pidb.meta
+# *.pdb.meta
+# *.mdb.meta
+# *.cs.meta
+# *.meta
 
 # Unity3D generated file on crash reports
 sysinfo.txt
@@ -74,3 +74,5 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 *.log
+*.log
+Through the Misty Gate/Logs/shadercompiler-UnityShaderCompiler.exe4.log
