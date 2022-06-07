@@ -30,6 +30,9 @@ public class PlayerController : MonoBehaviour
     private float jumpForce; // Jump Strength
     private float gravityScale;
 
+    private float maxFallingSpped;
+
+
     // Animation Variables
     private bool idle;
     private Animator animator;
@@ -51,11 +54,13 @@ public class PlayerController : MonoBehaviour
         gravityScale = 5;
         jumpTime = 0.4f;
         jumpForce = 11;
+        maxFallingSpped = -10f;
 
         playerRb = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
+
     }
 
     // Update is called once per frame
@@ -105,6 +110,14 @@ public class PlayerController : MonoBehaviour
             canHold = false;
         }
 
+        ModifyPhysics();
+
+    }
+
+    private void ModifyPhysics()
+    {
+        if (playerRb.velocity.y < 0 && playerRb.velocity.y > maxFallingSpped)
+            playerRb.AddForce(Vector2.down);
     }
 
     private void Climbing()
