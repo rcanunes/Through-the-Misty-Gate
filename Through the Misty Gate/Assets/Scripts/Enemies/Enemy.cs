@@ -2,7 +2,7 @@
 using Enemies.BehaviourTrees;
 
 namespace Enemies {
-    public class Enemy : MonoBehaviour {
+    public abstract class Enemy : MonoBehaviour {
         
         // Basic attributes
         protected string Name;
@@ -23,13 +23,23 @@ namespace Enemies {
 
         // Player and Manager
         public GameObject Player { get; protected set; }
-        //public GameManager Manager { get; protected set; }
+        public GameManager Manager { get; protected set; }
 
         // Rigidbody
         protected Rigidbody2D RigidBody;
         
         // Behaviour Tree
         protected Task BehaviourTree;
+        
+        protected virtual void Start() {
+            this.Name = this.transform.gameObject.name;
+            this.Type = this.transform.gameObject.tag;
+            
+            Manager = GameObject.FindObjectOfType<GameManager>();
+            Player = GameObject.FindGameObjectWithTag("Player");
+            
+            RigidBody = GetComponent<Rigidbody2D>();
+        }
         
         // Attack Target methods
         public void AttackTarget(GameObject target) {
