@@ -2,9 +2,12 @@
 using Enemies.BehaviourTrees.Trees;
 
 namespace Enemies.EnemyTypes {
-    public class MageEnemy  : Enemy {
+    public abstract class MageEnemy : Enemy {
         protected override void Start() {
             base.Start();
+
+            this.movementStyle = 0;
+            this.canJump = false;
 
             this.BehaviourTree = new MageTree();
         }

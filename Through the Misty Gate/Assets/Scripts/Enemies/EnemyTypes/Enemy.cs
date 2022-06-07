@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
-using Enemies.BehaviourTrees;
+using Enemies.BehaviourTrees.Implementation;
 
-namespace Enemies {
+namespace Enemies.EnemyTypes {
     public abstract class Enemy : MonoBehaviour {
         
         // Basic attributes
@@ -12,18 +12,23 @@ namespace Enemies {
         
         // Attack attributes
         protected int Damage;
-        protected float AttackRange;
+        protected float MeleeAttackRange;
+        protected float RangedAttackRange;
         protected bool HasRangedAttack = false;
         
         // Movement attributes
         protected float Speed;
         protected float JumpPower;
+        
+        // Movement Style
+        protected int movementStyle; // 0 for walking, 1 for flying, 2 for hopping, -1 for immobile
+        protected bool canJump;
 
         protected float AwakenDistance;
 
         // Player and Manager
-        public GameObject Player { get; protected set; }
-        public GameManager Manager { get; protected set; }
+        public GameObject Player { get; private set; }
+        public GameManager Manager { get; private set; }
 
         // Rigidbody
         protected Rigidbody2D RigidBody;
@@ -50,6 +55,11 @@ namespace Enemies {
             if (HasRangedAttack) {
                 //Manager.EnemyRangedAttack(this.gameObject, target);
             }
+        }
+        
+        // Getters
+        public float GetAwakenDistance() {
+            return AwakenDistance;
         }
     }
 }

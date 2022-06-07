@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Enemies.BehaviourTrees.Implementation;
 
-namespace Enemies.BehaviourTrees
-{
+namespace Enemies.BehaviourTrees.Implementation {
     public class Sequence : CompositeTask {
      
         public Sequence(List<Task> tasks) : base(tasks) { }
