@@ -54,7 +54,6 @@ public class UI_HotKeyBar : MonoBehaviour
 
                 if (hotKeySystem.GetCurrentSpell() == hotKeyAbility.spellType)
                 {
-                    Debug.Log(i.ToString() + " " + hotKeyAbility.spellType.ToString());
                     spellSlotTransform.Find("Border").GetComponent<Image>().color = Color.red;
                 }
 
