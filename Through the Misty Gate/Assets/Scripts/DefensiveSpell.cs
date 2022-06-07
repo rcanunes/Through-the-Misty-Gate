@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class DefensiveSpell : MonoBehaviour {
+public abstract class DefensiveSpell : BaseSpell {
     protected OffensiveSpell(string name, float cooldown, float castTime, float immobileCast) 
     : base(name, cooldown, castTime, immobileCast) {
         
