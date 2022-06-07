@@ -9,6 +9,7 @@ public class SpellBookSystem
     private List<UI_ItemManager.HotKeyAbility> allSpells;
     public event EventHandler OnSpellChange;
 
+    public bool toogleSpellBook;
 
     public SpellBookSystem(Spells player)
     {
@@ -65,4 +66,5 @@ public class SpellBookSystem
     {
         OnSpellChange?.Invoke(this, EventArgs.Empty);
     }
+
 }

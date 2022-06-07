@@ -18,10 +18,11 @@ public class UI_ItemManager : MonoBehaviour
     private void Start()
     {
         hotKeySystem = new HotKeySystem(player);
-        uiHotKeyBar.SetHotKeySystem(hotKeySystem);
 
         spellBookSystem = new SpellBookSystem(player);
         uiSpellBook.SetSpellBookSystem(spellBookSystem, hotKeySystem);
+        uiHotKeyBar.SetHotKeySystem(hotKeySystem, spellBookSystem);
+
     }
 
     void Update()

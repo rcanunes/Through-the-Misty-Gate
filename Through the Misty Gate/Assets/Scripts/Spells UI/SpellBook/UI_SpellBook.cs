@@ -66,6 +66,7 @@ public class UI_SpellBook : MonoBehaviour, IDropHandler, IDragHandler
         {
             ToogleSpellBook();
             UpdateSpellBookVisual();
+            spellBookSystem.toogleSpellBook = toogleSpellBook;
         }
     }
 
@@ -115,7 +116,7 @@ public class UI_SpellBook : MonoBehaviour, IDropHandler, IDragHandler
             spellSlotRectTransform.gameObject.SetActive(true);
             spellSlotRectTransform.Find("SpellIcon").GetComponent<Image>().sprite = spell.GetSprite();
             x++;
-            spellSlotTransform.GetComponent<UI_SpellBookSlot>().SetUp(spellBookSystem, spell);
+            spellSlotTransform.GetComponent<UI_SpellBookSlot>().SetUp(spellBookSystem, spell, hotKeySystem);
 
             if (hotKeySystem.CheckContainsSpell(spell))
             {    

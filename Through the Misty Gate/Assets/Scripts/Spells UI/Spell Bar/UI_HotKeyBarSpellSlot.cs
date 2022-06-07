@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class UI_HotKeyBarSpellSlot : MonoBehaviour, IDragHandler, IDropHandler, IEndDragHandler, IBeginDragHandler
+public class UI_HotKeyBarSpellSlot : MonoBehaviour, IDragHandler, IDropHandler, IEndDragHandler, IBeginDragHandler, IPointerDownHandler
 { 
     private UI_ItemManager.HotKeyAbility hotKeyAbility;
     private Canvas canvas;
@@ -11,7 +11,9 @@ public class UI_HotKeyBarSpellSlot : MonoBehaviour, IDragHandler, IDropHandler, 
     private RectTransform rectTransform;
     private Vector2 startAnchoredPosition;
     private int abilityIndex;
+
     private HotKeySystem hotKeySystem;
+    private SpellBookSystem spellBookSystem;
 
     private Transform hotKeyBar;
 
@@ -22,8 +24,9 @@ public class UI_HotKeyBarSpellSlot : MonoBehaviour, IDragHandler, IDropHandler, 
         canvasGroup = GetComponentInParent<CanvasGroup>();
        
     }
-    public void SetUp(int index, HotKeySystem hotKeySystem, UI_ItemManager.HotKeyAbility hotKeyAbility)
+    public void SetUp(int index, HotKeySystem hotKeySystem, UI_ItemManager.HotKeyAbility hotKeyAbility, SpellBookSystem spellBookSystem)
     {
+        this.spellBookSystem = spellBookSystem;
         this.hotKeyAbility = hotKeyAbility;
         this.abilityIndex = index;
         this.hotKeySystem = hotKeySystem;
@@ -100,5 +103,14 @@ public class UI_HotKeyBarSpellSlot : MonoBehaviour, IDragHandler, IDropHandler, 
     public void RemoveSpell()
     {
         hotKeySystem.RemoveSpell(hotKeyAbility);
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if (eventData.button == PointerEventData.InputButton.Right && hotKeyAbility != null && spellBookSystem.toogleSpellBook)
+        {
+            hotKeySystem.RemoveSpell(hotKeyAbility);
+            spellBookSystem.InvokeOnSpellChange();
+        }
     }
 }

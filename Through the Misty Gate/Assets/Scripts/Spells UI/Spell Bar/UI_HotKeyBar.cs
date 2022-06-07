@@ -9,6 +9,7 @@ public class UI_HotKeyBar : MonoBehaviour
 {
     private Transform spellSlotTemplate;
     private HotKeySystem hotKeySystem;
+    private SpellBookSystem spellBookSystem;
 
 
     private void Awake()
@@ -17,9 +18,10 @@ public class UI_HotKeyBar : MonoBehaviour
         spellSlotTemplate.gameObject.SetActive(false);
     }
 
-    public void SetHotKeySystem(HotKeySystem hotKeySystem)
+    public void SetHotKeySystem(HotKeySystem hotKeySystem, SpellBookSystem spellBookSystem)
     {
         this.hotKeySystem = hotKeySystem;
+        this.spellBookSystem = spellBookSystem;
         HotKeyBarUpdateVisual();
         hotKeySystem.OnAbilityListChange += HotKeySystem_OnAbilityListChange;
     }
@@ -56,7 +58,7 @@ public class UI_HotKeyBar : MonoBehaviour
                     spellSlotTransform.Find("Border").GetComponent<Image>().color = Color.red;
                 }
 
-                spellSlotTransform.GetComponent<UI_HotKeyBarSpellSlot>().SetUp(i, hotKeySystem, hotKeyAbility);
+                spellSlotTransform.GetComponent<UI_HotKeyBarSpellSlot>().SetUp(i, hotKeySystem, hotKeyAbility, spellBookSystem);
             }
 
             else
@@ -71,7 +73,7 @@ public class UI_HotKeyBar : MonoBehaviour
                 test.a = 0;
 
                 spellSlotTransform.Find("SpellIcon").GetComponent<Image>().color = test ;
-                spellSlotTransform.GetComponent<UI_HotKeyBarSpellSlot>().SetUp(i, hotKeySystem, null);
+                spellSlotTransform.GetComponent<UI_HotKeyBarSpellSlot>().SetUp(i, hotKeySystem, null, spellBookSystem);
 
             }
 

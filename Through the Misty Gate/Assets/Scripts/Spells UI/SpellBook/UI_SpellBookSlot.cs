@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class UI_SpellBookSlot : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHandler
+public class UI_SpellBookSlot : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHandler, IPointerDownHandler
 {
     private Canvas canvas;
     private CanvasGroup canvasGroup;
@@ -11,6 +11,7 @@ public class UI_SpellBookSlot : MonoBehaviour, IDragHandler, IEndDragHandler, IB
     private Vector2 startAnchoredPosition;
 
     private SpellBookSystem spellBookSystem;
+    private HotKeySystem hotKeySystem;
     public UI_ItemManager.HotKeyAbility hotKeyAbility;
 
     private void Awake()
@@ -32,8 +33,9 @@ public class UI_SpellBookSlot : MonoBehaviour, IDragHandler, IEndDragHandler, IB
 
     }
 
-    public void SetUp(SpellBookSystem spellBookSystem, UI_ItemManager.HotKeyAbility hotKeyAbility)
+    public void SetUp(SpellBookSystem spellBookSystem, UI_ItemManager.HotKeyAbility hotKeyAbility, HotKeySystem hotKeySystem)
     {
+        this.hotKeySystem = hotKeySystem;
         this.hotKeyAbility = hotKeyAbility;
         this.spellBookSystem = spellBookSystem;
     }
@@ -57,5 +59,14 @@ public class UI_SpellBookSlot : MonoBehaviour, IDragHandler, IEndDragHandler, IB
         canvasGroup.alpha = .6f;
         canvasGroup.blocksRaycasts = false;
         transform.SetAsLastSibling();
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            hotKeySystem.AddSpell(hotKeyAbility);
+            spellBookSystem.InvokeOnSpellChange();
+        }
     }
 }
