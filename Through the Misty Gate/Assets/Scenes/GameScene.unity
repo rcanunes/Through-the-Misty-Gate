@@ -645,7 +645,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &646616216
 GameObject:
@@ -1950,7 +1950,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2021751352
 GameObject:
@@ -2047,7 +2047,7 @@ RectTransform:
   - {fileID: 1455234110}
   - {fileID: 1755483645}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2085,7 +2085,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2028781839
 MonoBehaviour:
@@ -2114,13 +2114,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce67609942e50bb4f8c9b61d302b82c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FireballSprite: {fileID: 21300000, guid: 2d0997ac1b1fd664e98202450e7ea2d7, type: 3}
-  ShieldSprite: {fileID: 21300000, guid: 1667955fff4e1a141a5a99428fc35767, type: 3}
-  BoostSprite: {fileID: 21300000, guid: 42f6c722ead369b4b934a116b4324a4d, type: 3}
-  LightSwordSprite: {fileID: 21300000, guid: ff42a689ad961fd4b9da0a00643acce7, type: 3}
-  DefaultImage: {fileID: -2413806693520163455, guid: 8604fec366e52344684aa4b9c71027c7, type: 3}
-  HydropumpSprite: {fileID: 21300000, guid: d75c3ea4f69088244983a84c88525796, type: 3}
-  SoundwaveSprite: {fileID: 21300000, guid: eced15bb959edc54c8457ab75f9a45b5, type: 3}
+  FireballSprite: {fileID: 21300000, guid: ee34195976181ef4b83f98f5034ab668, type: 3}
+  ShieldSprite: {fileID: 21300000, guid: 8cfb7309ecb4fa14fa40431963ae59ea, type: 3}
+  BoostSprite: {fileID: 21300000, guid: 65d211f55b476254ea778e5c4d2e5735, type: 3}
+  LightSwordSprite: {fileID: 21300000, guid: d75c3ea4f69088244983a84c88525796, type: 3}
+  DefaultImage: {fileID: 21300000, guid: caf7b2475733a6e4480688688406916d, type: 3}
+  HydropumpSprite: {fileID: 21300000, guid: f41413a91e8d778458b926d8cf1d1c9a, type: 3}
+  SoundwaveSprite: {fileID: 21300000, guid: 6341005da49c17b4ebc0bd19107f0945, type: 3}
 --- !u!1001 &5443660000001726110
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2130,7 +2130,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5443659999593446820, guid: a84cbc1274f43c04187bc612d7750fb6, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5443659999593446820, guid: a84cbc1274f43c04187bc612d7750fb6, type: 3}
       propertyPath: m_LocalPosition.x
