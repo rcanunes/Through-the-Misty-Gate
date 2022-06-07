@@ -95,7 +95,38 @@ public class HotKeySystem {
                 spells[6].activateSpell();
             OnAbilityListChange?.Invoke(this, EventArgs.Empty);
         }
+
+        int index = GetIndex(GetCurrentSpell());
+
+        if (Input.GetAxisRaw("Mouse ScrollWheel") < 0f)
+        {
+            if (index < spells.Count -1)
+                index++;
+            spells[index].activateSpell();
+            OnAbilityListChange?.Invoke(this, EventArgs.Empty);
+        }
+
+        else if (Input.GetAxisRaw("Mouse ScrollWheel") > 0f)
+        {
+            if(index > 0)
+                index--;
+            spells[index].activateSpell();
+            OnAbilityListChange?.Invoke(this, EventArgs.Empty);
+        }
     }
+
+    private int GetIndex(UI_ItemManager.SpellType check)
+    {
+        for (int i = 0; i < spells.Count; i++)
+        {
+            if (spells[i].spellType == check)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
 
     internal void RemoveSpell(UI_ItemManager.HotKeyAbility hotKeyAbility)
     {
