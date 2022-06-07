@@ -17,9 +17,21 @@ public abstract class OffensiveSpell : BaseSpell {
         this.areaOfEffect = areaOfEffect;
     }
 
+    public float getDamage() {
+        return this.damage;
+    }
+
+    public float getSpeed() {
+        return this.speed;
+    }
+
+    public float getAoe() {
+        return this.areaOfEffect;
+    }
+
     public abstract void Cast();
 
-    private IEnumerator ChargeAttack()
+    protected IEnumerator ChargeAttack()
     {
         yield return new WaitForSeconds(chargeTime);
         rb.velocity = direction * speed;
