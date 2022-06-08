@@ -12,9 +12,9 @@ public class SpellScriptableObject : ScriptableObject
     public SpellEffectsScriptableObject spellEffects;
 
 
-    public void Cast(CharacterController player)
+    public void Cast(MonoBehaviour caller, PlayerController player)
     {
-        spellEffects.Cast(player);
+        spellEffects.Cast(caller, player);
     }
     
 }

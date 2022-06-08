@@ -22,7 +22,7 @@ public class AOESpellEffectsScriptableObject : SpellEffectsScriptableObject
     public GameObject aoePrefab;
 
 
-    public override void Cast(CharacterController player)
+    public override void Cast(MonoBehaviour caller, PlayerController player)
     {
         
     }

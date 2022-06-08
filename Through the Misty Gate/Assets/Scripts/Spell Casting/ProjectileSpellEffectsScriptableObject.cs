@@ -28,7 +28,7 @@ public class ProjectileSpellEffectsScriptableObject : SpellEffectsScriptableObje
     public GameObject projectilePrefab;  
     
     
-    public override void Cast(CharacterController player)
+    public override void Cast(MonoBehaviour caller, PlayerController player)
     {
         
     }

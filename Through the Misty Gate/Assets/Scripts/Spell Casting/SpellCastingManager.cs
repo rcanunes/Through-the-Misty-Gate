@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SpellCastingManager : MonoBehaviour
 {
-    private CharacterController _player;
+    private PlayerController _player;
     private SpellScriptableObject[] _unlockedSpells;  // Use array for quick lookup
     
     
@@ -18,7 +18,7 @@ public class SpellCastingManager : MonoBehaviour
     void Awake()
     {
         // Assign character controller
-        _player = transform.GetComponent<CharacterController>();
+        _player = transform.GetComponent<PlayerController>();
         
         
         // Assign starting spells to unlocked spells
@@ -60,7 +60,7 @@ public class SpellCastingManager : MonoBehaviour
 
     public void CastSpell()
     {
-        _unlockedSpells[currentSpellId].Cast(_player);
+        _unlockedSpells[currentSpellId].Cast(this, _player);
     }
 
     public SpellScriptableObject GetCurrentSpell()
