@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -30,9 +31,10 @@ public class ProjectileSpellEffectsScriptableObject : SpellEffectsScriptableObje
     
     public override void Cast(MonoBehaviour caller, PlayerController player)
     {
-        const float spawnOffset = 1.5f;
+        const float spawnOffset = 1.1f;
         
         GameObject projectile = Instantiate(projectilePrefab) as GameObject;
+        ProjectileBehaviorScript projectileBehavior = projectile.GetComponent<ProjectileBehaviorScript>();
         
         Vector3 position = player.transform.position;
         Vector3 target = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane));
@@ -40,14 +42,11 @@ public class ProjectileSpellEffectsScriptableObject : SpellEffectsScriptableObje
         Vector3 direction = target - position;
         float rotationZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         
-        float posX = position.x + direction.normalized.x * spawnOffset;
-        float posY = position.y;
-        float posZ = position.z;
-
-        projectile.transform.position = new Vector3(posX, posY, posZ);
-
+        projectile.transform.position = new Vector3(position.x + spawnOffset * Math.Sign(direction.x), position.y, position.z);
         projectile.transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotationZ);
 
         direction /= direction.magnitude;
+
+        projectileBehavior.SetAttributes(direction, speed);
     }
 }
