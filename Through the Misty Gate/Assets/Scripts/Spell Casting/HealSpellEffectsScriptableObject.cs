@@ -22,11 +22,10 @@ public class HealSpellEffectsScriptableObject : SpellEffectsScriptableObject
             //player.Heal(healAmount);   // TODO implement Heal() on PlayerController
             return;
         }
-        else
-        {
-            float healBit = healAmount / healDuration;   // Heal a bit every 1s
-            caller.StartCoroutine(HealOverTime(player, healBit));
-        }
+
+        float healBit = healAmount / healDuration;   // Heal a bit every 1s
+        caller.StartCoroutine(HealOverTime(player, healBit));
+      
     }
 
     public IEnumerator HealOverTime(PlayerController player, float healBit)
@@ -35,7 +34,7 @@ public class HealSpellEffectsScriptableObject : SpellEffectsScriptableObject
 
         while (healed < healAmount)
         {
-            //player.Heal(healBit);
+            //player.Heal(healBit);  // TODO 
             healed += healBit;
             yield return new WaitForSeconds(1);
         }

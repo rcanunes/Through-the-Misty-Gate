@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[CreateAssetMenu(fileName = "SpellsDatabase", menuName = "ScriptableObjects/SpellsDatabase")]
 public class SpellsDatabase : ScriptableObject
 {
     public List<SpellScriptableObject> spells;

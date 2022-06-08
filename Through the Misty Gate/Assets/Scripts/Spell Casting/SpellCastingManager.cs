@@ -39,7 +39,7 @@ public class SpellCastingManager : MonoBehaviour
         {
             foreach (var spell in spellsDatabase.spells)
             {
-                if (spell.name == spellName)
+                if (spell.spellName == spellName)
                     _unlockedSpells[spell.spellId] = spell;
             }
         }
@@ -55,7 +55,13 @@ public class SpellCastingManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Debug.Log("Casting " + _unlockedSpells[currentSpellId].spellName);
+            CastSpell();
+        }
+            
     }
 
     public void CastSpell()

@@ -113,6 +113,8 @@ public class HotKeySystem {
             spells[index].activateSpell();
             OnAbilityListChange?.Invoke(this, EventArgs.Empty);
         }
+        
+        
     }
 
     private int GetIndex(UI_ItemManager.SpellType check)
