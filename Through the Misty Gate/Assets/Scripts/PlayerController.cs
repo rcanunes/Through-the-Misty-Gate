@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour
     private float chargeDuration;
     private float elapsedCharge;
     private float knockbackAmount;
+    private float knockbackBurst;
     private bool ignoreInput = false;
 
 
@@ -209,7 +210,7 @@ public class PlayerController : MonoBehaviour
     private IEnumerator Knockback()
     {
         float elapsed = 0;
-        float duration = Mathf.Abs(knockbackAmount / 20.0f);
+        float duration = Mathf.Abs(1 / knockbackBurst);
 
         while (elapsed < duration)
         {
@@ -229,9 +230,10 @@ public class PlayerController : MonoBehaviour
         enterChargedCast = true;
     }
 
-    public void SetKnockback(float knockback)
+    public void SetKnockback(float amount, float burst)
     {
-        knockbackAmount = knockback;
+        knockbackAmount = amount;
+        knockbackBurst = burst;
     }
 
 

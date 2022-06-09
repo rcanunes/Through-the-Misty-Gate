@@ -24,7 +24,8 @@ public class ProjectileSpellEffectsScriptableObject : SpellEffectsScriptableObje
     public int damage = 10;
     public float speed = 20.0f;  // Travel speed of the projectile
     public int bulletsPerReload; // if bullets <= 1, the spell goes instantly on cooldown after casting
-    public float knockback = 2.0f;  // The amount of knockback that the player will suffer from casting the spell 
+    public float knockbackAmount = 8.0f;  // The amount of knockback that the player will suffer from casting the spell
+    public float knockbackBurst = 2.5f; // How fast the knockback power is released, lower = slower and longer knockback
     const float spawnOffset = 1.1f;
     
     // Prefab for the traveling projectile, should contain sprite, rigidbody and collider and be tagged 
@@ -48,7 +49,7 @@ public class ProjectileSpellEffectsScriptableObject : SpellEffectsScriptableObje
         direction /= direction.magnitude;
 
         projectileBehavior.SetAttributes(direction, speed);
-        player.SetKnockback(knockback * Math.Sign(direction.x) * (-1));
+        player.SetKnockback(knockbackAmount * Math.Sign(direction.x) * (-1), knockbackBurst);
     }
     
 }
