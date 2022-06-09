@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class HealSpell : SupportSpell {
+public abstract class HealSpell : SelfCastSpell {
     public HealSpell(string name, float cooldown, float castTime, float immobileCast) 
     : base(name, cooldown, castTime, immobileCast) {
         

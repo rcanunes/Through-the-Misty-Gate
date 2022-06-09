@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireballSpell : OffensiveSpell {
+public class FireballSpell : ProjectileSpell {
     public FireballSpell() : base("Fireball", 5, 1, false, 30, 12.5, 4.25) {}
 
     public override void Cast(Vector3 position, Vector3 target) {

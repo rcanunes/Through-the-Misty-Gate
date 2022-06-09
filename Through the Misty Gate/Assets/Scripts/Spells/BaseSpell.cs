@@ -4,33 +4,36 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class BaseSpell : MonoBehaviour {
-    private string name;
+    private string label;
     private float cooldown;
     private float castTime;
     private bool immobileCast;
 
-    protected Spell(string name, float cooldown, float castTime, float immobileCast) {
-        this.name = name;
+    protected BaseSpell(string label, float cooldown, float castTime, float immobileCast) {
+        this.label = label;
         this.cooldown = cooldown;
         this.castTime = castTime;
         this.immobileCast = immobileCast;
     }
 
-    public string getName() {
-        return this.name;
+    public string getLabel() {
+        return this.label;
     }
 
     public float getCooldown() {
         return this.cooldown;
     }
 
-    public float castTime() {
+    public float getCastTime() {
         return this.castTime;
     }
 
-    public bool immobileCast() {
+    public bool getImmobileCast() {
         return this.immobileCast;
     }
 
-    public abstract void Cast();
+    protected IEnumerator ChargeAttack() {
+        yield return new WaitForSeconds(chargeTime);
+        rb.velocity = direction * speed;
+    }
 }
