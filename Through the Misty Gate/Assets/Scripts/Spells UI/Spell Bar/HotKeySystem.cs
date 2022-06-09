@@ -7,47 +7,29 @@ public class HotKeySystem {
 
     // Update is called once per frame
 
-    private Spells player;
+    private SpellCastingManager player;
     private List<UI_ItemManager.HotKeyAbility> spells;
 
     public event EventHandler OnAbilityListChange;
 
     public int MaxSpells = 7;
 
-    public HotKeySystem(Spells player)
+    public HotKeySystem(SpellCastingManager player)
     {
         this.player = player;
         spells = new List<UI_ItemManager.HotKeyAbility>();
 
-        spells.Add(new UI_ItemManager.HotKeyAbility
+        foreach (var s in player.GetUnlockedSpells())
         {
-            spellType = UI_ItemManager.SpellType.Fireball,
-            activateSpell = () => player.SetSpell(Spells.Spell.Fireball)
-
-        });
-        spells.Add(new UI_ItemManager.HotKeyAbility
-        {
-            spellType = UI_ItemManager.SpellType.Shield,
-            activateSpell = () => player.SetSpell(Spells.Spell.Shield)
-
-        });
-        spells.Add(new UI_ItemManager.HotKeyAbility
-        {
-            spellType = UI_ItemManager.SpellType.LightSword,
-            activateSpell = () => player.SetSpell(Spells.Spell.LightSword)
-
-        });
-        spells.Add(new UI_ItemManager.HotKeyAbility
-        {
-            spellType = UI_ItemManager.SpellType.Boost,
-            activateSpell = () => player.SetSpell(Spells.Spell.Boost)
-        });
-
-        
-
+            spells.Add(new UI_ItemManager.HotKeyAbility
+            {
+                spell = s,
+                spellId = s.spellId,
+                activateSpell = () => player.SetCurrentSpell(s.spellId)
+            });
+        }
     }
-
-
+    
     public void Update()
     {
 
@@ -117,11 +99,11 @@ public class HotKeySystem {
         
     }
 
-    private int GetIndex(UI_ItemManager.SpellType check)
+    private int GetIndex(SpellScriptableObject check)
     {
         for (int i = 0; i < spells.Count; i++)
         {
-            if (spells[i].spellType == check)
+            if (spells[i].spellId == check.spellId)
             {
                 return i;
             }
@@ -133,19 +115,14 @@ public class HotKeySystem {
     {
         if (CheckContainsSpell(hotKeyAbility) && spells.Count > 1)
         {
-
             spells.Remove(hotKeyAbility);
 
-            if (GetCurrentSpell() == hotKeyAbility.spellType)
+            if (GetCurrentSpellID() == hotKeyAbility.spell.spellId)
             {
                 spells[0].activateSpell();
             }
-
-
         }
-
         
-
         OnAbilityListChange?.Invoke(this, EventArgs.Empty);
     }
 
@@ -163,7 +140,7 @@ public class HotKeySystem {
     {
         foreach (UI_ItemManager.HotKeyAbility spell in spells)
         {
-            if (spell.spellType == check.spellType)
+            if (spell.spellId == check.spellId)
             {
                 return true;
             }
@@ -214,30 +191,13 @@ public class HotKeySystem {
     }
 
 
-    public UI_ItemManager.SpellType GetCurrentSpell()
+    public SpellScriptableObject GetCurrentSpell()
     {
-        Spells.Spell current = player.GetCurrentSpell();
-        switch (current)
-        {
-            default:
-            case Spells.Spell.Fireball:
-                return UI_ItemManager.SpellType.Fireball;
+        return player.GetCurrentSpell();
+    }
 
-            case Spells.Spell.Shield:
-                return UI_ItemManager.SpellType.Shield;
-
-            case Spells.Spell.LightSword:
-                return UI_ItemManager.SpellType.LightSword;
-
-            case Spells.Spell.Boost:
-                return UI_ItemManager.SpellType.Boost;
-            case Spells.Spell.SoundWave:
-                return UI_ItemManager.SpellType.SoundWave;
-
-            case Spells.Spell.HydroPump:
-                return UI_ItemManager.SpellType.HydroPump;
-        }
-
-
+    public int GetCurrentSpellID()
+    {
+        return player.GetCurrentSpellID();
     }
 }

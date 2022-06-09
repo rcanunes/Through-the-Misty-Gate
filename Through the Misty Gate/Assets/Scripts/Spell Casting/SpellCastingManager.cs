@@ -73,5 +73,20 @@ public class SpellCastingManager : MonoBehaviour
     {
         return _unlockedSpells[currentSpellId];
     }
+
+    public int GetCurrentSpellID()
+    {
+        return currentSpellId;
+    }
+
+    public void SetCurrentSpell(int spellId)
+    {
+        currentSpellId = spellId;
+    }
+
+    public SpellScriptableObject[] GetUnlockedSpells()
+    {
+        return _unlockedSpells;
+    }
     
 }

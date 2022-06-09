@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -49,9 +50,7 @@ public class PlayerController : MonoBehaviour
     //Player Sounds Variables
     private AudioSource audioSource;
     public AudioClip jumpSound;
-
-
-
+    
 
 
     // Start is called before the first frame update
@@ -74,7 +73,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-
         AnimationSetup();
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, whatIsGround);
 

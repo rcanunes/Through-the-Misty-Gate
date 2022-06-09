@@ -24,7 +24,6 @@ public class SpellScriptableObject : ScriptableObject
         }
         
         spellEffects.Cast(caller, player);
-
     }
 
     private IEnumerator WaitForCharge(MonoBehaviour caller, PlayerController player)
