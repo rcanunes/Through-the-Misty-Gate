@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FireballSpell : ProjectileSpell {
-    public FireballSpell() : base("Fireball", 5, 1, false, 30, 12.5, 4.25) {}
+    public FireballSpell() : base("Fireball", 5, 1, false, 30, 12.5f, 4.25f) {}
 
     public override void Cast(Vector3 position, Vector3 target) {
         rb = transform.GetComponent<Rigidbody2D>();
@@ -17,15 +17,15 @@ public class FireballSpell : ProjectileSpell {
 
         direction /= direction.magnitude;
 
-        if (chargeTime > 0)
+        if (this.getCastTime() > 0)
             StartCoroutine(ChargeAttack());
         else
-            rb.velocity = direction.normalized * speed;
+            rb.velocity = direction.normalized * this.getSpeed();
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
 
-        if (other.gameObject.CompareTag("Enemy")) {
+        /*if (other.gameObject.CompareTag("Enemy")) {
             other.gameObject.GetComponent<Enemy>().ReceiveAttack(this);
         }
         if (other.gameObject.CompareTag("Player")) {
@@ -33,7 +33,7 @@ public class FireballSpell : ProjectileSpell {
         }
         else {
             Destroy(gameObject);
-        }
+        }*/
     }
 
 }

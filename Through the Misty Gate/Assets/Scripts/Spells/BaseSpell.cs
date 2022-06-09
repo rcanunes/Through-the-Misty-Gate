@@ -9,7 +9,7 @@ public abstract class BaseSpell : MonoBehaviour {
     private float castTime;
     private bool immobileCast;
 
-    protected BaseSpell(string label, float cooldown, float castTime, float immobileCast) {
+    protected BaseSpell(string label, float cooldown, float castTime, bool immobileCast) {
         this.label = label;
         this.cooldown = cooldown;
         this.castTime = castTime;
@@ -30,10 +30,5 @@ public abstract class BaseSpell : MonoBehaviour {
 
     public bool getImmobileCast() {
         return this.immobileCast;
-    }
-
-    protected IEnumerator ChargeAttack() {
-        yield return new WaitForSeconds(chargeTime);
-        rb.velocity = direction * speed;
     }
 }

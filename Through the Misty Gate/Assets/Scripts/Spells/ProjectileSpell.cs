@@ -7,10 +7,10 @@ public abstract class ProjectileSpell : BaseSpell {
     private float damage;
     private float speed;
     private float areaOfEffect;
-    private Vector3 direction;
-    private Rigidbody2D rb = null; 
+    protected Vector3 direction;
+    protected Rigidbody2D rb = null; 
 
-    protected ProjectileSpell(string name, float cooldown, float castTime, float immobileCast, float damage, float speed, float areaOfEffect) 
+    protected ProjectileSpell(string name, float cooldown, float castTime, bool immobileCast, float damage, float speed, float areaOfEffect) 
     : base(name, cooldown, castTime, immobileCast) {
         this.damage = damage;
         this.speed = speed;
@@ -27,6 +27,11 @@ public abstract class ProjectileSpell : BaseSpell {
 
     public float getAoe() {
         return this.areaOfEffect;
+    }
+    
+    protected IEnumerator ChargeAttack() {
+        yield return new WaitForSeconds(this.getCastTime());
+        rb.velocity = direction * speed;
     }
 
     public abstract void Cast(Vector3 position, Vector3 target);
