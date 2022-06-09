@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 
@@ -14,6 +16,20 @@ public class SpellScriptableObject : ScriptableObject
 
     public void Cast(MonoBehaviour caller, PlayerController player)
     {
+        if (chargeTime > 0)
+        {
+            player.EnterChargedCast(chargeTime);
+            caller.StartCoroutine(WaitForCharge(caller, player));
+            return;
+        }
+        
+        spellEffects.Cast(caller, player);
+
+    }
+
+    private IEnumerator WaitForCharge(MonoBehaviour caller, PlayerController player)
+    {
+        yield return new WaitForSeconds(chargeTime);
         spellEffects.Cast(caller, player);
     }
     

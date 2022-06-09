@@ -31,6 +31,12 @@ public class PlayerController : MonoBehaviour
     private float gravityScale;
 
     private float maxFallingSpped;
+    
+    // Spell Casting Variables
+    private bool freezePosition = false;
+    private float freezeDuration;
+    private float elapsedFreeze;
+    private float knockbackAmount;
 
 
     // Animation Variables
@@ -66,8 +72,26 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+
         AnimationSetup();
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, whatIsGround);
+        
+        // Freeze position when casting a charged spell, enabled in EnterChargedCast()
+        if (freezePosition)
+        {
+            playerRb.constraints = RigidbodyConstraints2D.FreezeAll;
+            
+            if (elapsedFreeze < freezeDuration) elapsedFreeze += Time.deltaTime;
+            else
+            {
+                playerRb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                freezePosition = false;
+                //StartCoroutine(Knockback());
+                playerRb.velocity = new Vector2(knockbackAmount, playerRb.velocity.y);
+            }
+            return;
+        }
+
         Jump();
         Climbing();
         MoveCharacter();
@@ -170,6 +194,34 @@ public class PlayerController : MonoBehaviour
             animator.SetTrigger("Idle");
         else
             animator.SetTrigger("Running");
+    }
+
+    private IEnumerator Knockback()
+    {
+        float elapsed = 0;
+        float duration = Mathf.Abs(knockbackAmount / 10.0f);
+        
+        while (elapsed < duration)
+        {
+            //playerRb.velocity = new Vector2(knockbackAmount, playerRb.velocity.y);
+            playerRb.AddRelativeForce(new Vector2(knockbackAmount, 0), ForceMode2D.Impulse);
+            elapsed += Time.deltaTime;
+            
+            yield return new WaitForEndOfFrame();
+        }
+        
+    }
+
+    public void EnterChargedCast(float chargeTime)
+    {
+        freezeDuration = chargeTime;
+        elapsedFreeze = 0;
+        freezePosition = true;
+    }
+
+    public void SetKnockback(float knockback)
+    {
+        knockbackAmount = knockback;
     }
 
 

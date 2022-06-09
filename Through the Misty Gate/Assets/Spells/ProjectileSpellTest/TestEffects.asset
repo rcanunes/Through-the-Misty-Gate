@@ -15,5 +15,5 @@ MonoBehaviour:
   damage: 10
   speed: 20
   bulletsPerReload: 0
-  knockback: 2
+  knockback: 20
   projectilePrefab: {fileID: 8219889510837476317, guid: 1a3521a0550f9894ca4133e6d908a6a0, type: 3}

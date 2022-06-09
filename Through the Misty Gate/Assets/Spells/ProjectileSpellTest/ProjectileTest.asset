@@ -15,6 +15,6 @@ MonoBehaviour:
   spellName: Test
   uiSprite: {fileID: -2413806693520163455, guid: 8604fec366e52344684aa4b9c71027c7, type: 3}
   cooldown: 1
-  chargeTime: 0
+  chargeTime: 2
   spellId: 0
   spellEffects: {fileID: 11400000, guid: ccf049254c5c41a4a9fb938b47bb40ab, type: 2}
