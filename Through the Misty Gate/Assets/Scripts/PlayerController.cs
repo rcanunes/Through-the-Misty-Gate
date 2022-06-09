@@ -33,10 +33,11 @@ public class PlayerController : MonoBehaviour
     private float maxFallingSpped;
     
     // Spell Casting Variables
-    private bool freezePosition = false;
-    private float freezeDuration;
-    private float elapsedFreeze;
+    private bool enterChargedCast = false;
+    private float chargeDuration;
+    private float elapsedCharge;
     private float knockbackAmount;
+    private bool ignoreInput = false;
 
 
     // Animation Variables
@@ -75,22 +76,13 @@ public class PlayerController : MonoBehaviour
 
         AnimationSetup();
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, whatIsGround);
+
         
-        // Freeze position when casting a charged spell, enabled in EnterChargedCast()
-        if (freezePosition)
-        {
-            playerRb.constraints = RigidbodyConstraints2D.FreezeAll;
-            
-            if (elapsedFreeze < freezeDuration) elapsedFreeze += Time.deltaTime;
-            else
-            {
-                playerRb.constraints = RigidbodyConstraints2D.FreezeRotation;
-                freezePosition = false;
-                //StartCoroutine(Knockback());
-                playerRb.velocity = new Vector2(knockbackAmount, playerRb.velocity.y);
-            }
+        if (enterChargedCast)
+            ChargedCastingMovement();
+        
+        if (ignoreInput)
             return;
-        }
 
         Jump();
         Climbing();
@@ -142,6 +134,24 @@ public class PlayerController : MonoBehaviour
     {
         if (playerRb.velocity.y < 0 && playerRb.velocity.y > maxFallingSpped)
             playerRb.AddForce(Vector2.down);
+    }
+
+    private void ChargedCastingMovement()
+    {
+        // Freeze position when casting a charged spell, enabled in EnterChargedCast()
+        if (enterChargedCast)
+        {
+            ignoreInput = true;
+            playerRb.constraints = RigidbodyConstraints2D.FreezeAll;
+            
+            if (elapsedCharge < chargeDuration) elapsedCharge += Time.deltaTime;
+            else
+            {
+                playerRb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                enterChargedCast = false;
+                StartCoroutine(Knockback());
+            }
+        }
     }
 
     private void Climbing()
@@ -199,24 +209,24 @@ public class PlayerController : MonoBehaviour
     private IEnumerator Knockback()
     {
         float elapsed = 0;
-        float duration = Mathf.Abs(knockbackAmount / 10.0f);
-        
+        float duration = Mathf.Abs(knockbackAmount / 20.0f);
+
         while (elapsed < duration)
         {
-            //playerRb.velocity = new Vector2(knockbackAmount, playerRb.velocity.y);
-            playerRb.AddRelativeForce(new Vector2(knockbackAmount, 0), ForceMode2D.Impulse);
             elapsed += Time.deltaTime;
-            
+            transform.position += new Vector3(knockbackAmount * Time.deltaTime, 0, 0);
+
             yield return new WaitForEndOfFrame();
         }
         
+        ignoreInput = false;
     }
 
     public void EnterChargedCast(float chargeTime)
     {
-        freezeDuration = chargeTime;
-        elapsedFreeze = 0;
-        freezePosition = true;
+        chargeDuration = chargeTime;
+        elapsedCharge = 0;
+        enterChargedCast = true;
     }
 
     public void SetKnockback(float knockback)
