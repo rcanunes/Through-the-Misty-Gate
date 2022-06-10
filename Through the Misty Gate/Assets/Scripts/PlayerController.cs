@@ -23,8 +23,7 @@ public class PlayerController : MonoBehaviour
     private float checkRadius = 0.2f;
     public LayerMask whatIsGround;
 
-
-    public bool canHold; //If it can hold for a longer jump
+    public bool jumpEnded;
     private float jumpTimeCounter; //Current Jump Time
     private float jumpTime; //Max jump Time
     private float jumpForce; // Jump Strength
@@ -46,6 +45,9 @@ public class PlayerController : MonoBehaviour
 
 
 
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +57,7 @@ public class PlayerController : MonoBehaviour
         jumpTime = 0.4f;
         jumpForce = 11;
         maxFallingSpped = -10f;
+        jumpEnded = true;
 
         playerRb = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
@@ -64,7 +67,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         AnimationSetup();
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, whatIsGround);
@@ -76,39 +79,28 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-
         playerRb.gravityScale = gravityScale;
 
-        if (isGrounded)
+        if (isGrounded && GetJumpKeysDown() && jumpEnded)
         {
-            canHold = true;
-        }
-
-        //Jump if keys are pressed down in this frame and is on the ground
-        if (GetJumpKeysDown() && isGrounded)
-        {
-            canHold = true;
+            jumpEnded = false;
             jumpTimeCounter = jumpTime;
             playerRb.velocity = Vector2.up * jumpForce;
             audioSource.PlayOneShot(jumpSound, 1);
 
         }
 
-        //If the keys are being hold down, and can still hold
-        else if (GetJumpKeys() && canHold)
+        else if (GetJumpKeys() && !jumpEnded)
         {
-
             if (jumpTimeCounter > 0 && playerRb.velocity.y > 0)
-            { 
+            {
                 playerRb.velocity = Vector2.up * jumpForce;
                 jumpTimeCounter -= Time.deltaTime;
             }
         }
 
-        else if (GetJumpKeysUp())
-        {
-            canHold = false;
-        }
+        if (GetJumpKeysUp())
+            jumpEnded = true;
 
         ModifyPhysics();
 
