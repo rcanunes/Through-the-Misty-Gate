@@ -102,7 +102,7 @@ public class PlayerController : MonoBehaviour
         if (GetJumpKeysUp())
             jumpEnded = true;
 
-        ModifyPhysics();
+        //ModifyPhysics();
 
     }
 
