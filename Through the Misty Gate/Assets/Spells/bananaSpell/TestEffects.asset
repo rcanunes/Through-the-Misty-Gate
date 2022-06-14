@@ -9,9 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8494d4df7b6810146b522ac335954fc2, type: 3}
-  m_Name: SpellsDatabase
+  m_Script: {fileID: 11500000, guid: 82a055d8c0060e6469d3373c16018a76, type: 3}
+  m_Name: TestEffects
   m_EditorClassIdentifier: 
-  spells:
-  - {fileID: 11400000, guid: 6ed8da6dcf677614c8f3af6fe561211e, type: 2}
-  - {fileID: 11400000, guid: 613e2bf14f5a8214088683802d001568, type: 2}
+  damage: 10
+  speed: 20
+  bulletsPerReload: 0
+  knockbackAmount: 8
+  knockbackBurst: 2.5
+  projectilePrefab: {fileID: 8219889510837476317, guid: 1a3521a0550f9894ca4133e6d908a6a0, type: 3}

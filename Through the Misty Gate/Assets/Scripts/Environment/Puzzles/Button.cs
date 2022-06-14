@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Lever : PuzzleKey
+public class Button : PuzzleKey
 {
 
     //Audio
@@ -14,11 +14,12 @@ public class Lever : PuzzleKey
     //Animation
     private Transform arm;
     private SpriteRenderer shereRenderer;
-    private bool canAction;
+
+    private int time;
 
     void Start()
     {
-        canAction = true;
+        time = 6;
         audioSource = GetComponent<AudioSource>();
         arm = transform.Find("Arm");
         shereRenderer = arm.Find("Handle").GetComponent<SpriteRenderer>();
@@ -49,7 +50,7 @@ public class Lever : PuzzleKey
     {
         active = true;
         VisualUpdate();
-        PlaySound();
+        StartCoroutine(TimedReturn(time));
     }
 
     private void Deactivate()
@@ -62,29 +63,39 @@ public class Lever : PuzzleKey
 
     private void PlaySound()
     {
-        audioSource.PlayOneShot(tickSound, 1);
+        if (done)
+        {
+            return;
+        }
+
+        if(active)
+            audioSource.PlayOneShot(tickSound, 1);
+        else
+            audioSource.PlayOneShot(resetSound, 1);
 
     }
 
-    IEnumerator StopMoving()
+    IEnumerator TimedReturn(int length)
     {
-        canAction = false;
-        yield return new WaitForSeconds(1f);
-        canAction = true;
+        for (int i = 0; i < length; i++)
+        {
+            PlaySound();
+            yield return new WaitForSeconds(1.5f);
+        }
+        if (!done)
+        {
+            Deactivate();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if ((collision.CompareTag("Player") || collision.CompareTag("Spell")) && canAction)
+        Debug.Log("Banana");
+        if (collision.CompareTag("Player") || collision.CompareTag("Spell"))
         {
             if (!active)
             {
                 Activate();
-            }
-
-            else
-            {
-                Deactivate();
             }
         }
     }

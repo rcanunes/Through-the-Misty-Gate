@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
 
    
     //Jump Related variables
-    public bool isGrounded;
+    public Collider2D isGrounded;
     public Transform feetPos;
     private float checkRadius = 0.2f;
     public LayerMask whatIsGround;
@@ -49,7 +49,8 @@ public class PlayerController : MonoBehaviour
     //Player Sounds Variables
     private AudioSource audioSource;
     public AudioClip jumpSound;
-    
+    private bool groundIsIce;
+
 
 
 
@@ -78,6 +79,7 @@ public class PlayerController : MonoBehaviour
     {
         AnimationSetup();
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, whatIsGround);
+        groundIsIce = CheckIfIce();
 
         
         if (enterChargedCast)
@@ -91,6 +93,11 @@ public class PlayerController : MonoBehaviour
         MoveCharacter();
     }
 
+    private bool CheckIfIce()
+    {   if(isGrounded != null)
+            return isGrounded.CompareTag("Ice");
+        return false;
+    }
 
     private void Jump()
     {
@@ -166,7 +173,36 @@ public class PlayerController : MonoBehaviour
     private void MoveCharacter()
     {
         horizontalInput = Input.GetAxis("Horizontal");
-        playerRb.velocity = new Vector2(horizontalInput * speed, playerRb.velocity.y);
+
+        if (groundIsIce)
+        {
+
+            playerRb.velocity += new Vector2(horizontalInput * speed, playerRb.velocity.y);
+
+            if(playerRb.velocity.x > speed)
+            {
+                playerRb.velocity = new Vector2(speed , playerRb.velocity.y);
+            }
+            else if (playerRb.velocity.x < -speed)
+            {
+                playerRb.velocity = new Vector2(-speed , playerRb.velocity.y);
+            }
+
+            playerRb.velocity *= 0.99f;
+            if (Mathf.Abs(playerRb.velocity.x) < 0.01)
+            {
+                playerRb.velocity = new Vector2(0, playerRb.velocity.y);
+            }
+
+
+
+        }
+        else
+        {
+            playerRb.velocity = new Vector2(horizontalInput * speed, playerRb.velocity.y);
+
+        }
+        //playerRb.AddForce(new Vector2(horizontalInput * speed, playerRb.velocity.y));
     }
 
     private void AnimationSetup()
@@ -197,20 +233,30 @@ public class PlayerController : MonoBehaviour
             animator.SetTrigger("Running");
     }
 
+    //private IEnumerator Knockback()
+    //{
+    //    float elapsed = 0;
+    //    float duration = Mathf.Abs(1 / knockbackBurst);
+
+    //    while (elapsed < duration)
+    //    {
+    //        elapsed += time.deltatime;
+    //        transform.position += new vector3(knockbackamount * time.deltatime, 0, 0);
+
+    //        yield return new waitforendofframe();
+    //    }
+
+        
+    //    ignoreInput = false;
+    //    Debug.Log("Exiting Knockback");
+    //}
+
     private IEnumerator Knockback()
     {
-        float elapsed = 0;
-        float duration = Mathf.Abs(1 / knockbackBurst);
-
-        while (elapsed < duration)
-        {
-            elapsed += Time.deltaTime;
-            transform.position += new Vector3(knockbackAmount * Time.deltaTime, 0, 0);
-
-            yield return new WaitForEndOfFrame();
-        }
-        
+        playerRb.AddForce(new Vector2(knockbackAmount, 0) * 4, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(0.5f);
         ignoreInput = false;
+
     }
 
     public void EnterChargedCast(float chargeTime)
@@ -224,6 +270,7 @@ public class PlayerController : MonoBehaviour
     {
         knockbackAmount = amount;
         knockbackBurst = burst;
+        Debug.Log("KnockbakAmount " + knockbackAmount.ToString() + " - KnockBackBurst" + knockbackBurst.ToString());
     }
 
 

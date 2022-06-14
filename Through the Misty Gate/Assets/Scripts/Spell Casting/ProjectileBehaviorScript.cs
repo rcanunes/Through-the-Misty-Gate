@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ProjectileBehaviorScript : MonoBehaviour
 {
-    private Vector3 _direction;
+    private Vector2 _direction;
     private float _speed;
     private bool _attributed = false;
 
@@ -16,7 +16,7 @@ public class ProjectileBehaviorScript : MonoBehaviour
         if (!_attributed)
             return;
 
-        transform.position += _speed * Time.deltaTime * _direction;
+        transform.position += _speed * Time.deltaTime * new Vector3(_direction.x, _direction.y, 0);
 
     }
 
