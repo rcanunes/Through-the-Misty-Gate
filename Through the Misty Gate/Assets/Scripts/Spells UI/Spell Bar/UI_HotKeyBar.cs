@@ -52,7 +52,7 @@ public class UI_HotKeyBar : MonoBehaviour
                 spellSlotTransform.Find("SpellIcon").GetComponent<Image>().sprite = hotKeyAbility.GetSprite();
                 spellSlotTransform.Find("Number").Find("Number").GetComponent<TextMeshProUGUI>().text = (i + 1).ToString();
 
-                if (hotKeySystem.GetCurrentSpell() == hotKeyAbility.spellType)
+                if (hotKeySystem.GetCurrentSpellID() == hotKeyAbility.spellId)
                 {
                     spellSlotTransform.Find("Border").GetComponent<Image>().color = Color.red;
                 }

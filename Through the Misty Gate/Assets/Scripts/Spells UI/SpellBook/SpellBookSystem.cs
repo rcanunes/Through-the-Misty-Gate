@@ -5,56 +5,28 @@ using UnityEngine;
 
 public class SpellBookSystem
 {
-    private Spells player;
+    private SpellCastingManager player;
     private List<UI_ItemManager.HotKeyAbility> allSpells;
     public event EventHandler OnSpellChange;
 
     public bool toogleSpellBook;
 
-    public SpellBookSystem(Spells player)
+    public SpellBookSystem(SpellCastingManager player)
     {
         this.player = player;
         //Adding to Inventory of Spells
 
         allSpells = new List<UI_ItemManager.HotKeyAbility>();
 
-        allSpells.Add(new UI_ItemManager.HotKeyAbility
+        foreach (var s in player.GetUnlockedSpells())
         {
-            spellType = UI_ItemManager.SpellType.Fireball,
-            activateSpell = () => player.SetSpell(Spells.Spell.Fireball)
-
-        });
-        allSpells.Add(new UI_ItemManager.HotKeyAbility
-        {
-            spellType = UI_ItemManager.SpellType.Shield,
-            activateSpell = () => player.SetSpell(Spells.Spell.Shield)
-
-        });
-        allSpells.Add(new UI_ItemManager.HotKeyAbility
-        {
-            spellType = UI_ItemManager.SpellType.LightSword,
-            activateSpell = () => player.SetSpell(Spells.Spell.LightSword)
-
-        });
-        allSpells.Add(new UI_ItemManager.HotKeyAbility
-        {
-            spellType = UI_ItemManager.SpellType.Boost,
-            activateSpell = () => player.SetSpell(Spells.Spell.Boost)
-        });
-
-        allSpells.Add(new UI_ItemManager.HotKeyAbility
-        {
-            spellType = UI_ItemManager.SpellType.SoundWave,
-            activateSpell = () => player.SetSpell(Spells.Spell.SoundWave)
-
-        });
-        allSpells.Add(new UI_ItemManager.HotKeyAbility
-        {
-            spellType = UI_ItemManager.SpellType.HydroPump,
-            activateSpell = () => player.SetSpell(Spells.Spell.HydroPump)
-
-        });
-
+            allSpells.Add(new UI_ItemManager.HotKeyAbility
+            {
+                spell = s,
+                spellId = s.spellId,
+                activateSpell = () => player.SetCurrentSpell(s.spellId)
+            });
+        }
     }
 
     public List<UI_ItemManager.HotKeyAbility> GetAllSpells()
