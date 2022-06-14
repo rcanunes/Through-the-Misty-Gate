@@ -84,8 +84,6 @@ public class UI_HotKeyBarSpellSlot : MonoBehaviour, IDragHandler, IDropHandler, 
         canvasGroup.blocksRaycasts = true;
         transform.parent.transform.SetAsFirstSibling();
 
-
-
     }
 
     public void OnBeginDrag(PointerEventData eventData)

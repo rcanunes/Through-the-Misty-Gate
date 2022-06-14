@@ -40,7 +40,7 @@ public class ProjectileSpellEffectsScriptableObject : SpellEffectsScriptableObje
         Vector3 position = player.transform.position;
         Vector3 target = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane));
         
-        Vector2 direction = target - position;
+        Vector3 direction = target - position;
         float rotationZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         
         projectile.transform.position = new Vector3(position.x + spawnOffset * Math.Sign(direction.x), position.y, position.z);
