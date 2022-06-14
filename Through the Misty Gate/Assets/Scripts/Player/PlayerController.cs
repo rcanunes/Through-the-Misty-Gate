@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,6 +31,14 @@ public class PlayerController : MonoBehaviour
     private float gravityScale;
 
     private float maxFallingSpped;
+    
+    // Spell Casting Variables
+    private bool enterChargedCast = false;
+    private float chargeDuration;
+    private float elapsedCharge;
+    private float knockbackAmount;
+    private float knockbackBurst;
+    private bool ignoreInput = false;
 
 
     // Animation Variables
@@ -40,9 +49,7 @@ public class PlayerController : MonoBehaviour
     //Player Sounds Variables
     private AudioSource audioSource;
     public AudioClip jumpSound;
-
-
-
+    
 
 
 
@@ -71,6 +78,14 @@ public class PlayerController : MonoBehaviour
     {
         AnimationSetup();
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, whatIsGround);
+
+        
+        if (enterChargedCast)
+            ChargedCastingMovement();
+        
+        if (ignoreInput)
+            return;
+
         Jump();
         Climbing();
         MoveCharacter();
@@ -110,6 +125,24 @@ public class PlayerController : MonoBehaviour
     {
         if (playerRb.velocity.y < 0 && playerRb.velocity.y > maxFallingSpped)
             playerRb.AddForce(Vector2.down);
+    }
+
+    private void ChargedCastingMovement()
+    {
+        // Freeze position when casting a charged spell, enabled in EnterChargedCast()
+        if (enterChargedCast)
+        {
+            ignoreInput = true;
+            playerRb.constraints = RigidbodyConstraints2D.FreezeAll;
+            
+            if (elapsedCharge < chargeDuration) elapsedCharge += Time.deltaTime;
+            else
+            {
+                playerRb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                enterChargedCast = false;
+                StartCoroutine(Knockback());
+            }
+        }
     }
 
     private void Climbing()
@@ -162,6 +195,35 @@ public class PlayerController : MonoBehaviour
             animator.SetTrigger("Idle");
         else
             animator.SetTrigger("Running");
+    }
+
+    private IEnumerator Knockback()
+    {
+        float elapsed = 0;
+        float duration = Mathf.Abs(1 / knockbackBurst);
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            transform.position += new Vector3(knockbackAmount * Time.deltaTime, 0, 0);
+
+            yield return new WaitForEndOfFrame();
+        }
+        
+        ignoreInput = false;
+    }
+
+    public void EnterChargedCast(float chargeTime)
+    {
+        chargeDuration = chargeTime;
+        elapsedCharge = 0;
+        enterChargedCast = true;
+    }
+
+    public void SetKnockback(float amount, float burst)
+    {
+        knockbackAmount = amount;
+        knockbackBurst = burst;
     }
 
 

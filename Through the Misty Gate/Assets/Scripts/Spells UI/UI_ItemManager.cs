@@ -5,10 +5,9 @@ using UnityEngine;
 
 public class UI_ItemManager : MonoBehaviour
 {
-    // Update is called once per frame
 
-
-    [SerializeField] Spells player;
+    //[SerializeField] Spells player;
+    [SerializeField] private SpellCastingManager player;
     [SerializeField] UI_HotKeyBar uiHotKeyBar;
     [SerializeField] UI_SpellBook uiSpellBook;
 
@@ -43,28 +42,13 @@ public class UI_ItemManager : MonoBehaviour
 
     public class HotKeyAbility
     {
-        public SpellType spellType;
+        public SpellScriptableObject spell;
+        public int spellId;
         public Action activateSpell;
 
         public Sprite GetSprite()
         {
-            switch (spellType)
-            {
-                default:
-                case SpellType.Fireball:
-                    return SpellsAssetContainer.Instance.FireballSprite;
-                case SpellType.Boost:
-                    return SpellsAssetContainer.Instance.BoostSprite;
-                case SpellType.LightSword:
-                    return SpellsAssetContainer.Instance.LightSwordSprite;
-                case SpellType.Shield:
-                    return SpellsAssetContainer.Instance.ShieldSprite;
-                case SpellType.SoundWave:
-                    return SpellsAssetContainer.Instance.SoundwaveSprite;
-                case SpellType.HydroPump:
-                    return SpellsAssetContainer.Instance.HydropumpSprite;
-
-            }
+            return spell.uiSprite;
         }
     }
 
