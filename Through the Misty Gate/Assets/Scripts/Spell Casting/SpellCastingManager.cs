@@ -56,7 +56,7 @@ public class SpellCastingManager : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && LevelManager.instance.CanClick())
         {
             Debug.Log("Casting " + _unlockedSpells[currentSpellId].spellName);
             CastSpell();

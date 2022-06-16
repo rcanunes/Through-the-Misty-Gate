@@ -74,6 +74,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
+
     // Update is called once per frame
     void Update()
     {
@@ -101,6 +102,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
+        
         playerRb.gravityScale = gravityScale;
 
         if (isGrounded && GetJumpKeysDown() && jumpEnded)
@@ -258,6 +260,7 @@ public class PlayerController : MonoBehaviour
         ignoreInput = false;
 
     }
+
 
     public void EnterChargedCast(float chargeTime)
     {

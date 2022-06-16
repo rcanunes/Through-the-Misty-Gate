@@ -2128,6 +2128,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2804326346047360900, guid: a84cbc1274f43c04187bc612d7750fb6, type: 3}
+      propertyPath: startingSpells.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2804326346047360900, guid: a84cbc1274f43c04187bc612d7750fb6, type: 3}
+      propertyPath: startingSpells.Array.data[1]
+      value: Banana
+      objectReference: {fileID: 0}
+    - target: {fileID: 2804326346047360900, guid: a84cbc1274f43c04187bc612d7750fb6, type: 3}
+      propertyPath: startingSpells.Array.data[2]
+      value: Test
+      objectReference: {fileID: 0}
     - target: {fileID: 5443659999593446820, guid: a84cbc1274f43c04187bc612d7750fb6, type: 3}
       propertyPath: m_RootOrder
       value: 3
