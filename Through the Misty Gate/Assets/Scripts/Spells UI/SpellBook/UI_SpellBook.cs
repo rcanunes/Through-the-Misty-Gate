@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UI_SpellBook : MonoBehaviour, IDropHandler, IDragHandler, IPointerExitHandler
+public class UI_SpellBook : MonoBehaviour, IDropHandler, IDragHandler
 {
     private Transform spellSlotTemplate;
     private Transform spellSlotContainer;
@@ -15,7 +15,6 @@ public class UI_SpellBook : MonoBehaviour, IDropHandler, IDragHandler, IPointerE
     private CanvasGroup canvasGroup;
     private HotKeySystem hotKeySystem;
 
-    private bool toogleSpellBook;
 
     private RectTransform rectTransform;
     private Canvas canvas;
@@ -90,7 +89,7 @@ public class UI_SpellBook : MonoBehaviour, IDropHandler, IDragHandler, IPointerE
 
     public void OnDrop(PointerEventData eventData)
     {
-        if (eventData.pointerDrag != null && toogleSpellBook)
+        if (eventData.pointerDrag != null && LevelManager.instance.IsSpellBookVisible())
         {
             UI_HotKeyBarSpellSlot uiHotKeyBarSpellSlot = eventData.pointerDrag.GetComponent<UI_HotKeyBarSpellSlot>();
             if (uiHotKeyBarSpellSlot != null)
@@ -110,9 +109,9 @@ public class UI_SpellBook : MonoBehaviour, IDropHandler, IDragHandler, IPointerE
         spellInfoCG.blocksRaycasts = false;
     }
 
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        Debug.Log("Exiting SpellBook");
-        DisableSpellInfo();
-    }
+    //public void OnPointerExit(PointerEventData eventData)
+    //{
+    //    Debug.Log("Exiting SpellBook");
+    //    DisableSpellInfo();
+    //}
 }

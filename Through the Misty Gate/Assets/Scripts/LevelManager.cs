@@ -47,7 +47,6 @@ public class LevelManager : MonoBehaviour
 
     public void CheckSpellInfo()
     {
-        Debug.Log(spellInfo.parent.GetComponent<RectTransform>().anchoredPosition);
         if (spellInfo.parent.GetComponent<RectTransform>().anchoredPosition.x < 0 && spellInfo.anchoredPosition.x < 0)
         {
             spellInfo.anchoredPosition = new Vector2( - spellInfo.anchoredPosition.x, spellInfo.anchoredPosition.y);
@@ -56,9 +55,6 @@ public class LevelManager : MonoBehaviour
         {
             spellInfo.anchoredPosition = new Vector2(-spellInfo.anchoredPosition.x, spellInfo.anchoredPosition.y);
         }
-
-
-
 
     }
 
@@ -84,6 +80,11 @@ public class LevelManager : MonoBehaviour
         return !toogleSpellBook && !isMouseOverUI();
     }
 
+    public bool IsSpellBookVisible()
+    {
+        return toogleSpellBook;
+    }
+
     private bool isMouseOverUI()
     {
         PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
@@ -94,7 +95,6 @@ public class LevelManager : MonoBehaviour
 
         foreach (RaycastResult ray in raycastResults)
         {
-            Debug.Log("rayname "  + ray.gameObject.name);
 
             if (ray.gameObject.GetComponent<MouseUIClickThrough>() != null)
             {

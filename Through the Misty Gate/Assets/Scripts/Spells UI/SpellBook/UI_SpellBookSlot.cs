@@ -66,6 +66,7 @@ public class UI_SpellBookSlot : MonoBehaviour, IDragHandler, IEndDragHandler, IB
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        Debug.Log("Getting down to biz");
         if (eventData.button == PointerEventData.InputButton.Right)
         {
             hotKeySystem.AddSpell(hotKeyAbility);
@@ -75,7 +76,6 @@ public class UI_SpellBookSlot : MonoBehaviour, IDragHandler, IEndDragHandler, IB
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("Showing info");
         LevelManager.instance.CheckSpellInfo();
         SetUpSpellInfo();
         
