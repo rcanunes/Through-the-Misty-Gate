@@ -51,7 +51,7 @@ public class Spells : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0) && LevelManager.instance.CanClick())
         {
             ActivateSpell();
         }

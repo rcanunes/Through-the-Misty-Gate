@@ -15,7 +15,6 @@ public class UI_SpellBook : MonoBehaviour, IDropHandler, IDragHandler
     private HotKeySystem hotKeySystem;
 
     private bool toogleSpellBook;
-    private int maxCellPerLine = 4;
 
     private RectTransform rectTransform;
     private Canvas canvas;
@@ -78,6 +77,7 @@ public class UI_SpellBook : MonoBehaviour, IDropHandler, IDragHandler
     private void ToogleSpellBook()
     {
         toogleSpellBook = !toogleSpellBook;
+        LevelManager.instance.SetInventoryVisivility( toogleSpellBook);
         if (toogleSpellBook)
         {
             canvasGroup.interactable = true;
