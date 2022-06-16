@@ -1,11 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UI_SpellBook : MonoBehaviour, IDropHandler, IDragHandler
+public class UI_SpellBook : MonoBehaviour, IDropHandler, IDragHandler, IPointerExitHandler
 {
     private Transform spellSlotTemplate;
     private Transform spellSlotContainer;
@@ -19,20 +20,23 @@ public class UI_SpellBook : MonoBehaviour, IDropHandler, IDragHandler
     private RectTransform rectTransform;
     private Canvas canvas;
 
+    [SerializeField] Transform spellInfo;
+
+
 
 
     private void Awake()
     {
         spellSlotContainer = transform.Find("SpellSlotContainer");
-
+        DisableSpellInfo(); 
         spellSlotTemplate = spellSlotContainer.Find("spellBookSlotTemplate");
         spellSlotTemplate.gameObject.SetActive(false);
+
+        
 
 
         //Hide Inventory
         canvasGroup = GetComponent<CanvasGroup>();
-        toogleSpellBook = true;
-        ToogleSpellBook();
 
         rectTransform = GetComponent<RectTransform>();
         canvas = GetComponentInParent<Canvas>();
@@ -59,36 +63,7 @@ public class UI_SpellBook : MonoBehaviour, IDropHandler, IDragHandler
         UpdateSpellBookVisual();
     }
 
-    private void Update()
-    {
-        if (ToogleKeysDown())
-        {
-            ToogleSpellBook();
-            UpdateSpellBookVisual();
-            spellBookSystem.toogleSpellBook = toogleSpellBook;
-        }
-    }
-
-    private bool ToogleKeysDown()
-    {
-        return Input.GetKeyDown(KeyCode.T);
-    }
-
-    private void ToogleSpellBook()
-    {
-        toogleSpellBook = !toogleSpellBook;
-        LevelManager.instance.SetInventoryVisivility( toogleSpellBook);
-        if (toogleSpellBook)
-        {
-            canvasGroup.interactable = true;
-            canvasGroup.alpha = 1;
-        }
-        else
-        {
-            canvasGroup.interactable = false;
-            canvasGroup.alpha = 0;
-        }
-    }
+    
 
     private void UpdateSpellBookVisual()
     {
@@ -124,5 +99,20 @@ public class UI_SpellBook : MonoBehaviour, IDropHandler, IDragHandler
                 UpdateSpellBookVisual();
             }
         }
+    }
+
+    private void DisableSpellInfo()
+    {
+
+        CanvasGroup spellInfoCG = spellInfo.GetComponent<CanvasGroup>();
+        spellInfoCG.interactable = false;
+        spellInfoCG.alpha = 0;
+        spellInfoCG.blocksRaycasts = false;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        Debug.Log("Exiting SpellBook");
+        DisableSpellInfo();
     }
 }

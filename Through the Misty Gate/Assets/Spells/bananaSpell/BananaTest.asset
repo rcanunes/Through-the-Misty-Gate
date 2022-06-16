@@ -17,4 +17,5 @@ MonoBehaviour:
   cooldown: 1
   chargeTime: 2
   spellId: 1
+  spellDescription: Ultimate Banana Power on the Palm of your hand
   spellEffects: {fileID: 11400000, guid: ccf049254c5c41a4a9fb938b47bb40ab, type: 2}

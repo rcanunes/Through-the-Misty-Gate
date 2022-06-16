@@ -17,4 +17,5 @@ MonoBehaviour:
   cooldown: 1
   chargeTime: 2
   spellId: 0
+  spellDescription: Simple basic stone throwing spell
   spellEffects: {fileID: 11400000, guid: ccf049254c5c41a4a9fb938b47bb40ab, type: 2}

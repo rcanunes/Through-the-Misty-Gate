@@ -102,6 +102,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
+        
         playerRb.gravityScale = gravityScale;
 
         if (isGrounded && GetJumpKeysDown() && jumpEnded)
