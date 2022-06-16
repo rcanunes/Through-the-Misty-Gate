@@ -92,10 +92,6 @@ public class UI_SpellBook : MonoBehaviour, IDropHandler, IDragHandler
 
     private void UpdateSpellBookVisual()
     {
-        int x = 0;
-        int y = 0;
-        float spellSlotCellSize = 50f;
-
         foreach (Transform child in spellSlotContainer)
         {
             if (child == spellSlotTemplate) continue;
@@ -104,18 +100,9 @@ public class UI_SpellBook : MonoBehaviour, IDropHandler, IDragHandler
 
         foreach (UI_ItemManager.HotKeyAbility spell in spellBookSystem.GetAllSpells())
         {
-            if (x >= maxCellPerLine)
-            {
-                y--;
-                x = 0;
-            }
-
             Transform spellSlotTransform = Instantiate(spellSlotTemplate, spellSlotContainer);
-            RectTransform spellSlotRectTransform = spellSlotTransform.GetComponent<RectTransform>();
-            spellSlotRectTransform.anchoredPosition += new Vector2(x * spellSlotCellSize, y * spellSlotCellSize);
-            spellSlotRectTransform.gameObject.SetActive(true);
-            spellSlotRectTransform.Find("SpellIcon").GetComponent<Image>().sprite = spell.GetSprite();
-            x++;
+            spellSlotTransform.gameObject.SetActive(true);
+            spellSlotTransform.Find("SpellIcon").GetComponent<Image>().sprite = spell.GetSprite();
             spellSlotTransform.GetComponent<UI_SpellBookSlot>().SetUp(spellBookSystem, spell, hotKeySystem);
 
             if (hotKeySystem.CheckContainsSpell(spell))
