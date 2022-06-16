@@ -163,12 +163,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isLadder: 0
   isClimbing: 0
-  isGrounded: 0
+  isGrounded: {fileID: 0}
   feetPos: {fileID: 5443660000543492061}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
-  canHold: 0
+  jumpEnded: 0
   jumpSound: {fileID: 8300000, guid: 05fdd0fc0a3748c499d79916b002b537, type: 3}
 --- !u!82 &5443659999593446826
 AudioSource:

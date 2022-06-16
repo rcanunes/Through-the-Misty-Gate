@@ -8,6 +8,7 @@ public class CameraTrigger : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] CinemachineVirtualCamera cinematicCamera;
     private AudioSource source;
+    private bool hasHappened = false;
 
     private void Awake()
     {
@@ -16,7 +17,7 @@ public class CameraTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (cinematicCamera != null && collision.CompareTag("Player"))
+        if (cinematicCamera != null && collision.CompareTag("Player") && !hasHappened)
         {
             cinematicCamera.Priority = 10;
             source.Play();
@@ -25,10 +26,16 @@ public class CameraTrigger : MonoBehaviour
         }
     }
 
+    private void Disable()
+    {
+        hasHappened = true;
+    }
+
     IEnumerator LeaveCinemtaic()
     {
         yield return new WaitForSeconds(7f);
 
         cinematicCamera.Priority = 0;
+        Disable();
     }
 }
