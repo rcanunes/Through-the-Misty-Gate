@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UI_SpellBook : MonoBehaviour, IDropHandler, IDragHandler
+public class UI_SpellBook : MonoBehaviour, IDropHandler, IDragHandler, IPointerExitHandler
 {
     private Transform spellSlotTemplate;
     private Transform spellSlotContainer;
@@ -77,7 +77,7 @@ public class UI_SpellBook : MonoBehaviour, IDropHandler, IDragHandler
             Transform spellSlotTransform = Instantiate(spellSlotTemplate, spellSlotContainer);
             spellSlotTransform.gameObject.SetActive(true);
             spellSlotTransform.Find("SpellIcon").GetComponent<Image>().sprite = spell.GetSprite();
-            spellSlotTransform.GetComponent<UI_SpellBookSlot>().SetUp(spellBookSystem, spell, hotKeySystem);
+            spellSlotTransform.GetComponent<UI_SpellBookSlot>().SetUp(spellBookSystem, spell, hotKeySystem, spellSlotContainer);
 
             if (hotKeySystem.CheckContainsSpell(spell))
             {    
@@ -103,15 +103,18 @@ public class UI_SpellBook : MonoBehaviour, IDropHandler, IDragHandler
     private void DisableSpellInfo()
     {
 
-        CanvasGroup spellInfoCG = spellInfo.GetComponent<CanvasGroup>();
-        spellInfoCG.interactable = false;
-        spellInfoCG.alpha = 0;
-        spellInfoCG.blocksRaycasts = false;
+        spellInfo.GetComponent<SmallAnimation>().OnCLose();
     }
 
-    //public void OnPointerExit(PointerEventData eventData)
-    //{
-    //    Debug.Log("Exiting SpellBook");
-    //    DisableSpellInfo();
-    //}
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (eventData.pointerCurrentRaycast.gameObject != null)
+        {
+            if (eventData.pointerCurrentRaycast.gameObject.transform.IsChildOf(transform))
+            {
+                DisableSpellInfo();
+                return;
+            }
+        }
+    }
 }

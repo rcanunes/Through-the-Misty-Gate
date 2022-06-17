@@ -12,6 +12,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] RectTransform spellInfo;
     [SerializeField] Camera mainCamera;
 
+    public float target = 225;
+
 
     private void Awake()
     {
@@ -45,15 +47,15 @@ public class LevelManager : MonoBehaviour
 
     }
 
-    public void CheckSpellInfo()
+    public void CheckSpellInfoSide()
     {
-        if (spellInfo.parent.GetComponent<RectTransform>().anchoredPosition.x < 0 && spellInfo.anchoredPosition.x < 0)
+        if (spellInfo.parent.GetComponent<RectTransform>().anchoredPosition.x < 0)
         {
-            spellInfo.anchoredPosition = new Vector2( - spellInfo.anchoredPosition.x, spellInfo.anchoredPosition.y);
+            spellInfo.GetComponent<SmallAnimation>().targetPos = target;
         }
-        else if (spellInfo.parent.GetComponent<RectTransform>().anchoredPosition.x > 0 && spellInfo.anchoredPosition.x > 0)
+        else if (spellInfo.parent.GetComponent<RectTransform>().anchoredPosition.x > 0)
         {
-            spellInfo.anchoredPosition = new Vector2(-spellInfo.anchoredPosition.x, spellInfo.anchoredPosition.y);
+            spellInfo.GetComponent<SmallAnimation>().targetPos = -target;
         }
 
     }
@@ -100,7 +102,7 @@ public class LevelManager : MonoBehaviour
             {
                 raycastResults.Remove(ray);
             }
-
+            Debug.Log("Gameonkect - " + ray.gameObject.name);
         }
 
         return raycastResults.Count > 0;

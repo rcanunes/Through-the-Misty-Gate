@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class UI_SpellBookSlot : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHandler, IPointerDownHandler, IPointerEnterHandler
+public class UI_SpellBookSlot : MonoBehaviour, IPointerDownHandler, IPointerExitHandler//, IPointerEnterHandler //, IDragHandler, IEndDragHandler, IBeginDragHandler
 {
     private Canvas canvas;
     private CanvasGroup canvasGroup;
@@ -16,7 +16,9 @@ public class UI_SpellBookSlot : MonoBehaviour, IDragHandler, IEndDragHandler, IB
     private HotKeySystem hotKeySystem;
     public UI_ItemManager.HotKeyAbility hotKeyAbility;
     [SerializeField] Transform spellInfo;
+    private GameObject temp;
 
+    private Transform spellSlotContainer;
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
@@ -30,17 +32,17 @@ public class UI_SpellBookSlot : MonoBehaviour, IDragHandler, IEndDragHandler, IB
     }
 
 
-    public void OnDrag(PointerEventData eventData)
-    {
-        rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+    //public void OnDrag(PointerEventData eventData)
+    //{
+    //    rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+    //}
 
-    }
-
-    public void SetUp(SpellBookSystem spellBookSystem, UI_ItemManager.HotKeyAbility hotKeyAbility, HotKeySystem hotKeySystem)
+    public void SetUp(SpellBookSystem spellBookSystem, UI_ItemManager.HotKeyAbility hotKeyAbility, HotKeySystem hotKeySystem, Transform spellSlotContainer)
     {
         this.hotKeySystem = hotKeySystem;
         this.hotKeyAbility = hotKeyAbility;
         this.spellBookSystem = spellBookSystem;
+        this.spellSlotContainer = spellSlotContainer;
     }
 
 
@@ -49,20 +51,22 @@ public class UI_SpellBookSlot : MonoBehaviour, IDragHandler, IEndDragHandler, IB
         startAnchoredPosition = rectTransform.anchoredPosition;
     }
 
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        rectTransform.anchoredPosition = startAnchoredPosition;
-        canvasGroup.alpha = 1;
-        canvasGroup.blocksRaycasts = true;
-        spellBookSystem.InvokeOnSpellChange();
-    }
+    //public void OnEndDrag(PointerEventData eventData)
+    //{
+    //    rectTransform.anchoredPosition = startAnchoredPosition;
+    //    canvasGroup.alpha = 1;
+    //    canvasGroup.blocksRaycasts = true;
+    //    spellBookSystem.InvokeOnSpellChange();
+    //    Destroy(temp);
+    //}
 
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        canvasGroup.alpha = .6f;
-        canvasGroup.blocksRaycasts = false;
-        transform.SetAsLastSibling();
-    }
+    //public void OnBeginDrag(PointerEventData eventData)
+    //{
+    //    canvasGroup.alpha = .6f;
+    //    canvasGroup.blocksRaycasts = false;
+    //    transform.SetAsLastSibling();
+
+    //}
 
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -72,14 +76,19 @@ public class UI_SpellBookSlot : MonoBehaviour, IDragHandler, IEndDragHandler, IB
             hotKeySystem.AddSpell(hotKeyAbility);
             spellBookSystem.InvokeOnSpellChange();
         }
+
+        else if(eventData.button == PointerEventData.InputButton.Left)
+        {
+            LevelManager.instance.CheckSpellInfoSide();
+            SetUpSpellInfo();
+        }
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        LevelManager.instance.CheckSpellInfo();
-        SetUpSpellInfo();
-        
-    }
+    //public void OnPointerEnter(PointerEventData eventData)
+    //{
+        // LevelManager.instance.CheckSpellInfo();
+        //SetUpSpellInfo();
+    //}
 
     private void SetUpSpellInfo()
     {
@@ -88,11 +97,24 @@ public class UI_SpellBookSlot : MonoBehaviour, IDragHandler, IEndDragHandler, IB
         spellInfo.Find("Cooldown").GetComponent<TextMeshProUGUI>().text = "Cooldown: " + hotKeyAbility.spell.cooldown.ToString();
         spellInfo.Find("Description").GetComponent<TextMeshProUGUI>().text = "Info: " + hotKeyAbility.spell.spellDescription;
 
+        spellInfo.gameObject.SetActive(true);
 
-        CanvasGroup spellInfoCG = spellInfo.GetComponent<CanvasGroup>();
-        spellInfoCG.interactable = true;
-        spellInfoCG.alpha = 1;
-        spellInfoCG.blocksRaycasts = true;
     }
+    private void DisableSpellInfo()
+    {
 
+        spellInfo.GetComponent<SmallAnimation>().OnCLose();
+    }
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (eventData.pointerCurrentRaycast.gameObject != null)
+        {
+            if (eventData.pointerCurrentRaycast.gameObject.transform != transform.parent.transform)
+            {
+                //Debug.Log("Exiting child to spellbook");
+                return;
+            }
+
+        }
+    }
 }
