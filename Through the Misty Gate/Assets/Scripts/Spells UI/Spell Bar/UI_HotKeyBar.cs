@@ -4,80 +4,76 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using Spells_UI.Spellbook;
 
-public class UI_HotKeyBar : MonoBehaviour
-{
-    private Transform spellSlotTemplate;
-    private HotKeySystem hotKeySystem;
-    private SpellBookSystem spellBookSystem;
+namespace Spells_UI.Spell_Bar {
+    public class UI_HotKeyBar : MonoBehaviour {
+        private Transform spellSlotTemplate;
+        private HotKeySystem hotKeySystem;
+        private SpellBookSystem spellBookSystem;
 
 
-    private void Awake()
-    {
-        spellSlotTemplate = transform.Find("spellSlotTemplate");
-        spellSlotTemplate.gameObject.SetActive(false);
-    }
-
-    public void SetHotKeySystem(HotKeySystem hotKeySystem, SpellBookSystem spellBookSystem)
-    {
-        this.hotKeySystem = hotKeySystem;
-        this.spellBookSystem = spellBookSystem;
-        HotKeyBarUpdateVisual();
-        hotKeySystem.OnAbilityListChange += HotKeySystem_OnAbilityListChange;
-    }
-
-    private void HotKeySystem_OnAbilityListChange(object sender, EventArgs e)
-    {
-        HotKeyBarUpdateVisual();
-    }
-
-    private void HotKeyBarUpdateVisual()
-    {
-        foreach (Transform child in transform)
-        {
-            if (child == spellSlotTemplate) continue;
-            Destroy(child.gameObject);
+        private void Awake() {
+            spellSlotTemplate = transform.Find("spellSlotTemplate");
+            spellSlotTemplate.gameObject.SetActive(false);
         }
 
-        List<UI_ItemManager.HotKeyAbility> hotKeyAbilitiesList = hotKeySystem.GetSpells();
-        for (int i = 0; i < hotKeySystem.MaxSpells ; i++)
-        {
+        public void SetHotKeySystem(HotKeySystem hotKeySystem, SpellBookSystem spellBookSystem) {
+            this.hotKeySystem = hotKeySystem;
+            this.spellBookSystem = spellBookSystem;
+            HotKeyBarUpdateVisual();
+            hotKeySystem.OnAbilityListChange += HotKeySystem_OnAbilityListChange;
+        }
 
-            if (i < hotKeyAbilitiesList.Count) {
-                UI_ItemManager.HotKeyAbility hotKeyAbility = hotKeyAbilitiesList[i];
-                Transform spellSlotTransform = Instantiate(spellSlotTemplate, transform);
-                spellSlotTransform.gameObject.SetActive(true);
-                RectTransform spellSlotRectTransforms = spellSlotTransform.GetComponent<RectTransform>();
-                spellSlotRectTransforms.anchoredPosition = new Vector2(60f * i, 0f);
-                spellSlotTransform.Find("SpellIcon").GetComponent<Image>().sprite = hotKeyAbility.GetSprite();
-                spellSlotTransform.Find("Number").Find("Number").GetComponent<TextMeshProUGUI>().text = (i + 1).ToString();
+        private void HotKeySystem_OnAbilityListChange(object sender, EventArgs e) {
+            HotKeyBarUpdateVisual();
+        }
 
-                if (hotKeySystem.GetCurrentSpellID() == hotKeyAbility.spellId)
-                {
-                    spellSlotTransform.Find("Border").GetComponent<Image>().color = Color.red;
+        private void HotKeyBarUpdateVisual() {
+            foreach (Transform child in transform) {
+                if (child == spellSlotTemplate) continue;
+                Destroy(child.gameObject);
+            }
+
+            List<UI_ItemManager.HotKeyAbility> hotKeyAbilitiesList = hotKeySystem.GetSpells();
+            for (int i = 0; i < hotKeySystem.MaxSpells; i++) {
+
+                if (i < hotKeyAbilitiesList.Count) {
+                    UI_ItemManager.HotKeyAbility hotKeyAbility = hotKeyAbilitiesList[i];
+                    Transform spellSlotTransform = Instantiate(spellSlotTemplate, transform);
+                    spellSlotTransform.gameObject.SetActive(true);
+                    RectTransform spellSlotRectTransforms = spellSlotTransform.GetComponent<RectTransform>();
+                    spellSlotRectTransforms.anchoredPosition = new Vector2(60f * i, 0f);
+                    spellSlotTransform.Find("SpellIcon").GetComponent<Image>().sprite = hotKeyAbility.GetSprite();
+                    spellSlotTransform.Find("Number").Find("Number").GetComponent<TextMeshProUGUI>().text =
+                        (i + 1).ToString();
+
+                    if (hotKeySystem.GetCurrentSpellID() == hotKeyAbility.spellId) {
+                        spellSlotTransform.Find("Border").GetComponent<Image>().color = Color.red;
+                    }
+
+                    spellSlotTransform.GetComponent<UI_HotKeyBarSpellSlot>()
+                        .SetUp(i, hotKeySystem, hotKeyAbility, spellBookSystem);
                 }
 
-                spellSlotTransform.GetComponent<UI_HotKeyBarSpellSlot>().SetUp(i, hotKeySystem, hotKeyAbility, spellBookSystem);
+                else {
+                    Transform spellSlotTransform = Instantiate(spellSlotTemplate, transform);
+                    spellSlotTransform.gameObject.SetActive(true);
+                    RectTransform spellSlotRectTransforms = spellSlotTransform.GetComponent<RectTransform>();
+                    spellSlotRectTransforms.anchoredPosition = new Vector2(60f * i, 0f);
+                    spellSlotTransform.Find("Number").Find("Number").GetComponent<TextMeshProUGUI>().text =
+                        (i + 1).ToString();
+
+                    Color test = Color.white;
+                    test.a = 0;
+
+                    spellSlotTransform.Find("SpellIcon").GetComponent<Image>().color = test;
+                    spellSlotTransform.GetComponent<UI_HotKeyBarSpellSlot>()
+                        .SetUp(i, hotKeySystem, null, spellBookSystem);
+
+                }
+
             }
-
-            else
-            {
-                Transform spellSlotTransform = Instantiate(spellSlotTemplate, transform);
-                spellSlotTransform.gameObject.SetActive(true);
-                RectTransform spellSlotRectTransforms = spellSlotTransform.GetComponent<RectTransform>();
-                spellSlotRectTransforms.anchoredPosition = new Vector2(60f * i, 0f);
-                spellSlotTransform.Find("Number").Find("Number").GetComponent<TextMeshProUGUI>().text = (i + 1).ToString();
-
-                Color test = Color.white;
-                test.a = 0;
-
-                spellSlotTransform.Find("SpellIcon").GetComponent<Image>().color = test ;
-                spellSlotTransform.GetComponent<UI_HotKeyBarSpellSlot>().SetUp(i, hotKeySystem, null, spellBookSystem);
-
-            }
-
         }
     }
-
-
 }
