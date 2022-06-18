@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Equipment : PickableItems
+[CreateAssetMenu(fileName = "New Equipment", menuName = "Invantory/Equipment")]
+
+public class Equipment : Item
 {
-
-    public string equimentName;
-    public string description;
-    public Sprite equipmentSprite;
-
-
-
-
-    public override void OnPickUp()
+    public TypeOfEquipment type;
+    public enum TypeOfEquipment
     {
-        //Add to inventory
+        Head,
+        Chest,
+        Ring,
+        Boots
     }
+
+    public EquipmentPowers.Mods modifier;
 }

@@ -8,7 +8,7 @@ public class PickableItems : MonoBehaviour
 
     public virtual void OnPickUp()
     {
-
+        Debug.Log("Picking Up Item");
     }
 
 
