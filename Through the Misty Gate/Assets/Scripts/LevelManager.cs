@@ -78,7 +78,6 @@ public class LevelManager : MonoBehaviour
 
     public bool CanClick()
     {
-        Debug.Log("IsOver? - " + isMouseOverUI().ToString());
         return !toogleSpellBook && !isMouseOverUI();
     }
 
@@ -102,7 +101,6 @@ public class LevelManager : MonoBehaviour
             {
                 raycastResults.Remove(ray);
             }
-            Debug.Log("Gameonkect - " + ray.gameObject.name);
         }
 
         return raycastResults.Count > 0;

@@ -5,8 +5,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class UI_SpellBookSlot : MonoBehaviour, IPointerDownHandler, IPointerExitHandler//, IPointerEnterHandler //, IDragHandler, IEndDragHandler, IBeginDragHandler
-{
+public class UI_SpellBookSlot : MonoBehaviour, IPointerDownHandler
+    {
     private Canvas canvas;
     private CanvasGroup canvasGroup;
     private RectTransform rectTransform;
@@ -99,22 +99,5 @@ public class UI_SpellBookSlot : MonoBehaviour, IPointerDownHandler, IPointerExit
 
         spellInfo.gameObject.SetActive(true);
 
-    }
-    private void DisableSpellInfo()
-    {
-
-        spellInfo.GetComponent<SmallAnimation>().OnCLose();
-    }
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        if (eventData.pointerCurrentRaycast.gameObject != null)
-        {
-            if (eventData.pointerCurrentRaycast.gameObject.transform != transform.parent.transform)
-            {
-                //Debug.Log("Exiting child to spellbook");
-                return;
-            }
-
-        }
     }
 }

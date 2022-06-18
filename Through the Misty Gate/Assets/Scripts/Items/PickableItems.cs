@@ -2,14 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Items : MonoBehaviour
+public class PickableItems : MonoBehaviour
 {
     // Start is called before the first frame update
+
+    public virtual void OnPickUp()
+    {
+
+    }
+
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            //this.dosomthing
+            OnPickUp();
             Destroy(gameObject);
         }        
     }

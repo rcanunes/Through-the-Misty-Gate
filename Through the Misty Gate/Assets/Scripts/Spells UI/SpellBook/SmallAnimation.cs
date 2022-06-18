@@ -18,14 +18,12 @@ public class SmallAnimation : MonoBehaviour
     private void OnEnable()
     {
         
-        Debug.Log("Opening");
         LeanTween.cancelAll();
-        LeanTween.moveX(rt, targetPos, 1f);
+        LeanTween.moveX(rt, targetPos, 0.1f);
     }
 
     public void OnCLose()
     {
-        Debug.Log("Closing");
         LeanTween.cancelAll();
         LeanTween.moveX(rt, startPos, 0.2f).setOnComplete(Disable);
     }
