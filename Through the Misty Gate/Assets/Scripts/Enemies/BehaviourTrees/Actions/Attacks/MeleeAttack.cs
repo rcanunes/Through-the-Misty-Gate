@@ -6,16 +6,16 @@ namespace Enemies.BehaviourTrees.Actions {
     public class MeleeAttack : Task {
         private Enemy enemy;
         
-        private GameObject target;
+        private PlayerController target;
 
-        public MeleeAttack(Enemy enemy, GameObject target) {
+        public MeleeAttack(Enemy enemy, PlayerController target) {
             this.enemy = enemy;
             this.target = target;
         }
         
         public override Result Run() {
             try {
-                enemy.AttackTarget(target);
+                enemy.AttackPlayer();
                 return Result.Success;
             }
             catch {

@@ -6,16 +6,16 @@ namespace Enemies.BehaviourTrees.Actions {
     public class RangedAttack : Task {
         private Enemy enemy;
         
-        private GameObject target;
+        private PlayerController player;
 
-        public RangedAttack(Enemy enemy, GameObject target) {
+        public RangedAttack(Enemy enemy, PlayerController player) {
             this.enemy = enemy;
-            this.target = target;
+            this.player = player;
         }
         
         public override Result Run() {
             try {
-                enemy.AttackTargetAtRange(target);
+                enemy.AttackPlayerAtRange();
                 return Result.Success;
             }
             catch {
