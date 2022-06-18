@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class UI_SpellBookSlot : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHandler, IPointerDownHandler
+public class UI_SpellBookSlot : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHandler, IPointerDownHandler, IPointerEnterHandler
 {
     private Canvas canvas;
     private CanvasGroup canvasGroup;
@@ -13,6 +15,7 @@ public class UI_SpellBookSlot : MonoBehaviour, IDragHandler, IEndDragHandler, IB
     private SpellBookSystem spellBookSystem;
     private HotKeySystem hotKeySystem;
     public UI_ItemManager.HotKeyAbility hotKeyAbility;
+    [SerializeField] Transform spellInfo;
 
     private void Awake()
     {
@@ -63,10 +66,33 @@ public class UI_SpellBookSlot : MonoBehaviour, IDragHandler, IEndDragHandler, IB
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        Debug.Log("Getting down to biz");
         if (eventData.button == PointerEventData.InputButton.Right)
         {
             hotKeySystem.AddSpell(hotKeyAbility);
             spellBookSystem.InvokeOnSpellChange();
         }
     }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        LevelManager.instance.CheckSpellInfo();
+        SetUpSpellInfo();
+        
+    }
+
+    private void SetUpSpellInfo()
+    {
+
+        spellInfo.Find("Spell Name").GetComponent<TextMeshProUGUI>().text = hotKeyAbility.spell.name;
+        spellInfo.Find("Cooldown").GetComponent<TextMeshProUGUI>().text = "Cooldown: " + hotKeyAbility.spell.cooldown.ToString();
+        spellInfo.Find("Description").GetComponent<TextMeshProUGUI>().text = "Info: " + hotKeyAbility.spell.spellDescription;
+
+
+        CanvasGroup spellInfoCG = spellInfo.GetComponent<CanvasGroup>();
+        spellInfoCG.interactable = true;
+        spellInfoCG.alpha = 1;
+        spellInfoCG.blocksRaycasts = true;
+    }
+
 }
