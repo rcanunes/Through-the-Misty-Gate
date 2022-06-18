@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Enemies.BehaviourTrees.Implementation;
 using Enemies.EnemyTypes;
+using Player;
 
 namespace Enemies.BehaviourTrees.Actions {
     public class PursuePlayer : Task {

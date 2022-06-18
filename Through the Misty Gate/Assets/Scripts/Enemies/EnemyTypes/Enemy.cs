@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using Enemies.BehaviourTrees.Implementation;
+using Player;
 
 namespace Enemies.EnemyTypes {
     public abstract class Enemy : MonoBehaviour {

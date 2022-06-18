@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Enemies.EnemyTypes;
 
 namespace Player {
     public class PlayerController : MonoBehaviour {
@@ -276,6 +277,12 @@ namespace Player {
             if (collision.CompareTag("Ladder")) {
                 isLadder = false;
             }
+        }
+        
+        // Ouchie Methods
+        public void BeAttacked(Enemy enemy, float damage) {
+            //Health -= damage;
+            Debug.Log("I was attacked by " + enemy.GetName() + " for " + damage);
         }
 
     }

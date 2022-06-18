@@ -3,6 +3,7 @@ using Enemies.BehaviourTrees.Actions;
 using Enemies.EnemyTypes;
 using System.Collections.Generic;
 using UnityEngine;
+using Player;
 
 namespace Enemies.BehaviourTrees.Trees {
     public class SlimeTree : Sequence {
