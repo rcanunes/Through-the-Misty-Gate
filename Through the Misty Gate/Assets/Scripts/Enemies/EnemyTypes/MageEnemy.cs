@@ -6,7 +6,7 @@ namespace Enemies.EnemyTypes {
         protected override void Start() {
             base.Start();
 
-            this.movementStyle = 0;
+            this.MovementStyle = _MovementStyle.Walking;
             this.canJump = false;
 
             this.BehaviourTree = new MageTree();

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Enemies.EnemyTypes;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -41,10 +42,6 @@ public class PlayerController : MonoBehaviour
     //Player Sounds Variables
     private AudioSource audioSource;
     public AudioClip jumpSound;
-
-
-
-
 
     // Start is called before the first frame update
     void Start()
@@ -203,5 +200,13 @@ public class PlayerController : MonoBehaviour
             isLadder = false;
         }
     }
+    
+    
+    // Ouchie Methods
+    public void BeAttacked(Enemy enemy, float damage) {
+        //Health -= damage;
+        Debug.Log("I was attacked by " + enemy.GetName() + " for " + damage);
+    }
+    
 
 }

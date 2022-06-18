@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Enemies.BehaviourTrees.Implementation;
 
 namespace Enemies.EnemyTypes {
@@ -14,21 +15,34 @@ namespace Enemies.EnemyTypes {
         protected int Damage;
         protected float MeleeAttackRange;
         protected float RangedAttackRange;
-        protected bool HasRangedAttack = false;
+        protected bool hasRangedAttack = false;
+        
+        // Movement Style
+        public enum _MovementStyle {Walking, Flying, Hopping, Immobile}
         
         // Movement attributes
         protected float Speed;
-        protected float JumpPower;
-        
-        // Movement Style
-        protected int movementStyle; // 0 for walking, 1 for flying, 2 for hopping, -1 for immobile
-        protected bool canJump;
+        protected _MovementStyle MovementStyle;
 
+        // Jump attributes
+        protected float JumpPower;
+        protected float MaxFallingSpeed;
+        protected bool canJump;
+        protected bool isGrounded;
+        protected bool isFlying;
+        
+        // Distance attributes
         protected float AwakenDistance;
+        protected float BreakOffDistance;
+        
+        // Feet
+        public Transform Feet;
+        protected float CheckRadius = 0.2f;
+        public LayerMask whatIsGround;   // Baby don't hurt me
 
         // Player and Manager
-        public GameObject Player { get; private set; }
-        public GameManager Manager { get; private set; }
+        protected PlayerController Player { get; private set; }
+        protected GameManager Manager { get; private set; }
 
         // Rigidbody
         protected Rigidbody2D RigidBody;
@@ -41,25 +55,94 @@ namespace Enemies.EnemyTypes {
             this.Type = this.transform.gameObject.tag;
             
             Manager = GameObject.FindObjectOfType<GameManager>();
-            Player = GameObject.FindGameObjectWithTag("Player");
+            Player = GameObject.FindObjectOfType<PlayerController>();
             
             RigidBody = GetComponent<Rigidbody2D>();
         }
-        
-        // Attack Target methods
-        public void AttackTarget(GameObject target) {
-            //Manager.EnemyMeleeAttack(this.gameObject, target);
+
+        protected void FixedUpdate() {
+            //AnimationSetup();
+            isGrounded = Physics2D.OverlapCircle(Feet.position, CheckRadius, whatIsGround);
+            this.BehaviourTree.Run();
+
+            if (!isFlying && !isGrounded) {
+                if (RigidBody.velocity.y < 0 && RigidBody.velocity.y > MaxFallingSpeed)
+                    RigidBody.AddForce(Vector2.down);
+            }
+        }
+
+        // Attack methods
+        public void AttackPlayer() {
+            Player.BeAttacked(this, Damage);
         }
         
-        public void AttackTargetAtRange(GameObject target) {
-            if (HasRangedAttack) {
-                //Manager.EnemyRangedAttack(this.gameObject, target);
+        public void AttackPlayerAtRange() {
+            if (hasRangedAttack) {
+                //Player.BeAttacked(this, Damage);
+            }
+        }
+        
+        // Movement methods
+        public void Walk(string direction) {
+            if (direction == "left") {
+                this.RigidBody.velocity = new Vector2(-Speed, 0);
+            } else if (direction == "right") {
+                this.RigidBody.velocity = new Vector2(Speed, 0);
+            }
+        }
+
+        public void Jump() {
+            if (canJump && isGrounded)
+                RigidBody.velocity = Vector2.up * JumpPower;
+        }
+        
+        public void Hop(string direction) {
+            Debug.Log(isGrounded);
+            if (isGrounded) {
+                if (direction == "left") {
+                    RigidBody.velocity = Vector2.left * Speed + Vector2.up * JumpPower;
+                } else if (direction == "right") {
+                    RigidBody.velocity = Vector2.right * Speed + Vector2.up * JumpPower;
+                }
             }
         }
         
         // Getters
+        public string GetName() {
+            return Name;
+        }
+        
         public float GetAwakenDistance() {
             return AwakenDistance;
         }
+        
+        public float GetBreakOffDistance() {
+            return BreakOffDistance;
+        }
+
+        public float GetAttackRange() {
+            if (hasRangedAttack)
+                return RangedAttackRange;
+
+            return MeleeAttackRange;
+        }
+        
+        public _MovementStyle GetMovementStyle() {
+            return MovementStyle;
+        }
+
+        public Vector2 GetVelocity() {
+            return RigidBody.velocity;
+        }
+
+        public bool CanJump() {
+            return canJump;
+        }
+
+        // Setters
+        public void SetVelocity(float x, float y) {
+            RigidBody.velocity = new Vector2(x, y);
+        }
+        
     }
 }

@@ -6,7 +6,7 @@ namespace Enemies.EnemyTypes {
         protected override void Start() {
             base.Start();
 
-            this.movementStyle = -1;
+            this.MovementStyle = _MovementStyle.Immobile;
             this.canJump = false;
 
             this.BehaviourTree = new TurretTree();
