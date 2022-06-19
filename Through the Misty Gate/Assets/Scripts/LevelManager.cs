@@ -8,7 +8,7 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager instance;
 
-    private bool toogleSpellBook;
+    public bool toogleSpellBook;
 
     [SerializeField] CanvasGroup spellBookCanvasGroup;
     [SerializeField] RectTransform spellInfo;
@@ -24,6 +24,7 @@ public class LevelManager : MonoBehaviour
     {
         instance = this;
         toogleSpellBook = false;
+        toogleInventory = false;
         MakeSpellBookInvisible();
     }
 
@@ -60,6 +61,8 @@ public class LevelManager : MonoBehaviour
     private void ToogleInventory()
     {
         toogleInventory = !toogleInventory;
+        if (toogleInventory &&  toogleSpellBook)
+            ToogleSpellBook();
         inventoryUI.SetActive(toogleInventory);
     }
 
@@ -89,9 +92,13 @@ public class LevelManager : MonoBehaviour
     private void ToogleSpellBook()
     {
         toogleSpellBook = !toogleSpellBook;
+
+
         if (toogleSpellBook)
         {
             MakeSpellBookVisible();
+            if (toogleInventory)
+                ToogleInventory();
         }
         else
             MakeSpellBookInvisible();
