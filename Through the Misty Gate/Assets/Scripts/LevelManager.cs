@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,11 +9,15 @@ public class LevelManager : MonoBehaviour
     public static LevelManager instance;
 
     private bool toogleSpellBook;
+
     [SerializeField] CanvasGroup spellBookCanvasGroup;
     [SerializeField] RectTransform spellInfo;
     [SerializeField] Camera mainCamera;
 
     public float target = 225;
+
+    public bool toogleInventory;
+    [SerializeField] GameObject inventoryUI;
 
 
     private void Awake()
@@ -40,11 +45,27 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
-        if (ToogleKeysDown())
+        if (ToogleSpellBookKeysDown())
         {
             ToogleSpellBook();
         }
 
+        if (ToogleInventoryKeysDown())
+        {
+            ToogleInventory();
+        }
+
+    }
+
+    private void ToogleInventory()
+    {
+        toogleInventory = !toogleInventory;
+        inventoryUI.SetActive(toogleInventory);
+    }
+
+    private bool ToogleInventoryKeysDown()
+    {
+        return Input.GetKeyDown(KeyCode.I);
     }
 
     public void CheckSpellInfoSide()
@@ -60,7 +81,7 @@ public class LevelManager : MonoBehaviour
 
     }
 
-    private bool ToogleKeysDown()
+    private bool ToogleSpellBookKeysDown()
     {
         return Input.GetKeyDown(KeyCode.T);
     }
@@ -84,6 +105,11 @@ public class LevelManager : MonoBehaviour
     public bool IsSpellBookVisible()
     {
         return toogleSpellBook;
+    }
+
+    public bool IsInventoryVisible()
+    {
+        return toogleInventory;
     }
 
     private bool isMouseOverUI()

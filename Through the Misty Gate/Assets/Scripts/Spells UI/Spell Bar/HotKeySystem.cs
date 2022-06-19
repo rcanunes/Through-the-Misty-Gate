@@ -32,6 +32,8 @@ public class HotKeySystem {
     
     public void Update()
     {
+        if (LevelManager.instance.toogleInventory)
+            return;
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {

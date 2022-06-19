@@ -2,22 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PickableItems : MonoBehaviour
+public class PickableItems : Interactable
 {
     // Start is called before the first frame update
 
-    public virtual void OnPickUp()
+    public Item item;
+    [SerializeField] float waitTime = 2f;
+
+    public void OnPickUp()
     {
-        Debug.Log("Picking Up Item");
+        bool added = Inventory.instance.AddItem(item);
+        Debug.Log("Adding Object");
+        if (added)
+            Destroy(gameObject);
+        else
+            ActivateObject();
     }
 
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public override void Interact()
     {
-        if (collision.CompareTag("Player"))
-        {
-            OnPickUp();
-            Destroy(gameObject);
-        }        
+        OnPickUp();
+    }
+
+    IEnumerator ActivateObject()
+    {
+        yield return new WaitForSeconds(waitTime);
+        hasInteracted = false;
     }
 }

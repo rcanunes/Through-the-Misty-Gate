@@ -17,7 +17,6 @@ public class UI_ItemManager : MonoBehaviour
     private void Start()
     {
         hotKeySystem = new HotKeySystem(player);
-
         spellBookSystem = new SpellBookSystem(player);
         uiSpellBook.SetSpellBookSystem(spellBookSystem, hotKeySystem);
         uiHotKeyBar.SetHotKeySystem(hotKeySystem, spellBookSystem);
