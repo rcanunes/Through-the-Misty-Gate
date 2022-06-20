@@ -7,7 +7,6 @@ public class SpellCastingManager : MonoBehaviour
 {
     private PlayerController _player;
     private SpellScriptableObject[] _unlockedSpells;  // Use array for quick lookup
-    public Transform spellCastPoint;
     
     
     [SerializeField] private List<string> startingSpells;  // Names of the starting spells - must match the name in the asset
@@ -57,7 +56,7 @@ public class SpellCastingManager : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetMouseButtonDown(0) && LevelManager.instance.CanClick())
+        if (Input.GetMouseButtonDown(0))
         {
             Debug.Log("Casting " + _unlockedSpells[currentSpellId].spellName);
             CastSpell();

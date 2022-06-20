@@ -49,11 +49,7 @@ public class PlayerController : MonoBehaviour
     //Player Sounds Variables
     private AudioSource audioSource;
     public AudioClip jumpSound;
-    private bool groundIsIce;
-
-
-
-
+    
 
 
     // Start is called before the first frame update
@@ -80,7 +76,6 @@ public class PlayerController : MonoBehaviour
     {
         AnimationSetup();
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, whatIsGround);
-        groundIsIce = CheckIfIce();
 
         
         if (enterChargedCast)
@@ -235,32 +230,21 @@ public class PlayerController : MonoBehaviour
             animator.SetTrigger("Running");
     }
 
-    //private IEnumerator Knockback()
-    //{
-    //    float elapsed = 0;
-    //    float duration = Mathf.Abs(1 / knockbackBurst);
-
-    //    while (elapsed < duration)
-    //    {
-    //        elapsed += time.deltatime;
-    //        transform.position += new vector3(knockbackamount * time.deltatime, 0, 0);
-
-    //        yield return new waitforendofframe();
-    //    }
-
-        
-    //    ignoreInput = false;
-    //    Debug.Log("Exiting Knockback");
-    //}
-
     private IEnumerator Knockback()
     {
-        playerRb.AddForce(new Vector2(knockbackAmount, 0) * 4, ForceMode2D.Impulse);
-        yield return new WaitForSeconds(0.5f);
+        float elapsed = 0;
+        float duration = Mathf.Abs(1 / knockbackBurst);
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            transform.position += new Vector3(knockbackAmount * Time.deltaTime, 0, 0);
+
+            yield return new WaitForEndOfFrame();
+        }
+        
         ignoreInput = false;
-
     }
-
 
     public void EnterChargedCast(float chargeTime)
     {
@@ -273,7 +257,6 @@ public class PlayerController : MonoBehaviour
     {
         knockbackAmount = amount;
         knockbackBurst = burst;
-        Debug.Log("KnockbakAmount " + knockbackAmount.ToString() + " - KnockBackBurst" + knockbackBurst.ToString());
     }
 
 

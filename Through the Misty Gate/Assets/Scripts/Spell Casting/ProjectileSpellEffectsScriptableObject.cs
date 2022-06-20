@@ -49,7 +49,6 @@ public class ProjectileSpellEffectsScriptableObject : SpellEffectsScriptableObje
         direction /= direction.magnitude;
 
         projectileBehavior.SetAttributes(direction, speed);
-
         player.SetKnockback(knockbackAmount * Math.Sign(direction.x) * (-1), knockbackBurst);
     }
     

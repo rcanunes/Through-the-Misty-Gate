@@ -11,7 +11,6 @@ public class SpellScriptableObject : ScriptableObject
     public float cooldown = 1.0f;
     public float chargeTime;  // The amount of time the character is immobilized while casting
     public int spellId;
-    public string spellDescription;
     public SpellEffectsScriptableObject spellEffects;
 
 

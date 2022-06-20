@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: ProjectileTest
   m_EditorClassIdentifier: 
   spellName: Test
-  uiSprite: {fileID: 21300000, guid: 42f6c722ead369b4b934a116b4324a4d, type: 3}
+  uiSprite: {fileID: -2413806693520163455, guid: 8604fec366e52344684aa4b9c71027c7, type: 3}
   cooldown: 1
   chargeTime: 2
   spellId: 0
-  spellDescription: Simple basic stone throwing spell
   spellEffects: {fileID: 11400000, guid: ccf049254c5c41a4a9fb938b47bb40ab, type: 2}
