@@ -8,7 +8,7 @@ public class Item : ScriptableObject
     public string itemName;
     public string description;
     public Sprite image;
-    public GameObject prefab; 
+    //public GameObject prefab; 
     
     public virtual void Use()
     {

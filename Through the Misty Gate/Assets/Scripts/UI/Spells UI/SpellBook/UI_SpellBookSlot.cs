@@ -78,7 +78,6 @@ public class UI_SpellBookSlot : MonoBehaviour, IPointerDownHandler
 
         else if(eventData.button == PointerEventData.InputButton.Left)
         {
-            LevelManager.instance.CheckSpellInfoSide();
             SetUpSpellInfo();
         }
     }

@@ -15,8 +15,11 @@ public class EquipmentManager : MonoBehaviour
 
     #endregion
 
-    Equipment[] currentEquipment;
+    public Equipment[] currentEquipment;
     Inventory inventory;
+
+    public delegate void EventHandler();
+    public event EventHandler ModifyEquipment;
 
     private void Start()
     {
@@ -34,6 +37,8 @@ public class EquipmentManager : MonoBehaviour
 
         currentEquipment[index] = item;
 
+        ModifyEquipment?.Invoke();
+
     }
 
     public void Unequip(int slotIndex)
@@ -44,6 +49,9 @@ public class EquipmentManager : MonoBehaviour
             inventory.AddItem(oldItem);
             currentEquipment[slotIndex] = null;
         }
+
+        ModifyEquipment?.Invoke();
+
     }
 
     public void UnequipAll()
@@ -52,7 +60,8 @@ public class EquipmentManager : MonoBehaviour
         {
             Unequip(i);
         }
-    }
 
+        ModifyEquipment?.Invoke();
+    }
 
 }

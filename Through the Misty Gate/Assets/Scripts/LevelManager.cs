@@ -11,10 +11,10 @@ public class LevelManager : MonoBehaviour
     public bool toogleSpellBook;
 
     [SerializeField] CanvasGroup spellBookCanvasGroup;
-    [SerializeField] RectTransform spellInfo;
+    //[SerializeField] RectTransform spellInfo;
     [SerializeField] Camera mainCamera;
 
-    public float target = 225;
+    //public float target = 225;
 
     public bool toogleInventory;
     [SerializeField] GameObject inventoryUI;
@@ -72,18 +72,18 @@ public class LevelManager : MonoBehaviour
         return Input.GetKeyDown(KeyCode.I);
     }
 
-    public void CheckSpellInfoSide()
-    {
-        if (spellInfo.parent.GetComponent<RectTransform>().anchoredPosition.x < 0)
-        {
-            spellInfo.GetComponent<SmallAnimation>().targetPos = target;
-        }
-        else if (spellInfo.parent.GetComponent<RectTransform>().anchoredPosition.x > 0)
-        {
-            spellInfo.GetComponent<SmallAnimation>().targetPos = -target;
-        }
+    //public void CheckSpellInfoSide()
+    //{
+    //    if (spellInfo.parent.GetComponent<RectTransform>().anchoredPosition.x < 0)
+    //    {
+    //        spellInfo.GetComponent<SmallAnimation>().targetPos = target;
+    //    }
+    //    else if (spellInfo.parent.GetComponent<RectTransform>().anchoredPosition.x > 0)
+    //    {
+    //        spellInfo.GetComponent<SmallAnimation>().targetPos = -target;
+    //    }
 
-    }
+    //}
 
     private bool ToogleSpellBookKeysDown()
     {
@@ -103,6 +103,8 @@ public class LevelManager : MonoBehaviour
         }
         else
             MakeSpellBookInvisible();
+
+
     }
 
     public bool CanClick()

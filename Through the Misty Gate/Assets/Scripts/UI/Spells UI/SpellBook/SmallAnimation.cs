@@ -5,32 +5,35 @@ using UnityEngine;
 public class SmallAnimation : MonoBehaviour
 {
     private RectTransform rt;
-    private float startPos;
     public float targetPos;
     // Start is called before the first frame update
 
     private void Awake()
     {
         rt = gameObject.GetComponent<RectTransform>();
-        startPos = rt.anchoredPosition.x;
-        targetPos = 225;
+        rt.anchoredPosition = new Vector2(targetPos, rt.anchoredPosition.y);
+
     }
     private void OnEnable()
     {
         
         LeanTween.cancelAll();
-        LeanTween.moveX(rt, targetPos, 0.1f);
+        LeanTween.alpha(rt, 1f, 0.1f);
     }
 
     public void OnCLose()
     {
         LeanTween.cancelAll();
-        LeanTween.moveX(rt, startPos, 0.2f).setOnComplete(Disable);
+        LeanTween.alpha(rt, 0f, 0.1f).setOnComplete(Disable);
+    }
+
+    public void ResetAnimations()
+    {
+        LeanTween.cancelAll();
     }
 
     private void Disable()
     {
-        rt.anchoredPosition = new Vector2(startPos, rt.anchoredPosition.y);
         gameObject.SetActive(false);
     }
 }

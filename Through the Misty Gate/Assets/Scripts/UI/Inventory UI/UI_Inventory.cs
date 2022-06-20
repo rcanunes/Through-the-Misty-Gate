@@ -1,13 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UI_Inventory : MonoBehaviour
+public class UI_Inventory : MonoBehaviour, IPointerExitHandler
 {
     private Transform itemSlot;
     private Transform itemSlotContainer;
+    private Transform infoBox;
     Inventory inventory;
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        Debug.Log("Yeah Boy");
+    }
 
     private void Start()
     {
