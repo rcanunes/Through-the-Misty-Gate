@@ -177,8 +177,6 @@ public class PlayerController : MonoBehaviour {
                 playerRb.velocity = new Vector2(0, playerRb.velocity.y);
             }
 
-
-
         }
         else {
             playerRb.velocity = new Vector2(horizontalInput * speed, playerRb.velocity.y);
