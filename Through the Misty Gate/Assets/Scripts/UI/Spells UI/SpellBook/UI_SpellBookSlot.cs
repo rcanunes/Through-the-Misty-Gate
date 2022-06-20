@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Spells_UI.Spell_Bar;
 
 public class UI_SpellBookSlot : MonoBehaviour, IPointerDownHandler
     {
@@ -26,10 +27,9 @@ public class UI_SpellBookSlot : MonoBehaviour, IPointerDownHandler
         canvasGroup = GetComponent<CanvasGroup>();
     }
 
-    public UI_ItemManager.HotKeyAbility GetSpell()
-    {
-        return hotKeyAbility;
-    }
+        public UI_ItemManager.HotKeyAbility GetSpell() {
+            return hotKeyAbility;
+        }
 
 
     //public void OnDrag(PointerEventData eventData)
@@ -46,10 +46,9 @@ public class UI_SpellBookSlot : MonoBehaviour, IPointerDownHandler
     }
 
 
-    private void Start()
-    {
-        startAnchoredPosition = rectTransform.anchoredPosition;
-    }
+        private void Start() {
+            startAnchoredPosition = rectTransform.anchoredPosition;
+        }
 
     //public void OnEndDrag(PointerEventData eventData)
     //{
@@ -88,12 +87,13 @@ public class UI_SpellBookSlot : MonoBehaviour, IPointerDownHandler
         //SetUpSpellInfo();
     //}
 
-    private void SetUpSpellInfo()
-    {
+        private void SetUpSpellInfo() {
 
-        spellInfo.Find("Spell Name").GetComponent<TextMeshProUGUI>().text = hotKeyAbility.spell.name;
-        spellInfo.Find("Cooldown").GetComponent<TextMeshProUGUI>().text = "Cooldown: " + hotKeyAbility.spell.cooldown.ToString();
-        spellInfo.Find("Description").GetComponent<TextMeshProUGUI>().text = "Info: " + hotKeyAbility.spell.spellDescription;
+            spellInfo.Find("Spell Name").GetComponent<TextMeshProUGUI>().text = hotKeyAbility.spell.name;
+            spellInfo.Find("Cooldown").GetComponent<TextMeshProUGUI>().text =
+                "Cooldown: " + hotKeyAbility.spell.cooldown.ToString();
+            spellInfo.Find("Description").GetComponent<TextMeshProUGUI>().text =
+                "Info: " + hotKeyAbility.spell.spellDescription;
 
         spellInfo.gameObject.SetActive(true);
 
