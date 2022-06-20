@@ -9,13 +9,13 @@ public class Stat
     public int baseValue;
     private List<int> modifiers = new List<int>();
 
-    public int GetValue()
+    public float GetValue()
     {
         int finalValue = baseValue;
 
         modifiers.ForEach(x => finalValue += x);
 
-        return finalValue;
+        return finalValue * 0.01f;
     }
 
     public void AddModifier(int modifier)

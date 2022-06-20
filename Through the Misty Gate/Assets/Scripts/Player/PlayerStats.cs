@@ -29,6 +29,13 @@ public class PlayerStats : MonoBehaviour
         currentHitPoints = maxHitPoints;
         healthBar.SetMaxHealth(maxHitPoints);
 
+        healthModifer.baseValue = 100;
+        baseDamageModifier.baseValue = 100;
+        jumpModifier.baseValue = 100;
+        speedModifier.baseValue = 100;
+        fireDamageModifer.baseValue = 100;
+        iceDamageModifier.baseValue = 100;
+
         EquipmentManager.instance.modifyEquipment += OnEquipItems;
     }
 
@@ -54,7 +61,12 @@ public class PlayerStats : MonoBehaviour
         if(oldItem != null)
             RemoveModifiers(oldItem.modifiers);
 
+        SetMaxHitPoints();
+    }
 
+    void SetMaxHitPoints()
+    {
+        healthBar.SetMaxHealth(maxHitPoints * healthModifer.GetValue());
     }
 
     private void RemoveModifiers(StatsBlock modifiers)

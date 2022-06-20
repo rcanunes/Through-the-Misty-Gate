@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
     private Rigidbody2D playerRb;
 
-    private float speed;
+    private float baseSpeed;
 
     private float horizontalInput;
     private float verticalInput;
@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour {
     public bool jumpEnded;
     private float jumpTimeCounter; //Current Jump Time
     private float jumpTime; //Max jump Time
-    private float jumpForce; // Jump Strength
+    private float baseJumpForce; // Jump Strength
     private float gravityScale;
 
     private float maxFallingSpped;
@@ -50,18 +50,18 @@ public class PlayerController : MonoBehaviour {
     public AudioClip jumpSound;
     private bool groundIsIce;
 
-
+    PlayerStats playerStats;
 
 
 
 
     // Start is called before the first frame update
     void Start() {
-        speed = 10;
+        baseSpeed = 10;
         climbingSpeed = 10;
         gravityScale = 5;
         jumpTime = 0.4f;
-        jumpForce = 11;
+        baseJumpForce = 11;
         maxFallingSpped = -10f;
         jumpEnded = true;
 
@@ -69,6 +69,7 @@ public class PlayerController : MonoBehaviour {
         audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
+        playerStats = GetComponent<PlayerStats>();
 
     }
 
@@ -100,6 +101,7 @@ public class PlayerController : MonoBehaviour {
     private void Jump() {
 
         playerRb.gravityScale = gravityScale;
+        float jumpForce = baseJumpForce * playerStats.jumpModifier.GetValue();
 
         if (isGrounded && GetJumpKeysDown() && jumpEnded) {
             jumpEnded = false;
@@ -161,6 +163,8 @@ public class PlayerController : MonoBehaviour {
     private void MoveCharacter() {
         horizontalInput = Input.GetAxis("Horizontal");
 
+        float speed = baseSpeed * playerStats.speedModifier.GetValue();
+
         if (groundIsIce) {
 
             playerRb.velocity += new Vector2(horizontalInput * speed, playerRb.velocity.y);
@@ -184,7 +188,6 @@ public class PlayerController : MonoBehaviour {
             playerRb.velocity = new Vector2(horizontalInput * speed, playerRb.velocity.y);
 
         }
-        //playerRb.AddForce(new Vector2(horizontalInput * speed, playerRb.velocity.y));
     }
 
     private void AnimationSetup() {
