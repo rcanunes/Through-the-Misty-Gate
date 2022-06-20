@@ -26,6 +26,7 @@ public class LevelManager : MonoBehaviour
         toogleSpellBook = false;
         toogleInventory = false;
         MakeSpellBookInvisible();
+        inventoryUI.SetActive(toogleInventory);
     }
 
     public void MakeSpellBookVisible()

@@ -17,6 +17,7 @@ public class Inventory : MonoBehaviour
 
     public List<Item> items = new List<Item>();
 
+
     public delegate void EventHandler();
     public event EventHandler ModifyInventory;
 

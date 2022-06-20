@@ -11,7 +11,7 @@ public class UI_Inventory : MonoBehaviour
 
     private void Start()
     {
-        itemSlotContainer = transform.Find("ScrollBar").Find("ItemContainer");
+        itemSlotContainer = transform.Find("ScrollView/Viewport/Content");
         itemSlot = itemSlotContainer.Find("ItemSlot");
         inventory = Inventory.instance;
 
@@ -35,8 +35,8 @@ public class UI_Inventory : MonoBehaviour
         {  
             Transform itemSlotTransform = Instantiate(itemSlot, itemSlotContainer);
             itemSlotTransform.gameObject.SetActive(true);
-   
-            itemSlotTransform.Find("ItemIcon").GetComponent<Image>().sprite = item.image;
+            itemSlotTransform.GetComponent<ItemSlot>().Setup(item);
+
         }
     }
 

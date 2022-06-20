@@ -7,13 +7,22 @@ using UnityEngine;
 public class Equipment : Item
 {
     public TypeOfEquipment type;
-    public enum TypeOfEquipment
-    {
-        Head,
-        Chest,
-        Ring,
-        Boots
-    }
+    
 
     public EquipmentPowers.Mods modifier;
+
+    public override void Use()
+    {
+        base.Use();
+        EquipmentManager.instance.Equip(this);
+        RemoveItemFromInventory();
+    }
+}
+
+public enum TypeOfEquipment
+{
+    Head,
+    Chest,
+    Ring,
+    Boots
 }

@@ -9,6 +9,15 @@ public class Item : ScriptableObject
     public string description;
     public Sprite image;
     public GameObject prefab; 
-    // Start is called before the first frame update
     
+    public virtual void Use()
+    {
+        Debug.Log("Using" + itemName);
+    }
+
+    public void RemoveItemFromInventory()
+    {
+        Inventory.instance.RemoveItem(this);
+    }
+
 }

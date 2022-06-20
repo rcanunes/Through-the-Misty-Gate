@@ -70,7 +70,6 @@ public class UI_SpellBookSlot : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log("Getting down to biz");
         if (eventData.button == PointerEventData.InputButton.Right)
         {
             hotKeySystem.AddSpell(hotKeyAbility);
