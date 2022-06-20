@@ -9,7 +9,7 @@ public class Equipment : Item
     public TypeOfEquipment type;
     
 
-    public EquipmentPowers.Mods modifier;
+    public StatsBlock modifiers;
 
     public override void Use()
     {

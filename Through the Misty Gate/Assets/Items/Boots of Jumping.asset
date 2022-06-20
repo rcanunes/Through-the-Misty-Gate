@@ -16,4 +16,13 @@ MonoBehaviour:
   description: They allow the user to jum twice
   image: {fileID: -1603717535, guid: 83bf93558b0ec514a95bd6edcd67f7ac, type: 3}
   type: 3
-  modifier: 1
+  modifiers:
+    healthModifer: 0
+    baseDamageModifier: 0
+    jumpModifier: 3
+    speedModifier: 0
+    fireDamageModifer: 3
+    iceDamageModifier: 3
+    iceBootsModifier: 0
+    doubleJumpModifier: 0
+    grabWallModifier: 0

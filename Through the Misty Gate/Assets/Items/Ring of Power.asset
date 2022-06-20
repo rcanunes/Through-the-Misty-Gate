@@ -16,4 +16,13 @@ MonoBehaviour:
   description: One ring to rule them all
   image: {fileID: 21300000, guid: ec3f5c9d06947e7458e9626551938feb, type: 3}
   type: 2
-  modifier: 0
+  modifiers:
+    healthModifer: 0
+    baseDamageModifier: 0
+    jumpModifier: 5
+    speedModifier: 5
+    fireDamageModifer: 0
+    iceDamageModifier: 0
+    iceBootsModifier: 0
+    doubleJumpModifier: 0
+    grabWallModifier: 0

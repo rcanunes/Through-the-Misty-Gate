@@ -15,6 +15,14 @@ MonoBehaviour:
   itemName: Hat of destiny
   description: Normal Blue Hat
   image: {fileID: 21300000, guid: 5087bdcc637973d41abbd18802fb23d3, type: 3}
-  prefab: {fileID: 1483801118521020786, guid: a893292e4b3c301408cad599e18ffdbe, type: 3}
   type: 0
-  modifier: 0
+  modifiers:
+    healthModifer: 3
+    baseDamageModifier: 3
+    jumpModifier: 0
+    speedModifier: 0
+    fireDamageModifer: 0
+    iceDamageModifier: 0
+    iceBootsModifier: 0
+    doubleJumpModifier: 0
+    grabWallModifier: 0

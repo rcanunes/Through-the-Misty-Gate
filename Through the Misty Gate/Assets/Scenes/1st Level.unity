@@ -6515,6 +6515,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 2422644191015648680, guid: b81a7dee52b524d4e9791d41104d6c27, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2422644191015648680, guid: b81a7dee52b524d4e9791d41104d6c27, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2422644191015648680, guid: b81a7dee52b524d4e9791d41104d6c27, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2422644191015648680, guid: b81a7dee52b524d4e9791d41104d6c27, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2422644191015648680, guid: b81a7dee52b524d4e9791d41104d6c27, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2422644191015648680, guid: b81a7dee52b524d4e9791d41104d6c27, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b81a7dee52b524d4e9791d41104d6c27, type: 3}
 --- !u!1 &1122316362 stripped
@@ -7657,7 +7681,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 51340905791064556, guid: 8ac6ad5f6239d154aba5821cc04dac8a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8ac6ad5f6239d154aba5821cc04dac8a, type: 3}
 --- !u!1 &1358998631
 GameObject:
@@ -7773,6 +7798,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHitPoints: 1000
   healthBar: {fileID: 1709527986}
+  healthModifer:
+    baseValue: 0
+  baseDamageModifier:
+    baseValue: 0
+  jumpModifier:
+    baseValue: 0
+  speedModifier:
+    baseValue: 0
+  fireDamageModifer:
+    baseValue: 0
+  iceDamageModifier:
+    baseValue: 0
 --- !u!1 &1384579822
 GameObject:
   m_ObjectHideFlags: 0

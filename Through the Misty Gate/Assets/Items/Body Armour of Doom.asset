@@ -16,4 +16,13 @@ MonoBehaviour:
   description: Very cool
   image: {fileID: 79862522, guid: 83bf93558b0ec514a95bd6edcd67f7ac, type: 3}
   type: 1
-  modifier: 1
+  modifiers:
+    healthModifer: 5
+    baseDamageModifier: 0
+    jumpModifier: 0
+    speedModifier: 0
+    fireDamageModifer: 0
+    iceDamageModifier: 0
+    iceBootsModifier: 0
+    doubleJumpModifier: 0
+    grabWallModifier: 0
