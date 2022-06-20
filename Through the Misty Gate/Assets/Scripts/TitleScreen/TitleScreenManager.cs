@@ -2,33 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace TitleScreen {
-    public class TitleScreenManager : MonoBehaviour {
-        private Animator animator;
+public class TitleScreenManager : MonoBehaviour {
+    private Animator animator;
 
-        [SerializeField] private List<Animator> buttonAnimators;
+    [SerializeField] private List<Animator> buttonAnimators;
 
-        void Start() {
-            animator = GetComponent<Animator>();
-            StartCoroutine(WaitForFadeIn());
-        }
+    void Start() {
+        animator = GetComponent<Animator>();
+        StartCoroutine(WaitForFadeIn());
+    }
 
-        private IEnumerator WaitForFadeIn() {
-            SetButtonAnimators(false);
+    private IEnumerator WaitForFadeIn() {
+        SetButtonAnimators(false);
 
-            yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(2);
 
-            SetButtonAnimators(true);
-        }
+        SetButtonAnimators(true);
+    }
 
-        public void FadeOut() {
-            animator.SetBool("FadeOut", true);
-        }
+    public void FadeOut() {
+        animator.SetBool("FadeOut", true);
+    }
 
-        private void SetButtonAnimators(bool value) {
-            foreach (var buttonAnimator in buttonAnimators) {
-                buttonAnimator.enabled = value;
-            }
+    private void SetButtonAnimators(bool value) {
+        foreach (var buttonAnimator in buttonAnimators) {
+            buttonAnimator.enabled = value;
         }
     }
 }

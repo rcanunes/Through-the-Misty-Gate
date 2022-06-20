@@ -5,7 +5,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using Spells_UI.Spell_Bar;
 
 public class UI_SpellBook : MonoBehaviour, IDropHandler, IDragHandler, IPointerExitHandler
 {

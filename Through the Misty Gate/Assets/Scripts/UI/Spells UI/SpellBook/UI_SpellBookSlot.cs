@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class UI_SpellBookSlot : MonoBehaviour, IPointerDownHandler
-    {
+{
     private Canvas canvas;
     private CanvasGroup canvasGroup;
     private RectTransform rectTransform;
