@@ -19,10 +19,10 @@ MonoBehaviour:
   modifiers:
     healthModifer: 0
     baseDamageModifier: 0
-    jumpModifier: 3
+    jumpModifier: 100
     speedModifier: 0
-    fireDamageModifer: 3
-    iceDamageModifier: 3
+    fireDamageModifer: 0
+    iceDamageModifier: 0
     iceBootsModifier: 0
     doubleJumpModifier: 0
     grabWallModifier: 0

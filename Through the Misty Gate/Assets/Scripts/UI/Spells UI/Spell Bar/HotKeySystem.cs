@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class HotKeySystem {
 
-    // Update is called once per frame
 
     private SpellCastingManager player;
     private List<UI_ItemManager.HotKeyAbility> spells;
@@ -14,22 +13,29 @@ public class HotKeySystem {
     public int MaxSpells = 7;
 
     public HotKeySystem(SpellCastingManager player) {
+
+
         this.player = player;
+
         spells = new List<UI_ItemManager.HotKeyAbility>();
 
-    foreach (var s in player.GetUnlockedSpells())
-    {
-        spells.Add(new UI_ItemManager.HotKeyAbility
+        foreach (var s in player.GetUnlockedSpells())
         {
-            spell = s,
-            spellId = s.spellId,
-            activateSpell = () => player.SetCurrentSpell(s.spellId)
-        });
+            Debug.Log("Spells: " + s.spellName);
+            spells.Add(new UI_ItemManager.HotKeyAbility
+            {
+                spell = s,
+                spellId = s.spellId,
+                activateSpell = () => player.SetCurrentSpell(s.spellId)
+            });
+        }
+
+
     }
-}
-    
+
     public void Update()
     {
+
         if (LevelManager.instance.toogleInventory)
             return;
 

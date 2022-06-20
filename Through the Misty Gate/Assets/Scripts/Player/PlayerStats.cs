@@ -66,7 +66,7 @@ public class PlayerStats : MonoBehaviour
 
     void SetMaxHitPoints()
     {
-        healthBar.SetMaxHealth(maxHitPoints * healthModifer.GetValue());
+        healthBar.SetMaxHealth((int)(maxHitPoints * healthModifer.GetValue()));
     }
 
     private void RemoveModifiers(StatsBlock modifiers)

@@ -95,6 +95,7 @@ public class PlayerController : MonoBehaviour {
     private bool CheckIfIce() {
         if (isGrounded != null)
             return isGrounded.CompareTag("Ice");
+
         return false;
     }
 
@@ -165,19 +166,14 @@ public class PlayerController : MonoBehaviour {
 
         float speed = baseSpeed * playerStats.speedModifier.GetValue();
 
-        if (groundIsIce) {
+        if (groundIsIce || playerStats.iceBootsModifier.GetValue()) {
 
-            playerRb.velocity += new Vector2(horizontalInput * speed, playerRb.velocity.y);
+            playerRb.velocity += new Vector2(horizontalInput * speed, 0);
 
-            if (playerRb.velocity.x > speed) {
-                playerRb.velocity = new Vector2(speed, playerRb.velocity.y);
-            }
-            else if (playerRb.velocity.x < -speed) {
-                playerRb.velocity = new Vector2(-speed, playerRb.velocity.y);
-            }
+            playerRb.velocity = new Vector2(Math.Clamp(playerRb.velocity.x,-speed,speed), playerRb.velocity.y);
 
             playerRb.velocity *= 0.99f;
-            if (Mathf.Abs(playerRb.velocity.x) < 0.01) {
+            if (Mathf.Abs(playerRb.velocity.x) < 0.1) {
                 playerRb.velocity = new Vector2(0, playerRb.velocity.y);
             }
 
