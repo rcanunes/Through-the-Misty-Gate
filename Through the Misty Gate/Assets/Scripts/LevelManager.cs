@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,17 +8,25 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager instance;
 
-    private bool toogleSpellBook;
+    public bool toogleSpellBook;
+
     [SerializeField] CanvasGroup spellBookCanvasGroup;
-    [SerializeField] RectTransform spellInfo;
+    //[SerializeField] RectTransform spellInfo;
     [SerializeField] Camera mainCamera;
+
+    //public float target = 225;
+
+    public bool toogleInventory;
+    [SerializeField] GameObject inventoryUI;
 
 
     private void Awake()
     {
         instance = this;
         toogleSpellBook = false;
+        toogleInventory = false;
         MakeSpellBookInvisible();
+        inventoryUI.SetActive(toogleInventory);
     }
 
     public void MakeSpellBookVisible()
@@ -38,27 +47,45 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
-        if (ToogleKeysDown())
+        if (ToogleSpellBookKeysDown())
         {
             ToogleSpellBook();
         }
 
+        if (ToogleInventoryKeysDown())
+        {
+            ToogleInventory();
+        }
+
     }
 
-    public void CheckSpellInfo()
+    private void ToogleInventory()
     {
-        if (spellInfo.parent.GetComponent<RectTransform>().anchoredPosition.x < 0 && spellInfo.anchoredPosition.x < 0)
-        {
-            spellInfo.anchoredPosition = new Vector2( - spellInfo.anchoredPosition.x, spellInfo.anchoredPosition.y);
-        }
-        else if (spellInfo.parent.GetComponent<RectTransform>().anchoredPosition.x > 0 && spellInfo.anchoredPosition.x > 0)
-        {
-            spellInfo.anchoredPosition = new Vector2(-spellInfo.anchoredPosition.x, spellInfo.anchoredPosition.y);
-        }
-
+        toogleInventory = !toogleInventory;
+        if (toogleInventory &&  toogleSpellBook)
+            ToogleSpellBook();
+        inventoryUI.SetActive(toogleInventory);
     }
 
-    private bool ToogleKeysDown()
+    private bool ToogleInventoryKeysDown()
+    {
+        return Input.GetKeyDown(KeyCode.I);
+    }
+
+    //public void CheckSpellInfoSide()
+    //{
+    //    if (spellInfo.parent.GetComponent<RectTransform>().anchoredPosition.x < 0)
+    //    {
+    //        spellInfo.GetComponent<SmallAnimation>().targetPos = target;
+    //    }
+    //    else if (spellInfo.parent.GetComponent<RectTransform>().anchoredPosition.x > 0)
+    //    {
+    //        spellInfo.GetComponent<SmallAnimation>().targetPos = -target;
+    //    }
+
+    //}
+
+    private bool ToogleSpellBookKeysDown()
     {
         return Input.GetKeyDown(KeyCode.T);
     }
@@ -66,23 +93,33 @@ public class LevelManager : MonoBehaviour
     private void ToogleSpellBook()
     {
         toogleSpellBook = !toogleSpellBook;
+
+
         if (toogleSpellBook)
         {
             MakeSpellBookVisible();
+            if (toogleInventory)
+                ToogleInventory();
         }
         else
             MakeSpellBookInvisible();
+
+
     }
 
     public bool CanClick()
     {
-        Debug.Log("IsOver? - " + isMouseOverUI().ToString());
         return !toogleSpellBook && !isMouseOverUI();
     }
 
     public bool IsSpellBookVisible()
     {
         return toogleSpellBook;
+    }
+
+    public bool IsInventoryVisible()
+    {
+        return toogleInventory;
     }
 
     private bool isMouseOverUI()
@@ -100,7 +137,6 @@ public class LevelManager : MonoBehaviour
             {
                 raycastResults.Remove(ray);
             }
-
         }
 
         return raycastResults.Count > 0;
