@@ -7,6 +7,8 @@ public class StatsBlock{
     [SerializeField]
     public int healthModifer;
     [SerializeField]
+    public int armourModifier;
+    [SerializeField]
     public int baseDamageModifier;
     [SerializeField]
     public int jumpModifier;

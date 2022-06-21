@@ -16,6 +16,7 @@ public class PlayerStats : MonoBehaviour
     public Stat baseDamageModifier;
     public Stat jumpModifier;
     public Stat speedModifier;
+    public Stat armourModifier;
 
     public Stat fireDamageModifer;
     public Stat iceDamageModifier;
@@ -29,6 +30,7 @@ public class PlayerStats : MonoBehaviour
         currentHitPoints = maxHitPoints;
         healthBar.SetMaxHealth(maxHitPoints);
 
+        armourModifier.baseValue = 100;
         healthModifer.baseValue = 100;
         baseDamageModifier.baseValue = 100;
         jumpModifier.baseValue = 100;
@@ -39,8 +41,9 @@ public class PlayerStats : MonoBehaviour
         EquipmentManager.instance.modifyEquipment += OnEquipItems;
     }
 
-    void TakeDamage(int damage)
+    void TakeDamage(int originalDamage)
     {
+        int damage = (int) (originalDamage * armourModifier.GetValue());
         currentHitPoints -= damage;
         currentHitPoints = Mathf.Clamp(currentHitPoints, 0, maxHitPoints);
 
