@@ -11,60 +11,64 @@ public class UI_SpellBook : MonoBehaviour, IDropHandler, IDragHandler, IPointerE
     private Transform spellSlotTemplate;
     private Transform spellSlotContainer;
 
-        private SpellBookSystem spellBookSystem;
-        private CanvasGroup canvasGroup;
-        private HotKeySystem hotKeySystem;
+    private SpellBookSystem spellBookSystem;
+    private CanvasGroup canvasGroup;
+    private HotKeySystem hotKeySystem;
 
 
-        private RectTransform rectTransform;
-        private Canvas canvas;
+    private RectTransform rectTransform;
+    private Canvas canvas;
 
-        [SerializeField] Transform spellInfo;
-
-
-
-
-        private void Awake() {
-            spellSlotContainer = transform.Find("SpellSlotContainer");
-            DisableSpellInfo();
-            spellSlotTemplate = spellSlotContainer.Find("spellBookSlotTemplate");
-            spellSlotTemplate.gameObject.SetActive(false);
+    [SerializeField] Transform spellInfo;
 
 
 
 
-            //Hide Inventory
-            canvasGroup = GetComponent<CanvasGroup>();
+    private void Awake() {
+        spellSlotContainer = transform.Find("SpellSlotContainer");
+        spellSlotTemplate = spellSlotContainer.Find("spellBookSlotTemplate");
+        spellSlotTemplate.gameObject.SetActive(false);
 
-            rectTransform = GetComponent<RectTransform>();
-            canvas = GetComponentInParent<Canvas>();
 
+
+
+        //Hide Inventory
+        canvasGroup = GetComponent<CanvasGroup>();
+
+        rectTransform = GetComponent<RectTransform>();
+        canvas = GetComponentInParent<Canvas>();
+
+    }
+
+    public void OnDrag(PointerEventData eventData) {
+        rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+
+    }
+
+    public void SetSpellBookSystem(SpellBookSystem spellBookSystem, HotKeySystem hotKeySystem) {
+        this.spellBookSystem = spellBookSystem;
+        this.hotKeySystem = hotKeySystem;
+        spellBookSystem.OnSpellChange += SpellBookSystem_OnSpellChange;
+
+
+    }
+
+    private void SpellBookSystem_OnSpellChange(object sender, EventArgs e) {
+        UpdateSpellBookVisual();
+    }
+
+    private void OnEnable()
+    {
+        UpdateSpellBookVisual();
+    }
+
+    private void UpdateSpellBookVisual() {
+
+        Debug.Log("Updating Visual");
+        foreach (Transform child in spellSlotContainer) {
+            if (child == spellSlotTemplate) continue;
+            Destroy(child.gameObject);
         }
-
-        public void OnDrag(PointerEventData eventData) {
-            rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
-
-        }
-
-        public void SetSpellBookSystem(SpellBookSystem spellBookSystem, HotKeySystem hotKeySystem) {
-            this.spellBookSystem = spellBookSystem;
-            this.hotKeySystem = hotKeySystem;
-            spellBookSystem.OnSpellChange += SpellBookSystem_OnSpellChange;
-
-            UpdateSpellBookVisual();
-        }
-
-        private void SpellBookSystem_OnSpellChange(object sender, EventArgs e) {
-            UpdateSpellBookVisual();
-        }
-
-
-
-        private void UpdateSpellBookVisual() {
-            foreach (Transform child in spellSlotContainer) {
-                if (child == spellSlotTemplate) continue;
-                Destroy(child.gameObject);
-            }
 
         foreach (UI_ItemManager.HotKeyAbility spell in spellBookSystem.GetAllSpells())
         {
@@ -73,27 +77,27 @@ public class UI_SpellBook : MonoBehaviour, IDropHandler, IDragHandler, IPointerE
             spellSlotTransform.Find("SpellIcon").GetComponent<Image>().sprite = spell.GetSprite();
             spellSlotTransform.GetComponent<UI_SpellBookSlot>().SetUp(spellBookSystem, spell, hotKeySystem, spellSlotContainer);
 
-                if (hotKeySystem.CheckContainsSpell(spell)) {
-                    spellSlotTransform.GetComponent<CanvasGroup>().alpha = 0.5f;
-                }
+            if (hotKeySystem.CheckContainsSpell(spell)) {
+                spellSlotTransform.GetComponent<CanvasGroup>().alpha = 0.5f;
+            }
 
+        }
+    }
+
+    public void OnDrop(PointerEventData eventData) {
+        if (eventData.pointerDrag != null && LevelManager.instance.IsSpellBookVisible()) {
+            UI_HotKeyBarSpellSlot uiHotKeyBarSpellSlot =
+                eventData.pointerDrag.GetComponent<UI_HotKeyBarSpellSlot>();
+            if (uiHotKeyBarSpellSlot != null) {
+                uiHotKeyBarSpellSlot.RemoveSpell();
+                UpdateSpellBookVisual();
             }
         }
+    }
 
-        public void OnDrop(PointerEventData eventData) {
-            if (eventData.pointerDrag != null && LevelManager.instance.IsSpellBookVisible()) {
-                UI_HotKeyBarSpellSlot uiHotKeyBarSpellSlot =
-                    eventData.pointerDrag.GetComponent<UI_HotKeyBarSpellSlot>();
-                if (uiHotKeyBarSpellSlot != null) {
-                    uiHotKeyBarSpellSlot.RemoveSpell();
-                    UpdateSpellBookVisual();
-                }
-            }
-        }
-
-        private void DisableSpellInfo() {
-
-        spellInfo.GetComponent<SmallAnimation>().OnCLose();
+    private void DisableSpellInfo() {
+        if(spellInfo.gameObject.activeSelf)
+            spellInfo.GetComponent<SmallAnimation>().OnCLose();
     }
 
     public void OnPointerExit(PointerEventData eventData)

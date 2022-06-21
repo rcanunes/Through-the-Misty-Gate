@@ -22,7 +22,6 @@ public class EquipmentManager : MonoBehaviour
     public delegate void ModifyEquipment(Equipment newItem, Equipment oldItem);
     public event ModifyEquipment modifyEquipment;
 
-    [SerializeField] RectTransform lorePage;
 
     private void Start()
     {
@@ -71,12 +70,6 @@ public class EquipmentManager : MonoBehaviour
             Unequip(i);
         }
 
-    }
-
-    public void ShowLore(LoreItem item)
-    {
-        lorePage.gameObject.SetActive(true);
-        lorePage.GetComponent<TextMeshProUGUI>().text = item.description;
     }
 
 }

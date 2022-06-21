@@ -12,10 +12,10 @@ public class SpellBookSystem {
     public SpellBookSystem(SpellCastingManager player) {
         this.player = player;
         //Adding to Inventory of Spells
-
         allSpells = new List<UI_ItemManager.HotKeyAbility>();
 
         foreach (var s in player.GetUnlockedSpells()) {
+            Debug.Log("Creating hotKey abilities");
             allSpells.Add(new UI_ItemManager.HotKeyAbility {
                 spell = s,
                 spellId = s.spellId,
