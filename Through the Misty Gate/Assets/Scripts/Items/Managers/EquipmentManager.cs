@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class EquipmentManager : MonoBehaviour
 {
@@ -18,8 +19,9 @@ public class EquipmentManager : MonoBehaviour
     public Equipment[] currentEquipment;
     Inventory inventory;
 
-    public delegate void EventHandler();
-    public event EventHandler ModifyEquipment;
+    public delegate void ModifyEquipment(Equipment newItem, Equipment oldItem);
+    public event ModifyEquipment modifyEquipment;
+
 
     private void Start()
     {
@@ -33,11 +35,17 @@ public class EquipmentManager : MonoBehaviour
     {
         int index = (int)item.type;
 
-        Unequip(index);
+        Equipment oldItem = null;
+
+        if (currentEquipment[index] != null)
+        {
+            oldItem = currentEquipment[index];
+            inventory.AddItem(oldItem);
+        }
 
         currentEquipment[index] = item;
 
-        ModifyEquipment?.Invoke();
+        modifyEquipment?.Invoke(item, oldItem);
 
     }
 
@@ -48,10 +56,11 @@ public class EquipmentManager : MonoBehaviour
             Equipment oldItem = currentEquipment[slotIndex];
             inventory.AddItem(oldItem);
             currentEquipment[slotIndex] = null;
-        }
 
-        ModifyEquipment?.Invoke();
 
+            modifyEquipment?.Invoke(null, oldItem);
+
+    }
     }
 
     public void UnequipAll()
@@ -61,7 +70,6 @@ public class EquipmentManager : MonoBehaviour
             Unequip(i);
         }
 
-        ModifyEquipment?.Invoke();
     }
 
 }

@@ -17,13 +17,13 @@ public class UI_Equipment : MonoBehaviour
         equipSlot = transform.Find("EquipSlot");
         equipmentManager = EquipmentManager.instance;
 
-        equipmentManager.ModifyEquipment += UpdateEquipmentVisual;
+        equipmentManager.modifyEquipment += UpdateEquipmentVisual;
 
-        UpdateEquipmentVisual();
+        UpdateEquipmentVisual(null, null);
 
     }
 
-    public void UpdateEquipmentVisual()
+    public void UpdateEquipmentVisual(Equipment nemItem, Equipment oldItem)
     {
 
         foreach (Transform child in transform)

@@ -8,42 +8,22 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager instance;
 
-    public bool toogleSpellBook;
-
-    [SerializeField] CanvasGroup spellBookCanvasGroup;
-    //[SerializeField] RectTransform spellInfo;
     [SerializeField] Camera mainCamera;
 
-    //public float target = 225;
-
-    public bool toogleInventory;
-    [SerializeField] GameObject inventoryUI;
+    public GameObject inventoryUI;
+    public GameObject pageLoreUI;
+    public GameObject spellBookUI;
 
 
     private void Awake()
     {
         instance = this;
-        toogleSpellBook = false;
-        toogleInventory = false;
-        MakeSpellBookInvisible();
-        inventoryUI.SetActive(toogleInventory);
+        inventoryUI.SetActive(false);
+        pageLoreUI.SetActive(false);
+        spellBookUI.SetActive(false);
     }
 
-    public void MakeSpellBookVisible()
-    {
-        spellBookCanvasGroup.interactable = true;
-        spellBookCanvasGroup.alpha = 1;
-        spellBookCanvasGroup.blocksRaycasts = true;
 
-    }
-
-    public void MakeSpellBookInvisible()
-    {
-        spellBookCanvasGroup.interactable = false;
-        spellBookCanvasGroup.alpha = 0;
-        spellBookCanvasGroup.blocksRaycasts = false;
-
-    }
 
     private void Update()
     {
@@ -61,10 +41,34 @@ public class LevelManager : MonoBehaviour
 
     private void ToogleInventory()
     {
-        toogleInventory = !toogleInventory;
-        if (toogleInventory &&  toogleSpellBook)
-            ToogleSpellBook();
-        inventoryUI.SetActive(toogleInventory);
+        if (inventoryUI.activeSelf)
+            inventoryUI.SetActive(false);
+        else
+        {
+            spellBookUI.SetActive(false);
+            pageLoreUI.SetActive(false);
+            inventoryUI.SetActive(true);
+        }
+    }
+
+    private void ToogleSpellBook()
+    {
+        if (spellBookUI.activeSelf)
+            spellBookUI.SetActive(false);
+        else
+        {
+            inventoryUI.SetActive(false);
+            pageLoreUI.SetActive(false);
+            spellBookUI.SetActive(true);
+
+        }
+    }
+
+    internal void ActivateLorePage()
+    {
+        pageLoreUI.SetActive(true);
+        spellBookUI.SetActive(false);
+        inventoryUI.SetActive(false);
     }
 
     private bool ToogleInventoryKeysDown()
@@ -72,54 +76,25 @@ public class LevelManager : MonoBehaviour
         return Input.GetKeyDown(KeyCode.I);
     }
 
-    //public void CheckSpellInfoSide()
-    //{
-    //    if (spellInfo.parent.GetComponent<RectTransform>().anchoredPosition.x < 0)
-    //    {
-    //        spellInfo.GetComponent<SmallAnimation>().targetPos = target;
-    //    }
-    //    else if (spellInfo.parent.GetComponent<RectTransform>().anchoredPosition.x > 0)
-    //    {
-    //        spellInfo.GetComponent<SmallAnimation>().targetPos = -target;
-    //    }
-
-    //}
-
     private bool ToogleSpellBookKeysDown()
     {
         return Input.GetKeyDown(KeyCode.T);
     }
 
-    private void ToogleSpellBook()
-    {
-        toogleSpellBook = !toogleSpellBook;
-
-
-        if (toogleSpellBook)
-        {
-            MakeSpellBookVisible();
-            if (toogleInventory)
-                ToogleInventory();
-        }
-        else
-            MakeSpellBookInvisible();
-
-
-    }
 
     public bool CanClick()
     {
-        return !toogleSpellBook && !isMouseOverUI();
+        return !spellBookUI.activeSelf && !isMouseOverUI();
     }
 
     public bool IsSpellBookVisible()
     {
-        return toogleSpellBook;
+        return spellBookUI.activeSelf;
     }
 
     public bool IsInventoryVisible()
     {
-        return toogleInventory;
+        return spellBookUI.activeSelf;
     }
 
     private bool isMouseOverUI()
