@@ -54,7 +54,7 @@ public class Inventory : MonoBehaviour
 
     public void ShowLore(LoreItem item)
     {
-        lorePage.gameObject.SetActive(true);
+        LevelManager.instance.ActivateLorePage();    
         lorePage.Find("Lore").GetComponent<TextMeshProUGUI>().text = item.description;
     }
 

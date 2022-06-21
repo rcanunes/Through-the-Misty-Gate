@@ -44,7 +44,11 @@ public class LevelManager : MonoBehaviour
         if (inventoryUI.activeSelf)
             inventoryUI.SetActive(false);
         else
+        {
+            spellBookUI.SetActive(false);
+            pageLoreUI.SetActive(false);
             inventoryUI.SetActive(true);
+        }
     }
 
     private void ToogleSpellBook()
@@ -52,7 +56,19 @@ public class LevelManager : MonoBehaviour
         if (spellBookUI.activeSelf)
             spellBookUI.SetActive(false);
         else
+        {
+            inventoryUI.SetActive(false);
+            pageLoreUI.SetActive(false);
             spellBookUI.SetActive(true);
+
+        }
+    }
+
+    internal void ActivateLorePage()
+    {
+        pageLoreUI.SetActive(true);
+        spellBookUI.SetActive(false);
+        inventoryUI.SetActive(false);
     }
 
     private bool ToogleInventoryKeysDown()
