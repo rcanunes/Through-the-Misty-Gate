@@ -42,7 +42,7 @@ public class EquipmentManager : MonoBehaviour
             oldItem = currentEquipment[index];
             inventory.AddItem(oldItem);
         }
-            
+
         currentEquipment[index] = item;
 
         modifyEquipment?.Invoke(item, oldItem);
@@ -60,7 +60,7 @@ public class EquipmentManager : MonoBehaviour
 
             modifyEquipment?.Invoke(null, oldItem);
 
-        }
+    }
     }
 
     public void UnequipAll()
@@ -70,6 +70,7 @@ public class EquipmentManager : MonoBehaviour
             Unequip(i);
         }
 
+        ModifyEquipment?.Invoke();
     }
 
 }
