@@ -18,11 +18,30 @@ public class SpellBookSystem {
                 activateSpell = () => player.SetCurrentSpell(s)
             });
         }
+
+        player.modifySpell += Player_modifySpell;
+
+    }
+
+    private void Player_modifySpell(Spell none)
+    {
+        allSpells = new List<UI_ItemManager.HotKeyAbility>();
+
+        foreach (var s in player.GetKnownSpells())
+        {
+            allSpells.Add(new UI_ItemManager.HotKeyAbility
+            {
+                spell = s,
+                activateSpell = () => player.SetCurrentSpell(s)
+            });
+        }
     }
 
     public List<UI_ItemManager.HotKeyAbility> GetAllSpells() {
         return allSpells;
     }
+
+
 
     public void InvokeOnSpellChange() {
         OnSpellChange?.Invoke(this, EventArgs.Empty);

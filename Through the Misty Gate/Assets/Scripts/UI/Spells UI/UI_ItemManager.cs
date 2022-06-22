@@ -18,11 +18,15 @@ public class UI_ItemManager : MonoBehaviour {
     uiSpellBook.SetSpellBookSystem(spellBookSystem, hotKeySystem);
     uiHotKeyBar.SetHotKeySystem(hotKeySystem, spellBookSystem);
 
+
     }
+
+
 
     void Update() {
         hotKeySystem.Update();
     }
+
 
     public enum SpellType {
         Fireball,

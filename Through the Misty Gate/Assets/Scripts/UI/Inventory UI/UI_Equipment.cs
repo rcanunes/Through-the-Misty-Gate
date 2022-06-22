@@ -18,7 +18,6 @@ public class UI_Equipment : MonoBehaviour
         equipmentManager = EquipmentManager.instance;
 
         equipmentManager.modifyEquipment += UpdateEquipmentVisual;
-
         UpdateEquipmentVisual(null, null);
 
     }

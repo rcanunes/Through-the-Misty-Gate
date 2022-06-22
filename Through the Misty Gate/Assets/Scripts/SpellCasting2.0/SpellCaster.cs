@@ -17,6 +17,9 @@ public class SpellCaster : MonoBehaviour
     [SerializeField]
     UI_SpellCharging spellCharging;
 
+    public delegate void ModifyKnownSpells(Spell spell);
+    public event ModifyKnownSpells modifySpell;
+
     enum CastingStatus
     {
         Idle,
@@ -36,13 +39,18 @@ public class SpellCaster : MonoBehaviour
 
     public void AddToKnowSpells(Spell newSpell)
     {
+        if(!knownSpells.Contains(newSpell))
+            knownSpells.Add(newSpell);
 
+        modifySpell?.Invoke(newSpell);
     }
 
     private void Update()
     {
+        if (LevelManager.instance.CantCast() || currentSpell == null)
+            return;
 
-        if (Input.GetKeyUp(KeyCode.Mouse0))
+        if (Input.GetKeyUp(KeyCode.Mouse0) )
             StopCasting();
 
         switch (castingStatus)

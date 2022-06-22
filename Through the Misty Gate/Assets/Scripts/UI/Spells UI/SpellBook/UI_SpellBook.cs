@@ -57,8 +57,6 @@ public class UI_SpellBook : MonoBehaviour, IDropHandler, IDragHandler, IPointerE
 
     private void UpdateSpellBookVisual() {
 
-        Debug.Log("Updating Visual");
-
 
         foreach (Transform child in spellSlotContainer) {
             if (child == spellSlotTemplate) continue;
