@@ -90,7 +90,7 @@ public class UI_SpellBookSlot : MonoBehaviour, IPointerDownHandler
             spellInfo.Find("Cooldown").GetComponent<TextMeshProUGUI>().text =
                 "Cooldown: " + hotKeyAbility.spell.cooldown.ToString();
             spellInfo.Find("Description").GetComponent<TextMeshProUGUI>().text =
-                "Info: " + hotKeyAbility.spell.spellDescription;
+                "Info: " + hotKeyAbility.spell.description;
 
         spellInfo.gameObject.SetActive(true);
 

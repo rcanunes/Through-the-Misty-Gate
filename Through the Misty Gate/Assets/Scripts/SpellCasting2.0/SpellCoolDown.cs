@@ -7,18 +7,20 @@ public class SpellCoolDown: MonoBehaviour
     // Start is called before the first frame update
     public Spell spell;
     float currentTime;
-
-    public SpellCoolDown(Spell spell)
+    SpellCaster spellCaster;
+    
+    public void Initialize(SpellCaster spellCaster, Spell spell)
     {
+        this.spellCaster = spellCaster;
         this.spell = spell;
-        currentTime = 0;
     }
 
     public void Update()
     {
         if(currentTime >= spell.cooldown)
         {
-            Destroy(gameObject);
+            spellCaster.RemoveCoolDown(this);
+            Destroy(this);
         }
 
         currentTime += Time.deltaTime;

@@ -29,6 +29,11 @@ public class SpellCaster : MonoBehaviour
         castingTime = 0;
     }
 
+    internal void RemoveCoolDown(SpellCoolDown spellCoolDown)
+    {
+        coolDowns.Remove(spellCoolDown);
+    }
+
     public void AddToKnowSpells(Spell newSpell)
     {
 
@@ -73,9 +78,30 @@ public class SpellCaster : MonoBehaviour
 
     private void StartCasting()
     {
+        if (IsOnCoolDown(currentSpell))
+        {
+            return;
+        }
+
+        if (currentSpell == null)
+            return;
+
         castingStatus = CastingStatus.Casting;
         spellCharging.gameObject.SetActive(true);
         spellCharging.SetCharger(currentSpell.chargeTime);
+    }
+
+    private bool IsOnCoolDown(Spell currentSpell)
+    {
+        foreach (SpellCoolDown coolDown in coolDowns)
+        {
+            if (coolDown.spell.name == currentSpell.name)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private void StopCasting()
@@ -88,6 +114,9 @@ public class SpellCaster : MonoBehaviour
     private void CastSpell()
     {
         StopCasting();
+        SpellCoolDown temp = gameObject.AddComponent<SpellCoolDown>();
+        temp.Initialize(this, currentSpell);
+        coolDowns.Add(temp);
         currentSpell.Cast();
     }
 
@@ -95,5 +124,15 @@ public class SpellCaster : MonoBehaviour
     {
         castingTime += Time.deltaTime;
         spellCharging.UpdateCharger(castingTime);
+    }
+
+    public List<Spell> GetKnownSpells()
+    {
+        return knownSpells;
+    }
+
+    public void SetCurrentSpell(Spell spell)
+    {
+        currentSpell = spell;
     }
 }

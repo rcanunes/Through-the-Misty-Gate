@@ -4,7 +4,7 @@ using UnityEngine;
 public class UI_ItemManager : MonoBehaviour {
 
     //[SerializeField] Spells player;
-    [SerializeField] private SpellCastingManager player;
+    [SerializeField] private SpellCaster player;
     [SerializeField] UI_HotKeyBar uiHotKeyBar;
     [SerializeField] UI_SpellBook uiSpellBook;
 
@@ -35,12 +35,11 @@ public class UI_ItemManager : MonoBehaviour {
     }
 
     public class HotKeyAbility {
-        public SpellScriptableObject spell;
-        public int spellId;
+        public Spell spell;
         public Action activateSpell;
 
         public Sprite GetSprite() {
-            return spell.uiSprite;
+            return spell.image;
         }
     }
 
