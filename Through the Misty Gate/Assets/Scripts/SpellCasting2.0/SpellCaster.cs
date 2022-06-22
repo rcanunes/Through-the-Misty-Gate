@@ -19,6 +19,9 @@ public class SpellCaster : MonoBehaviour
 
     public delegate void ModifyKnownSpells(Spell spell);
     public event ModifyKnownSpells modifySpell;
+    
+    public delegate void JustCastedSpell(Spell spell);
+    public event JustCastedSpell justCastedSpell;
 
     enum CastingStatus
     {
@@ -84,6 +87,16 @@ public class SpellCaster : MonoBehaviour
         }
     }
 
+    internal SpellCoolDown FindSpellCoolDown(Spell spell)
+    {
+        foreach (SpellCoolDown item in coolDowns)
+        {
+            if (item.spell == spell)
+                return item;
+        }
+        return null;
+    }
+
     private void StartCasting()
     {
         if (IsOnCoolDown(currentSpell))
@@ -126,6 +139,7 @@ public class SpellCaster : MonoBehaviour
         temp.Initialize(this, currentSpell);
         coolDowns.Add(temp);
         currentSpell.Cast();
+        justCastedSpell?.Invoke(currentSpell);
     }
 
     private void Casting()

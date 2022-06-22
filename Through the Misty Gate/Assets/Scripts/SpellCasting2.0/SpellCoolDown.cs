@@ -26,4 +26,9 @@ public class SpellCoolDown: MonoBehaviour
         currentTime += Time.deltaTime;
 
     }
+
+    public float CurrentRatio()
+    {
+        return currentTime / spell.cooldown;
+    }
 }
