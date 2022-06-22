@@ -102,7 +102,7 @@ public class PlayerController : MonoBehaviour {
     private void Jump() {
 
         playerRb.gravityScale = gravityScale;
-        float jumpForce = baseJumpForce * playerStats.jumpModifier.GetValue();
+        float jumpForce = baseJumpForce; //* playerStats.jumpModifier.GetValue();
 
         if (isGrounded && GetJumpKeysDown() && jumpEnded) {
             jumpEnded = false;
@@ -164,9 +164,9 @@ public class PlayerController : MonoBehaviour {
     private void MoveCharacter() {
         horizontalInput = Input.GetAxis("Horizontal");
 
-        float speed = baseSpeed * playerStats.speedModifier.GetValue();
+        float speed = baseSpeed; //* playerStats.speedModifier.GetValue();
 
-        if (groundIsIce || playerStats.iceBootsModifier.GetValue()) {
+        if (groundIsIce) { //}|| playerStats.iceBootsModifier.GetValue()) {
 
             playerRb.velocity += new Vector2(horizontalInput * speed, 0);
 

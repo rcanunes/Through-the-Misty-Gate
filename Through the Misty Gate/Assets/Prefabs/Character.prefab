@@ -76,6 +76,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingSpells:
   - Test
+  - Banana
+  - test1
+  - test2
   spellsDatabase: {fileID: 11400000, guid: f9da3f0e40b74dc42b58df579e336319, type: 2}
 --- !u!114 &519819356279976265
 MonoBehaviour:
@@ -98,6 +101,8 @@ MonoBehaviour:
   jumpModifier:
     baseValue: 0
   speedModifier:
+    baseValue: 0
+  armourModifier:
     baseValue: 0
   fireDamageModifer:
     baseValue: 0
