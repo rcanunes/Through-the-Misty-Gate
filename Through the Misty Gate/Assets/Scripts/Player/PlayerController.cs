@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour {
 
     PlayerStats playerStats;
 
-
+    bool movementType = false;
 
 
     // Start is called before the first frame update
@@ -83,16 +83,18 @@ public class PlayerController : MonoBehaviour {
         groundIsIce = CheckIfIce();
 
 
-        if (enterChargedCast)
-            ChargedCastingMovement();
+        //if (enterChargedCast)
+        //    ChargedCastingMovement();
 
         if (ignoreInput)
             return;
 
-        Jump();
         Climbing();
         MoveCharacter();
+        Jump();     
+
     }
+
 
     private bool CheckIfIce() {
         if (isGrounded != null)
@@ -109,14 +111,14 @@ public class PlayerController : MonoBehaviour {
         if (isGrounded && GetJumpKeysDown() && jumpEnded) {
             jumpEnded = false;
             jumpTimeCounter = jumpTime;
-            playerRb.velocity = Vector2.up * jumpForce;
+            playerRb.velocity = new Vector2(playerRb.velocity.x, jumpForce);
             audioSource.PlayOneShot(jumpSound, 1);
 
         }
 
         else if (GetJumpKeys() && !jumpEnded) {
             if (jumpTimeCounter > 0 && playerRb.velocity.y > 0) {
-                playerRb.velocity = Vector2.up * jumpForce;
+                playerRb.velocity = new Vector2(playerRb.velocity.x ,jumpForce);
                 jumpTimeCounter -= Time.deltaTime;
             }
         }
@@ -133,20 +135,20 @@ public class PlayerController : MonoBehaviour {
             playerRb.AddForce(Vector2.down);
     }
 
-    private void ChargedCastingMovement() {
-        // Freeze position when casting a charged spell, enabled in EnterChargedCast()
-        if (enterChargedCast) {
-            ignoreInput = true;
-            playerRb.constraints = RigidbodyConstraints2D.FreezeAll;
+    //private void ChargedCastingMovement() {
+    //    // Freeze position when casting a charged spell, enabled in EnterChargedCast()
+    //    if (enterChargedCast) {
+    //        ignoreInput = true;
+    //        playerRb.constraints = RigidbodyConstraints2D.FreezeAll;
 
-            if (elapsedCharge < chargeDuration) elapsedCharge += Time.deltaTime;
-            else {
-                playerRb.constraints = RigidbodyConstraints2D.FreezeRotation;
-                enterChargedCast = false;
-                StartCoroutine(Knockback());
-            }
-        }
-    }
+    //        if (elapsedCharge < chargeDuration) elapsedCharge += Time.deltaTime;
+    //        else {
+    //            playerRb.constraints = RigidbodyConstraints2D.FreezeRotation;
+    //            enterChargedCast = false;
+    //            StartCoroutine(Knockback());
+    //        }
+    //    }
+    //}
 
     private void Climbing() {
         verticalInput = Input.GetAxis("Vertical");
@@ -163,28 +165,33 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    private void MoveCharacter() {
+    private void MoveCharacter()
+    {
         horizontalInput = Input.GetAxis("Horizontal");
 
-        float speed = baseSpeed; //* playerStats.speedModifier.GetValue();
+        float speed = baseSpeed * playerStats.speedModifier.GetValue();
 
-        if (groundIsIce) { //}|| playerStats.iceBootsModifier.GetValue()) {
+        if (groundIsIce || playerStats.iceBootsModifier.GetValue())
+        {
 
             playerRb.velocity += new Vector2(horizontalInput * speed, 0);
 
-            playerRb.velocity = new Vector2(Math.Clamp(playerRb.velocity.x,-speed,speed), playerRb.velocity.y);
+            playerRb.velocity = new Vector2(Math.Clamp(playerRb.velocity.x, -speed, speed), playerRb.velocity.y);
 
             playerRb.velocity *= 0.99f;
-            if (Mathf.Abs(playerRb.velocity.x) < 0.1) {
+            if (Mathf.Abs(playerRb.velocity.x) < 0.1)
+            {
                 playerRb.velocity = new Vector2(0, playerRb.velocity.y);
             }
 
         }
-        else {
+        else
+        {
             playerRb.velocity = new Vector2(horizontalInput * speed, playerRb.velocity.y);
 
         }
     }
+
 
     private void AnimationSetup() {
         idle = true;
@@ -230,16 +237,20 @@ public class PlayerController : MonoBehaviour {
     //    Debug.Log("Exiting Knockback");
     //}
 
-    public void Knockback(ProjectileStats projectileStats)
+    public void KnockBack(Vector2 knockback)
     {
-        throw new NotImplementedException();
+        StartCoroutine(KnockbackRoutine(knockback));
     }
 
-    private IEnumerator Knockback() {
-        playerRb.AddForce(new Vector2(knockbackAmount, 0) * 4, ForceMode2D.Impulse);
-        yield return new WaitForSeconds(0.5f);
-        ignoreInput = false;
+    private IEnumerator KnockbackRoutine(Vector2 knockback) {
 
+        if (knockback.magnitude == 0)
+            yield break;
+
+        ignoreInput = true;
+        playerRb.velocity += knockback;
+        yield return new WaitForSeconds(0.2f);
+        ignoreInput = false;
     }
 
 

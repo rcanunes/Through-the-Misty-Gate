@@ -11,11 +11,13 @@ public class Spell: ScriptableObject
     public Sprite image;
     public float chargeTime;
     public float cooldown;
-    public bool canMoveOnCharge;
-    public int knockback;
-    public bool stopsMovementOnCharge;
+    public int knockback = 0;
 
-    public virtual void Cast(GameObject player)
+    public bool canMoveOnCharge;
+    public bool stopsMovementOnCharge;
+    public bool damageStopsCasting;
+
+    public virtual void Cast(GameObject player = null)
     {
         Debug.Log("Casting: " + spellName);
     }

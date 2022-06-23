@@ -7,6 +7,7 @@ TagManager:
   - Ladder
   - Spell
   - Ice
+  - Target
   layers:
   - Default
   - TransparentFX
