@@ -20,7 +20,10 @@ public class ProjectileBehaviour : MonoBehaviour
 
     private void Move()
     {
-        rb.velocity = direction;
+        float rotationZ = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
+        Quaternion rotation = Quaternion.Euler(0.0f, 0.0f, rotationZ);
+        gameObject.transform.rotation = rotation;
+
     }
 
     internal void SetUp(Vector3 direction, ProjectileStats projectileStats)
@@ -28,13 +31,35 @@ public class ProjectileBehaviour : MonoBehaviour
         this.direction = direction;
         this.projectileStats = projectileStats;
         rb = GetComponentInChildren<Rigidbody2D>();
+        rb.velocity = direction * projectileStats.speed;
+        rb.gravityScale = projectileStats.affectedByGravity;
+        StartCoroutine(DestroyProjectile());
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Target"))
+        if (collision.CompareTag("Enemy"))
         {
-            Debug.Log("Hit");
+            if (projectileStats.stopsOnEnemies)
+            {
+                Destroy(gameObject);
+                throw new NotImplementedException("Fucking Nunes doesnt give me enemies");
+            }
+        }
+
+        else if (!collision.CompareTag("Player"))
+        {
+            if (projectileStats.stopsOnWalls)
+            {
+                Destroy(gameObject);
+            }
         }
     }
+
+    IEnumerator DestroyProjectile()
+    {
+        yield return new WaitForSeconds(projectileStats.lifeTime);
+        Destroy(gameObject);
+    }
+
 }

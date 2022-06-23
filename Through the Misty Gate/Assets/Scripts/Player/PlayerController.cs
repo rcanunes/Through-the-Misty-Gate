@@ -219,24 +219,6 @@ public class PlayerController : MonoBehaviour {
             animator.SetTrigger("Running");
     }
 
-    //private IEnumerator Knockback()
-    //{
-    //    float elapsed = 0;
-    //    float duration = Mathf.Abs(1 / knockbackBurst);
-
-    //    while (elapsed < duration)
-    //    {
-    //        elapsed += time.deltatime;
-    //        transform.position += new vector3(knockbackamount * time.deltatime, 0, 0);
-
-    //        yield return new waitforendofframe();
-    //    }
-
-
-    //    ignoreInput = false;
-    //    Debug.Log("Exiting Knockback");
-    //}
-
     public void KnockBack(Vector2 knockback)
     {
         StartCoroutine(KnockbackRoutine(knockback));

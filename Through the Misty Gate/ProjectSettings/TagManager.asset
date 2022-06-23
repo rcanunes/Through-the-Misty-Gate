@@ -8,6 +8,7 @@ TagManager:
   - Spell
   - Ice
   - Target
+  - Enemy
   layers:
   - Default
   - TransparentFX
