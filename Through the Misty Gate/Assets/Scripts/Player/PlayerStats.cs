@@ -11,6 +11,7 @@ public class PlayerStats : MonoBehaviour
     public int currentHitPoints;
 
     [SerializeField] HealthBar healthBar;
+    [SerializeField] ParticleSystem healingParticles;
 
     public Stat healthModifer;
     public Stat baseDamageModifier;
@@ -24,6 +25,8 @@ public class PlayerStats : MonoBehaviour
     public BoolStat iceBootsModifier;
     public BoolStat doubleJumpModifier;
     public BoolStat grabWallModifier;
+
+    bool healingParticlesON = false;
 
     private void Start()
     {
@@ -106,27 +109,36 @@ public class PlayerStats : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            TakeDamage(20);    
+            TakeDamage(800);    
         }
         if (Input.GetKeyDown(KeyCode.H))
         {
-            Heal(20);    
+            Heal(1000, 1);    
         }
+
+       
 
 
     }
 
 
-    void Heal(int heal)
+    public void Heal(int heal, float timeToHeal = 0.01f)
     {
         currentHitPoints += heal;
+        currentHitPoints = Mathf.Clamp(currentHitPoints, 0, maxHitPoints);
 
-        healthBar.SetHealth(currentHitPoints);
+        healthBar.SetHealth(currentHitPoints, timeToHeal);
 
-        if (currentHitPoints >= maxHitPoints)
-        {
-            currentHitPoints = maxHitPoints;
-        }
+        PlayHealingParticles(timeToHeal);
     }
 
+    private void PlayHealingParticles(float timeToHeal)
+    {
+        healingParticles.Stop();
+
+        var duration = healingParticles.main;
+        duration.duration = timeToHeal;
+
+        healingParticles.Play();
+    }
 }

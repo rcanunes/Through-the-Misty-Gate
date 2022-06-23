@@ -138,7 +138,7 @@ public class SpellCaster : MonoBehaviour
         SpellCoolDown temp = gameObject.AddComponent<SpellCoolDown>();
         temp.Initialize(this, currentSpell);
         coolDowns.Add(temp);
-        currentSpell.Cast();
+        currentSpell.Cast(gameObject);
         justCastedSpell?.Invoke(currentSpell);
     }
 

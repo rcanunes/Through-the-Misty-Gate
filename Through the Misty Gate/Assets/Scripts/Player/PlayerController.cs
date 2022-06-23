@@ -31,6 +31,8 @@ public class PlayerController : MonoBehaviour {
 
     private float maxFallingSpped;
 
+   
+
     // Spell Casting Variables
     private bool enterChargedCast = false;
     private float chargeDuration;
@@ -227,6 +229,11 @@ public class PlayerController : MonoBehaviour {
     //    ignoreInput = false;
     //    Debug.Log("Exiting Knockback");
     //}
+
+    public void Knockback(ProjectileStats projectileStats)
+    {
+        throw new NotImplementedException();
+    }
 
     private IEnumerator Knockback() {
         playerRb.AddForce(new Vector2(knockbackAmount, 0) * 4, ForceMode2D.Impulse);
