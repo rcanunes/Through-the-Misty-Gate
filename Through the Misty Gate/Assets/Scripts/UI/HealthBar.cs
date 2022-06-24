@@ -14,10 +14,10 @@ public class HealthBar : MonoBehaviour
     private float originHealth;
     private float t;
     private float timeToReach;
-    public void SetMaxHealth(int health)
+    public void SetMaxHealth(int health, int currentHealth)
     {
         healthBar.maxValue = health;
-        healthBar.value = health;
+        healthBar.value = currentHealth;
         fill.color = gradient.Evaluate(1f);
     }
 

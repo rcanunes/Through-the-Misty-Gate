@@ -10,7 +10,11 @@ public class PlayerStats : MonoBehaviour
     private int maxHitPoints = 1000;
     public int currentHitPoints;
 
+    private int maxExtraHitPoints = 1000;
+    private int extraLifePoints;
+
     [SerializeField] HealthBar healthBar;
+    [SerializeField] HealthBar extraLife;
     [SerializeField] ParticleSystem healingParticles;
 
     public Stat healthModifer;
@@ -26,12 +30,13 @@ public class PlayerStats : MonoBehaviour
     public BoolStat doubleJumpModifier;
     public BoolStat grabWallModifier;
 
-    bool healingParticlesON = false;
 
     private void Start()
     {
         currentHitPoints = maxHitPoints;
-        healthBar.SetMaxHealth(maxHitPoints);
+        healthBar.SetMaxHealth(maxHitPoints, currentHitPoints);
+
+        extraLife.SetMaxHealth(maxExtraHitPoints, 0);
 
         armourModifier.baseValue = 100;
         healthModifer.baseValue = 100;
@@ -47,6 +52,25 @@ public class PlayerStats : MonoBehaviour
     void TakeDamage(int originalDamage)
     {
         int damage = (int) (originalDamage * armourModifier.GetValue());
+
+        if (extraLifePoints != 0)
+        {
+            if (damage > extraLifePoints)
+            {
+                damage -= extraLifePoints;
+                extraLifePoints = 0;
+            }
+
+            else
+            {
+                extraLifePoints -= damage;
+                damage = 0;
+            }
+
+            extraLife.SetHealth(extraLifePoints);
+        }
+
+
         currentHitPoints -= damage;
         currentHitPoints = Mathf.Clamp(currentHitPoints, 0, maxHitPoints);
 
@@ -56,6 +80,23 @@ public class PlayerStats : MonoBehaviour
         {
             //die
         }
+
+    }
+
+
+    public void AddExtraLife(int newPoints)
+    {
+        if(extraLifePoints != 0)
+        {
+            if (newPoints > extraLifePoints)
+                extraLifePoints = newPoints;
+        }
+        else
+        {
+            extraLifePoints = newPoints;
+        }
+
+        extraLife.SetHealth(extraLifePoints);
 
     }
 
@@ -72,7 +113,7 @@ public class PlayerStats : MonoBehaviour
 
     void SetMaxHitPoints()
     {
-        healthBar.SetMaxHealth((int)(maxHitPoints * healthModifer.GetValue()));
+        healthBar.SetMaxHealth((int)(maxHitPoints * healthModifer.GetValue()), currentHitPoints);
     }
 
     private void RemoveModifiers(StatsBlock modifiers)
@@ -109,12 +150,18 @@ public class PlayerStats : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            TakeDamage(800);    
+            TakeDamage(50);    
         }
         if (Input.GetKeyDown(KeyCode.H))
         {
             Heal(1000, 1);    
         }
+        
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            AddExtraLife(300);    
+        }
+
 
        
 

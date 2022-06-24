@@ -17,4 +17,7 @@ public class ProjectileStats : ScriptableObject
     [SerializeField]
     public GameObject projectile;
 
+    [SerializeField]
+    public ParticleSystem spellEfects = null;
+
 }

@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class ProjectileBehaviour : MonoBehaviour
 {
-    ProjectileStats projectileStats;
-    public Rigidbody2D rb;
+    protected ProjectileStats projectileStats;
+    Rigidbody2D rb;
 
     // Update is called once per frame
 
