@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class ProjectileBehaviour : MonoBehaviour
 {
-    Vector3 direction;
     ProjectileStats projectileStats;
     public Rigidbody2D rb;
 
@@ -28,7 +27,6 @@ public class ProjectileBehaviour : MonoBehaviour
 
     internal void SetUp(Vector3 direction, ProjectileStats projectileStats)
     {
-        this.direction = direction;
         this.projectileStats = projectileStats;
         rb = GetComponentInChildren<Rigidbody2D>();
         rb.velocity = direction * projectileStats.speed;
