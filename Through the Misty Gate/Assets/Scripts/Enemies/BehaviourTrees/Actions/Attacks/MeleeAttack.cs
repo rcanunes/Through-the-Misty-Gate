@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using Enemies.BehaviourTrees.Implementation;
 using Enemies.EnemyTypes;
-using Player;
 
 namespace Enemies.BehaviourTrees.Actions {
     public class MeleeAttack : Task {
@@ -15,13 +14,12 @@ namespace Enemies.BehaviourTrees.Actions {
         }
         
         public override Result Run() {
-            try {
-                enemy.AttackPlayer();
-                return Result.Success;
-            }
-            catch {
+            if (!enemy.ReadyForAttack())
                 return Result.Failure;
-            }
+                
+            enemy.AttackPlayer();
+            return Result.Success;
+            
         }
     }
 }

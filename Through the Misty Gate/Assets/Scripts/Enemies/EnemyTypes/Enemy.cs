@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using Enemies.BehaviourTrees.Implementation;
-using Player;
+using Random = System.Random;
 
 namespace Enemies.EnemyTypes {
     public abstract class Enemy : MonoBehaviour {
@@ -10,13 +10,17 @@ namespace Enemies.EnemyTypes {
         protected string Name;
         protected string Type;
 
-        protected int Health;
+        // Health attributes
+        protected int MaxHealth;
+        protected int CurrentHealth;
         
         // Attack attributes
         protected int Damage;
         protected float MeleeAttackRange;
         protected float RangedAttackRange;
         protected bool hasRangedAttack = false;
+        protected float AttackSpeed;
+        protected float AttackCooldown;
         
         // Movement Style
         public enum _MovementStyle {Walking, Flying, Hopping, Immobile}
@@ -24,6 +28,7 @@ namespace Enemies.EnemyTypes {
         // Movement attributes
         protected float Speed;
         protected _MovementStyle MovementStyle;
+        protected float RandomMoveCooldown;
 
         // Jump attributes
         protected float JumpPower;
@@ -70,6 +75,14 @@ namespace Enemies.EnemyTypes {
                 if (RigidBody.velocity.y < 0 && RigidBody.velocity.y > MaxFallingSpeed)
                     RigidBody.AddForce(Vector2.down);
             }
+
+            if (RandomMoveCooldown > 0) {
+                RandomMoveCooldown -= Time.deltaTime;
+            }
+            
+            if (AttackCooldown > 0) {
+                AttackCooldown -= Time.deltaTime;
+            }
         }
 
         // Attack methods
@@ -98,7 +111,6 @@ namespace Enemies.EnemyTypes {
         }
         
         public void Hop(string direction) {
-            Debug.Log(isGrounded);
             if (isGrounded) {
                 if (direction == "left") {
                     RigidBody.velocity = Vector2.left * Speed + Vector2.up * JumpPower;
@@ -106,6 +118,10 @@ namespace Enemies.EnemyTypes {
                     RigidBody.velocity = Vector2.right * Speed + Vector2.up * JumpPower;
                 }
             }
+        }
+        
+        public void Fly(Vector3 direction) {
+            RigidBody.velocity = new Vector2(direction.x * Speed, direction.y * Speed);
         }
         
         // Getters
@@ -140,10 +156,25 @@ namespace Enemies.EnemyTypes {
             return canJump;
         }
 
+        public bool ReadyForAttack() {
+            if (AttackCooldown > 0)
+                return false;
+
+            AttackCooldown = AttackSpeed;
+            return true;
+        }
+
+        public bool ReadyForRandom() {
+            if (RandomMoveCooldown > 0)
+                return false;
+
+            RandomMoveCooldown = 2.0f;
+            return true;
+        }
+
         // Setters
         public void SetVelocity(float x, float y) {
             RigidBody.velocity = new Vector2(x, y);
         }
-        
     }
 }

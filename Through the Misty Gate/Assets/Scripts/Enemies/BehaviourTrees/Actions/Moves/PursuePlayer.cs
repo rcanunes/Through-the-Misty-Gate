@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using Enemies.BehaviourTrees.Implementation;
 using Enemies.EnemyTypes;
-using Player;
 
 namespace Enemies.BehaviourTrees.Actions {
     public class PursuePlayer : Task {
@@ -39,12 +38,12 @@ namespace Enemies.BehaviourTrees.Actions {
                 }
                 
             } else if (enemy.GetMovementStyle() == Enemy._MovementStyle.Flying) {
+                enemy.Fly((player.transform.position - enemy.transform.position).normalized);       // Fly to the enemy
 
-                
             } else if (enemy.GetMovementStyle() == Enemy._MovementStyle.Hopping) {
-                if (enemy.transform.position.x > player.transform.position.x) {                // Hop to the left
+                if (enemy.transform.position.x > player.transform.position.x) {                     // Hop to the left
                     enemy.Hop("left");
-                } else if (enemy.transform.position.x < player.transform.position.x) {         // Hop to the right
+                } else if (enemy.transform.position.x < player.transform.position.x) {              // Hop to the right
                     enemy.Hop("right");
                 }
             }

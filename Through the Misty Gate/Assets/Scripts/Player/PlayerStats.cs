@@ -41,7 +41,7 @@ public class PlayerStats : MonoBehaviour
         EquipmentManager.instance.modifyEquipment += OnEquipItems;
     }
 
-    void TakeDamage(int originalDamage)
+    public void TakeDamage(int originalDamage)
     {
         int damage = (int) (originalDamage * armourModifier.GetValue());
         currentHitPoints -= damage;

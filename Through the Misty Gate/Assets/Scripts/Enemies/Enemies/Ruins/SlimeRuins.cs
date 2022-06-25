@@ -6,7 +6,8 @@ namespace Enemies.Enemies.Ruins {
             base.Start();
 
             //Set attributes
-            this.Health = 100;
+            this.MaxHealth = 100;
+            this.CurrentHealth = this.MaxHealth;
             this.Damage = 5;
 
             this.Speed = 2.0f;

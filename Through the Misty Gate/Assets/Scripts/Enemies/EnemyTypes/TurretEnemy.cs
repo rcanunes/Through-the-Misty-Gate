@@ -8,8 +8,9 @@ namespace Enemies.EnemyTypes {
 
             this.MovementStyle = _MovementStyle.Immobile;
             this.canJump = false;
+            this.isFlying = false;
 
-            this.BehaviourTree = new TurretTree();
+            this.BehaviourTree = new TurretTree(this, Player);
         }
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Enemies.EnemyTypes;
 
 public class PlayerController : MonoBehaviour {
     private Rigidbody2D playerRb;
@@ -274,4 +275,9 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    // Ouchie Methods
+    public void BeAttacked(Enemy enemy, int damage) {
+        playerStats.TakeDamage(damage);
+        Debug.Log("I was attacked by " + enemy.GetName() + " for " + damage);
+    }
 }

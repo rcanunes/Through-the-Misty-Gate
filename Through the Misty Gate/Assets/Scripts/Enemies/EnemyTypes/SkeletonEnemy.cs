@@ -2,15 +2,15 @@
 using Enemies.BehaviourTrees.Trees;
 
 namespace Enemies.EnemyTypes {
-    public abstract class BatEnemy : Enemy {
+    public abstract class SkeletonEnemy : Enemy {
         protected override void Start() {
             base.Start();
 
-            this.MovementStyle = _MovementStyle.Flying;
+            this.MovementStyle = _MovementStyle.Walking;
             this.canJump = false;
-            this.isFlying = true;
-            
-            this.BehaviourTree = new BatTree(this, Player);
+            this.isFlying = false;
+
+            this.BehaviourTree = new SkeletonTree(this, Player);
         }
     }
 }

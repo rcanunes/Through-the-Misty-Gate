@@ -8,8 +8,9 @@ namespace Enemies.EnemyTypes {
             
             this.MovementStyle = _MovementStyle.Flying;
             this.canJump = false;
-
-            this.BehaviourTree = new RangedBatTree();
+            this.isFlying = true;
+    
+            this.BehaviourTree = new RangedBatTree(this, Player);
         }
     }
 }

@@ -8,8 +8,9 @@ namespace Enemies.EnemyTypes {
 
             this.MovementStyle = _MovementStyle.Walking;
             this.canJump = false;
+            this.isFlying = false;
 
-            this.BehaviourTree = new MageTree();
+            this.BehaviourTree = new MageTree(this, Player);
         }
     }
 }

@@ -5,13 +5,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Enemies.BehaviourTrees.Trees {
-    public class BatTree : Sequence {
-        public BatTree(Enemy enemy, PlayerController player) {
+    public class SkeletonTree : Sequence {
+        public SkeletonTree(Enemy enemy, PlayerController player) {
             this.children = new List<Task>() {
-                // Move randomly/patrol
+                // Randomly walk around
                 // Spot player
-                // Chase player
-                // Melee attack player
+                // Walk towards player
+                // Melee attack the player
                 
                 new RandomMove(enemy, player),
                 new PursuePlayer(enemy, player),

@@ -7,15 +7,15 @@ namespace Enemies.BehaviourTrees.Actions {
     public class Sleep : Task {
         private Enemy enemy;
 
-        private GameObject target;
+        private PlayerController player;
 
-        public Sleep(Enemy enemy, GameObject target) {
+        public Sleep(Enemy enemy, PlayerController player) {
             this.enemy = enemy;
-            this.target = target;
+            this.player = player;
         }
 
         public override Result Run() {
-            if (Vector3.Distance(enemy.transform.position, this.target.transform.position) <= enemy.GetAwakenDistance()) {
+            if (Vector3.Distance(enemy.transform.position, this.player.transform.position) <= enemy.GetAwakenDistance()) {
                 return Result.Success;
             }
 
