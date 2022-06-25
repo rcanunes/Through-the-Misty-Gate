@@ -7,13 +7,15 @@ public class ProjectileBehaviour : MonoBehaviour
 {
     protected ProjectileStats projectileStats;
     Rigidbody2D rb;
+    PlayerStats playerStats;
 
     // Update is called once per frame
 
     
     void Update()
     {
-        Move();
+        if(projectileStats.affectedByGravity != 0)
+            Move();
        
     }
 
@@ -31,27 +33,65 @@ public class ProjectileBehaviour : MonoBehaviour
         rb = GetComponentInChildren<Rigidbody2D>();
         rb.velocity = direction * projectileStats.speed;
         rb.gravityScale = projectileStats.affectedByGravity;
+        playerStats = GameObject.FindWithTag("Player").GetComponent<PlayerStats>();
         StartCoroutine(DestroyProjectile());
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy"))
+        if (!collision.CompareTag("Player"))
         {
-            if (projectileStats.stopsOnEnemies)
-            {
-                Destroy(gameObject);
-                throw new NotImplementedException("Fucking Nunes doesnt give me enemies");
-            }
+            Affect(collision);
+
+
         }
 
-        else if (!collision.CompareTag("Player"))
+
+    }
+
+    private void Affect(Collider2D collision)
+    {
+        if(projectileStats.radius == 0 && collision.CompareTag("Enemy"))
         {
-            if (projectileStats.stopsOnWalls)
-            {
-                Destroy(gameObject);
-            }
+            projectileStats.spellEffects.EffectOnEnemy(collision, gameObject, playerStats);
+
+            if (projectileStats.stopsOnEnemies)
+                ProjectileCollision();
+
         }
+        else
+        {
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, projectileStats.radius);
+
+            foreach (Collider2D collider in colliders)
+            {
+                if(collider.CompareTag("Enemy"))
+                    projectileStats.spellEffects.EffectOnEnemy(collider, gameObject, playerStats);
+                else
+                    projectileStats.spellEffects.Effect(collider, gameObject);
+
+            }
+
+            if (projectileStats.stopsOnWalls)
+                ProjectileCollision();
+        }
+    }
+
+    private void ProjectileCollision()
+    {
+        if(projectileStats.spellEfectsOnCollision != null)
+        {
+            var aux = Instantiate(projectileStats.spellEfectsOnCollision, transform.position, transform.rotation);
+            Destroy(aux.gameObject, 1f);
+        }
+            
+        Destroy(gameObject);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, projectileStats.radius > 0? 0.1f : projectileStats.radius);
     }
 
     IEnumerator DestroyProjectile()

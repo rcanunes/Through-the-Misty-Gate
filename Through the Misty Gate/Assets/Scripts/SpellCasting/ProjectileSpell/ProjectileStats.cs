@@ -7,22 +7,23 @@ public class ProjectileStats : ScriptableObject
 {
     public float affectedByGravity = 0;
     public float speed = 1;
-    public float damage = 1;
     public int bulletsPerReload = 1;
 
     public bool stopsOnEnemies = true;
     public bool stopsOnWalls = true;
     public float lifeTime = 10f;
 
-    public int knockBackEnemies = 0;
+    public float radius = 0;
 
     [SerializeField]
     public GameObject projectile;
 
     [SerializeField]
     public GameObject spellEfectsOnCollision = null;
-    
+
     [SerializeField]
-    public AudioClip spellSoundOnCollision = null;
+    public SpellEffect spellEffects;
+    
+    
 
 }

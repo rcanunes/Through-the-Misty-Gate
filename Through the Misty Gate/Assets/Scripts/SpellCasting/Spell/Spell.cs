@@ -20,8 +20,7 @@ public class Spell: ScriptableObject
     public float shakeIntensityOnCast = 0;
     public float shakeDuration = 0;
 
-    [SerializeField]
-    public SpellEffect spellEffect = null;
+    
 
     public virtual void Cast(GameObject player = null)
     {

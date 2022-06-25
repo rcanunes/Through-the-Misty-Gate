@@ -18,7 +18,9 @@ MonoBehaviour:
   chargeTime: 1
   cooldown: 1
   knockback: 1
-  canMoveOnCharge: 0
-  stopsMovementOnCharge: 0
+  cantMoveOnCharge: 0
+  stopsMovementOnCharge: 1
   damageStopsCasting: 0
+  shakeIntensityOnCast: 0
+  shakeDuration: 0
   projectileStats: {fileID: 11400000, guid: eaae0617f9933e242ab3bea2e29aafe4, type: 2}

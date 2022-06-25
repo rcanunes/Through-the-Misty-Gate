@@ -18,9 +18,11 @@ MonoBehaviour:
   chargeTime: 5
   cooldown: 10
   knockback: 0
-  canMoveOnCharge: 0
+  cantMoveOnCharge: 1
   stopsMovementOnCharge: 0
-  damageStopsCasting: 0
+  damageStopsCasting: 1
+  shakeIntensityOnCast: 0
+  shakeDuration: 0
   amountHealed: 1000
   healTime: 2
   isExtraLife: 0
