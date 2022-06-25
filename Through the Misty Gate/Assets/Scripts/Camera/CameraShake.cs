@@ -30,7 +30,8 @@ public class CameraShake : MonoBehaviour
     IEnumerator StopShake(float duration)
     {
         yield return new WaitForSeconds(duration);
-
+        while (channelPerlin.m_AmplitudeGain > 0)
+            channelPerlin.m_AmplitudeGain -= Time.deltaTime;
         channelPerlin.m_AmplitudeGain = 0;
     }
 }

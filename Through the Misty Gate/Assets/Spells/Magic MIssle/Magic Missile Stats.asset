@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   affectedByGravity: 0
   speed: 20
-  damage: 10
   bulletsPerReload: 1
   stopsOnEnemies: 1
   stopsOnWalls: 1
   lifeTime: 10
+  radius: 0
   projectile: {fileID: 1556621154285097090, guid: bb3a6651901a43845a03b22e8ca56db4, type: 3}
-  spellEfects: {fileID: 0}
+  spellEfectsOnCollision: {fileID: 0}
+  spellEffects: {fileID: 11400000, guid: b1612dadc21521e4ca024a55353e649b, type: 2}

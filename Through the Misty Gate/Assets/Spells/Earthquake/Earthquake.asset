@@ -18,10 +18,11 @@ MonoBehaviour:
   chargeTime: 2
   cooldown: 5
   knockback: 0
-  canMoveOnCharge: 0
+  cantMoveOnCharge: 0
   stopsMovementOnCharge: 0
   damageStopsCasting: 0
   shakeIntensityOnCast: 3
-  shakeDuration: 1
-  spellEffect: {fileID: 0}
+  shakeDuration: 1.5
   radius: 10
+  spellEffect: {fileID: 11400000, guid: 04a271ee71cd91f41b537225b993bc79, type: 2}
+  castingEffects: {fileID: 354934955302842608, guid: 28472f2fc1afbaf408935f0772a35726, type: 3}

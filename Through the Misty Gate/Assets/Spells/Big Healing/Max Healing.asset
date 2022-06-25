@@ -23,6 +23,8 @@ MonoBehaviour:
   damageStopsCasting: 1
   shakeIntensityOnCast: 0
   shakeDuration: 0
+  castingEffects: {fileID: 8938860531248802624, guid: 406db20ffd60432479e4b94922806156, type: 3}
+  castingEffectsDuration: 4
   amountHealed: 1000
   healTime: 2
   isExtraLife: 0

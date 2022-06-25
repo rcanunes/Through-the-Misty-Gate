@@ -11,7 +11,7 @@ public class ProjectileSpell : Spell
 
     public override void Cast(GameObject player)
     {
-        base.Cast();
+        base.Cast(player);
         
         Vector3 direction = GetDirection(player);
         float rotationZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;

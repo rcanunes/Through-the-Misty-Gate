@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d54510293c1f3904393548276495b817, type: 3}
-  m_Name: DefaultSpell
+  m_Script: {fileID: 11500000, guid: 1199c009fdea4424189fa8a5f35e2011, type: 3}
+  m_Name: Wall of fire Spell Effects
   m_EditorClassIdentifier: 
-  spellName: Default Spell
-  description: just for testing
-  image: {fileID: -147071979, guid: 72d07fee22f493948b72208ccb15d3f0, type: 3}
-  chargeTime: 1
-  cooldown: 3
+  damage: 80
+  knockback: 5
+  damageType: 0

@@ -42,8 +42,6 @@ public class ProjectileBehaviour : MonoBehaviour
         if (!collision.CompareTag("Player"))
         {
             Affect(collision);
-
-
         }
 
 
@@ -57,7 +55,11 @@ public class ProjectileBehaviour : MonoBehaviour
 
             if (projectileStats.stopsOnEnemies)
                 ProjectileCollision();
-
+        }
+        else if (projectileStats.radius == 0)
+        {
+            if (projectileStats.stopsOnWalls)
+                ProjectileCollision();
         }
         else
         {
@@ -72,8 +74,8 @@ public class ProjectileBehaviour : MonoBehaviour
 
             }
 
-            if (projectileStats.stopsOnWalls)
-                ProjectileCollision();
+            
+            ProjectileCollision();
         }
     }
 

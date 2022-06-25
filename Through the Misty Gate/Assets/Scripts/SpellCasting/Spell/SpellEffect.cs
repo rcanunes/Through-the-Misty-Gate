@@ -26,6 +26,7 @@ public class SpellEffect: ScriptableObject
     {
         if (knockback > 0)
             AddForce(enemy, projectile);
+
     }
 
     private void DealDamage(Collider2D enemy, PlayerStats player)

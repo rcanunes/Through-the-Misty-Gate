@@ -18,9 +18,13 @@ MonoBehaviour:
   chargeTime: 1
   cooldown: 10
   knockback: 0
-  canMoveOnCharge: 0
+  cantMoveOnCharge: 0
   stopsMovementOnCharge: 0
   damageStopsCasting: 0
+  shakeIntensityOnCast: 0
+  shakeDuration: 0
+  castingEffects: {fileID: 17966149064300990, guid: ca7ae9d5080c69b41ab5bbbeb1c6e958, type: 3}
+  castingEffectsDuration: 2
   amountHealed: 300
   healTime: 1
   isExtraLife: 1

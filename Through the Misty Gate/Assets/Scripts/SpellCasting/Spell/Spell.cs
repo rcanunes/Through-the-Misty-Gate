@@ -20,12 +20,22 @@ public class Spell: ScriptableObject
     public float shakeIntensityOnCast = 0;
     public float shakeDuration = 0;
 
-    
+    [SerializeField]
+    public GameObject castingEffects = null;
+    public float castingEffectsDuration = 2f;
 
     public virtual void Cast(GameObject player = null)
     {
         Debug.Log("Casting: " + spellName);
-        if(shakeIntensityOnCast > 0)
+
+
+        if (castingEffects != null)
+        {
+            var aux = Instantiate(castingEffects, player.transform);
+            Destroy(aux.gameObject, castingEffectsDuration);
+        }
+
+        if (shakeIntensityOnCast > 0)
         {
             CameraShake.instance.Shake(shakeIntensityOnCast, shakeDuration);
         }

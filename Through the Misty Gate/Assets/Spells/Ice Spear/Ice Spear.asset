@@ -23,4 +23,6 @@ MonoBehaviour:
   damageStopsCasting: 0
   shakeIntensityOnCast: 0
   shakeDuration: 0
+  castingEffects: {fileID: 4516704530003987761, guid: 00648ecab49ef60409704177471087df, type: 3}
+  castingEffectsDuration: 2
   projectileStats: {fileID: 11400000, guid: eaae0617f9933e242ab3bea2e29aafe4, type: 2}
