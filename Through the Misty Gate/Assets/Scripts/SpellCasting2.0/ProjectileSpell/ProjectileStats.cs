@@ -18,6 +18,12 @@ public class ProjectileStats : ScriptableObject
     public GameObject projectile;
 
     [SerializeField]
-    public ParticleSystem spellEfects = null;
+    public GameObject spellEfectsOnCollision = null;
+    
+    [SerializeField]
+    public AudioClip spellSoundOnCollision = null;
+
+
+
 
 }
