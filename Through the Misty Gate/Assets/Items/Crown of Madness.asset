@@ -16,4 +16,13 @@ MonoBehaviour:
   description: Bazinga
   image: {fileID: 21300000, guid: f30c689e1cd8caa45a28c4947f382374, type: 3}
   type: 0
-  modifier: 0
+  modifiers:
+    healthModifer: 0
+    baseDamageModifier: 5
+    jumpModifier: 0
+    speedModifier: 0
+    fireDamageModifer: 0
+    iceDamageModifier: 0
+    iceBootsModifier: 0
+    doubleJumpModifier: 0
+    grabWallModifier: 0

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class HotKeySystem {
 
-    // Update is called once per frame
 
     private SpellCastingManager player;
     private List<UI_ItemManager.HotKeyAbility> spells;
@@ -14,81 +13,88 @@ public class HotKeySystem {
     public int MaxSpells = 7;
 
     public HotKeySystem(SpellCastingManager player) {
+
+
         this.player = player;
+
         spells = new List<UI_ItemManager.HotKeyAbility>();
 
-    foreach (var s in player.GetUnlockedSpells())
-    {
-        spells.Add(new UI_ItemManager.HotKeyAbility
+        foreach (var s in player.GetUnlockedSpells())
         {
-            spell = s,
-            spellId = s.spellId,
-            activateSpell = () => player.SetCurrentSpell(s.spellId)
-        });
+            Debug.Log("Spells: " + s.spellName);
+            spells.Add(new UI_ItemManager.HotKeyAbility
+            {
+                spell = s,
+                spellId = s.spellId,
+                activateSpell = () => player.SetCurrentSpell(s.spellId)
+            });
+        }
+
+
     }
-}
-    
+
     public void Update()
     {
-        if (LevelManager.instance.toogleInventory)
+
+        if (LevelManager.instance.inventoryUI.activeSelf)
             return;
 
-            if (Input.GetKeyDown(KeyCode.Alpha1)) {
-                if (spells.Count > 0)
-                    spells[0].activateSpell();
-                OnAbilityListChange?.Invoke(this, EventArgs.Empty);
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha2)) {
-                if (spells.Count > 1)
-                    spells[1].activateSpell();
-                OnAbilityListChange?.Invoke(this, EventArgs.Empty);
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha3)) {
-                if (spells.Count > 2)
-                    spells[2].activateSpell();
-                OnAbilityListChange?.Invoke(this, EventArgs.Empty);
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha4)) {
-                if (spells.Count > 3)
-                    spells[3].activateSpell();
-                OnAbilityListChange?.Invoke(this, EventArgs.Empty);
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha5)) {
-                if (spells.Count > 4)
-                    spells[4].activateSpell();
-                OnAbilityListChange?.Invoke(this, EventArgs.Empty);
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha6)) {
-                if (spells.Count > 5) {
-                    spells[5].activateSpell();
-                }
-
-                OnAbilityListChange?.Invoke(this, EventArgs.Empty);
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha7)) {
-                if (spells.Count > 6)
-                    spells[6].activateSpell();
-                OnAbilityListChange?.Invoke(this, EventArgs.Empty);
-            }
-
-            int index = GetIndex(GetCurrentSpell());
-
-            if (Input.GetAxisRaw("Mouse ScrollWheel") < 0f) {
-                if (index < spells.Count - 1)
-                    index++;
-                spells[index].activateSpell();
-                OnAbilityListChange?.Invoke(this, EventArgs.Empty);
-            }
-
-            else if (Input.GetAxisRaw("Mouse ScrollWheel") > 0f) {
-                if (index > 0)
-                    index--;
-                spells[index].activateSpell();
-                OnAbilityListChange?.Invoke(this, EventArgs.Empty);
-            }
-
-
+        if (Input.GetKeyDown(KeyCode.Alpha1)) {
+            if (spells.Count > 0)
+                spells[0].activateSpell();
+            OnAbilityListChange?.Invoke(this, EventArgs.Empty);
         }
+        else if (Input.GetKeyDown(KeyCode.Alpha2)) {
+            if (spells.Count > 1)
+                spells[1].activateSpell();
+            OnAbilityListChange?.Invoke(this, EventArgs.Empty);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3)) {
+            if (spells.Count > 2)
+                spells[2].activateSpell();
+            OnAbilityListChange?.Invoke(this, EventArgs.Empty);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha4)) {
+            if (spells.Count > 3)
+                spells[3].activateSpell();
+            OnAbilityListChange?.Invoke(this, EventArgs.Empty);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha5)) {
+            if (spells.Count > 4)
+                spells[4].activateSpell();
+            OnAbilityListChange?.Invoke(this, EventArgs.Empty);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha6)) {
+            if (spells.Count > 5) {
+                spells[5].activateSpell();
+            }
+
+            OnAbilityListChange?.Invoke(this, EventArgs.Empty);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha7)) {
+            if (spells.Count > 6)
+                spells[6].activateSpell();
+            OnAbilityListChange?.Invoke(this, EventArgs.Empty);
+        }
+
+        int index = GetIndex(GetCurrentSpell());
+
+        if (Input.GetAxisRaw("Mouse ScrollWheel") < 0f) {
+            if (index < spells.Count - 1)
+                index++;
+            spells[index].activateSpell();
+            OnAbilityListChange?.Invoke(this, EventArgs.Empty);
+        }
+
+        else if (Input.GetAxisRaw("Mouse ScrollWheel") > 0f) {
+            if (index > 0)
+                index--;
+            spells[index].activateSpell();
+            OnAbilityListChange?.Invoke(this, EventArgs.Empty);
+        }
+
+
+    }
 
     private int GetIndex(SpellScriptableObject check) {
         for (int i = 0; i < spells.Count; i++) {

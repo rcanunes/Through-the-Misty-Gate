@@ -34,6 +34,7 @@ public class ItemSlot : MonoBehaviour, IPointerExitHandler
             return;
 
         itemInfo.Find("Item Name").GetComponent<TextMeshProUGUI>().text = item.itemName;
+
         if(item is Equipment)
         {
             itemInfo.Find("Type").GetComponent<TextMeshProUGUI>().text = "Type: " + ((Equipment)item).type.ToString();
@@ -43,7 +44,10 @@ public class ItemSlot : MonoBehaviour, IPointerExitHandler
             itemInfo.Find("Type").GetComponent<TextMeshProUGUI>().text = "";
         }
 
-        itemInfo.Find("Info").GetComponent<TextMeshProUGUI>().text = "Info: " + item.description;
+        if(item is LoreItem)
+            itemInfo.Find("Info").GetComponent<TextMeshProUGUI>().text = "";
+        else
+            itemInfo.Find("Info").GetComponent<TextMeshProUGUI>().text = "Info: " + item.description;
 
         itemInfo.gameObject.SetActive(true);
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
@@ -21,6 +22,9 @@ public class Inventory : MonoBehaviour
     public delegate void EventHandler();
     public event EventHandler ModifyInventory;
 
+    [SerializeField] RectTransform lorePage;
+
+
     //public int slots = 20;
 
     public bool AddItem(Item item)
@@ -32,6 +36,12 @@ public class Inventory : MonoBehaviour
         //}
         items.Add(item);
         ModifyInventory?.Invoke();
+        if (item is LoreItem)
+        {
+            ShowLore((LoreItem)item);
+        }
+    
+
         return true;
     }
 
@@ -40,6 +50,12 @@ public class Inventory : MonoBehaviour
 
         items.Remove(item);
         ModifyInventory?.Invoke();
+    }
+
+    public void ShowLore(LoreItem item)
+    {
+        LevelManager.instance.ActivateLorePage();    
+        lorePage.Find("Lore").GetComponent<TextMeshProUGUI>().text = item.description;
     }
 
 

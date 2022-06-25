@@ -10,20 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 671a64866a60fbf408412a50e9ee9054, type: 3}
-  m_Name: Body Armour of Doom
+  m_Name: Ice Skates
   m_EditorClassIdentifier: 
-  itemName: Body Armour of Doom
-  description: Very cool
-  image: {fileID: 79862522, guid: 83bf93558b0ec514a95bd6edcd67f7ac, type: 3}
-  type: 1
+  itemName: Ice Skates
+  description: Allows to user to skate on different types of groud
+  image: {fileID: 1596249046, guid: 83bf93558b0ec514a95bd6edcd67f7ac, type: 3}
+  type: 3
   modifiers:
-    healthModifer: 5
-    armourModifier: -10
+    healthModifer: 0
     baseDamageModifier: 0
     jumpModifier: 0
     speedModifier: 0
     fireDamageModifer: 0
     iceDamageModifier: 0
-    iceBootsModifier: 0
+    iceBootsModifier: 1
     doubleJumpModifier: 0
     grabWallModifier: 0

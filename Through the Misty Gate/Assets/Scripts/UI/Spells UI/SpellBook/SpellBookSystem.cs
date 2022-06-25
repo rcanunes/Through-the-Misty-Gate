@@ -12,7 +12,6 @@ public class SpellBookSystem {
     public SpellBookSystem(SpellCastingManager player) {
         this.player = player;
         //Adding to Inventory of Spells
-
         allSpells = new List<UI_ItemManager.HotKeyAbility>();
 
         foreach (var s in player.GetUnlockedSpells()) {
