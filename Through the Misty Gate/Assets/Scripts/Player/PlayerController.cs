@@ -34,9 +34,6 @@ public class PlayerController : MonoBehaviour {
    
 
     // Spell Casting Variables
-    private bool enterChargedCast = false;
-    private float chargeDuration;
-    private float elapsedCharge;
     private float knockbackAmount;
     private float knockbackBurst;
     private bool ignoreInput = false;
@@ -53,8 +50,10 @@ public class PlayerController : MonoBehaviour {
     private bool groundIsIce;
 
     PlayerStats playerStats;
+    SpellCaster spellCaster;
 
-    bool movementType = false;
+    private bool hasMoved;
+
 
 
     // Start is called before the first frame update
@@ -67,11 +66,13 @@ public class PlayerController : MonoBehaviour {
         maxFallingSpped = -10f;
         jumpEnded = true;
 
-        playerRb = GetComponent<Rigidbody2D>();
-        audioSource = GetComponent<AudioSource>();
-        animator = GetComponent<Animator>();
-        sr = GetComponent<SpriteRenderer>();
-        playerStats = GetComponent<PlayerStats>();
+        playerRb        = GetComponent<Rigidbody2D>();
+        audioSource     = GetComponent<AudioSource>();
+        animator        = GetComponent<Animator>();
+        sr              = GetComponent<SpriteRenderer>();
+        playerStats     = gameObject.GetComponent<PlayerStats>();
+        spellCaster     = gameObject.GetComponent<SpellCaster>();
+
 
     }
 
@@ -81,17 +82,31 @@ public class PlayerController : MonoBehaviour {
         AnimationSetup();
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, whatIsGround);
         groundIsIce = CheckIfIce();
-
-
-        //if (enterChargedCast)
-        //    ChargedCastingMovement();
+        hasMoved = false;
+        playerRb.gravityScale = gravityScale;
 
         if (ignoreInput)
             return;
 
         Climbing();
         MoveCharacter();
-        Jump();     
+        Jump();
+
+
+        if (spellCaster.currentSpell != null)
+        {
+            if (hasMoved && spellCaster.currentSpell.cantMoveOnCharge)
+                spellCaster.StopCasting();
+
+            if (spellCaster.currentSpell.stopsMovementOnCharge && spellCaster.castingStatus == SpellCaster.CastingStatus.Casting)
+            {
+                playerRb.velocity *= 0;
+                playerRb.gravityScale = 0;
+            }
+
+        }
+
+        hasMoved = false;
 
     }
 
@@ -105,14 +120,14 @@ public class PlayerController : MonoBehaviour {
 
     private void Jump() {
 
-        playerRb.gravityScale = gravityScale;
-        float jumpForce = baseJumpForce; //* playerStats.jumpModifier.GetValue();
+        float jumpForce = baseJumpForce * playerStats.jumpModifier.GetValue();
 
         if (isGrounded && GetJumpKeysDown() && jumpEnded) {
             jumpEnded = false;
             jumpTimeCounter = jumpTime;
             playerRb.velocity = new Vector2(playerRb.velocity.x, jumpForce);
             audioSource.PlayOneShot(jumpSound, 1);
+            hasMoved = true;
 
         }
 
@@ -135,24 +150,10 @@ public class PlayerController : MonoBehaviour {
             playerRb.AddForce(Vector2.down);
     }
 
-    //private void ChargedCastingMovement() {
-    //    // Freeze position when casting a charged spell, enabled in EnterChargedCast()
-    //    if (enterChargedCast) {
-    //        ignoreInput = true;
-    //        playerRb.constraints = RigidbodyConstraints2D.FreezeAll;
-
-    //        if (elapsedCharge < chargeDuration) elapsedCharge += Time.deltaTime;
-    //        else {
-    //            playerRb.constraints = RigidbodyConstraints2D.FreezeRotation;
-    //            enterChargedCast = false;
-    //            StartCoroutine(Knockback());
-    //        }
-    //    }
-    //}
-
     private void Climbing() {
         verticalInput = Input.GetAxis("Vertical");
         if (isLadder && verticalInput != 0) {
+            hasMoved = true;
             isClimbing = true;
         }
         else if (GetJumpKeysDown() || !isLadder) {
@@ -190,6 +191,9 @@ public class PlayerController : MonoBehaviour {
             playerRb.velocity = new Vector2(horizontalInput * speed, playerRb.velocity.y);
 
         }
+
+        if (horizontalInput != 0)
+            hasMoved = true;
     }
 
 
@@ -235,12 +239,6 @@ public class PlayerController : MonoBehaviour {
         ignoreInput = false;
     }
 
-
-    public void EnterChargedCast(float chargeTime) {
-        chargeDuration = chargeTime;
-        elapsedCharge = 0;
-        enterChargedCast = true;
-    }
 
     public void SetKnockback(float amount, float burst) {
         knockbackAmount = amount;

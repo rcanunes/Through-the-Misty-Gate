@@ -14,11 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellName: Max Healing
   description: You heal a lot
-  image: {fileID: 21300000, guid: 222d62d87db5931498bb85845842b0d3, type: 3}
+  image: {fileID: 21300000, guid: b72437f26efa146a1a067ecaa57317ef, type: 3}
   chargeTime: 5
-  cooldown: 5
-  canMoveOnCharge: 0
+  cooldown: 10
   knockback: 0
+  canMoveOnCharge: 0
   stopsMovementOnCharge: 0
-  amountHealed: 500
+  damageStopsCasting: 0
+  amountHealed: 1000
   healTime: 2
+  isExtraLife: 0

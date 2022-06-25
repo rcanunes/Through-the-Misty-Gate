@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
-
     private int maxHitPoints = 1000;
     public int currentHitPoints;
 
@@ -16,6 +15,8 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] HealthBar healthBar;
     [SerializeField] HealthBar extraLife;
     [SerializeField] ParticleSystem healingParticles;
+
+    SpellCaster spellCaster;
 
     public Stat healthModifer;
     public Stat baseDamageModifier;
@@ -30,7 +31,6 @@ public class PlayerStats : MonoBehaviour
     public BoolStat doubleJumpModifier;
     public BoolStat grabWallModifier;
 
-
     private void Start()
     {
         currentHitPoints = maxHitPoints;
@@ -38,15 +38,17 @@ public class PlayerStats : MonoBehaviour
 
         extraLife.SetMaxHealth(maxExtraHitPoints, 0);
 
-        armourModifier.baseValue = 100;
-        healthModifer.baseValue = 100;
-        baseDamageModifier.baseValue = 100;
-        jumpModifier.baseValue = 100;
-        speedModifier.baseValue = 100;
-        fireDamageModifer.baseValue = 100;
-        iceDamageModifier.baseValue = 100;
+        armourModifier.baseValue        = 100;
+        healthModifer.baseValue         = 100;
+        baseDamageModifier.baseValue    = 100;
+        jumpModifier.baseValue          = 100;
+        speedModifier.baseValue         = 100;
+        fireDamageModifer.baseValue     = 100;
+        iceDamageModifier.baseValue     = 100;
 
         EquipmentManager.instance.modifyEquipment += OnEquipItems;
+
+        spellCaster = GetComponent<SpellCaster>();
     }
 
     void TakeDamage(int originalDamage)
@@ -81,6 +83,9 @@ public class PlayerStats : MonoBehaviour
             //die
         }
 
+        if(spellCaster.currentSpell != null)
+            if(spellCaster.currentSpell.damageStopsCasting)
+                spellCaster.StopCasting();
     }
 
 
