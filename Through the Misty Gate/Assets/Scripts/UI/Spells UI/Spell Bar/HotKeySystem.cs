@@ -5,31 +5,19 @@ using UnityEngine;
 public class HotKeySystem {
 
 
-    private SpellCastingManager player;
+    private SpellCaster player;
     private List<UI_ItemManager.HotKeyAbility> spells;
 
     public event EventHandler OnAbilityListChange;
 
     public int MaxSpells = 7;
 
-    public HotKeySystem(SpellCastingManager player) {
+    public HotKeySystem(SpellCaster player) {
 
 
         this.player = player;
 
         spells = new List<UI_ItemManager.HotKeyAbility>();
-
-        foreach (var s in player.GetUnlockedSpells())
-        {
-            Debug.Log("Spells: " + s.spellName);
-            spells.Add(new UI_ItemManager.HotKeyAbility
-            {
-                spell = s,
-                spellId = s.spellId,
-                activateSpell = () => player.SetCurrentSpell(s.spellId)
-            });
-        }
-
 
     }
 
@@ -79,26 +67,31 @@ public class HotKeySystem {
 
         int index = GetIndex(GetCurrentSpell());
 
+        if (index == -1)
+            return;
+
         if (Input.GetAxisRaw("Mouse ScrollWheel") < 0f) {
             if (index < spells.Count - 1)
                 index++;
-            spells[index].activateSpell();
+            if (spells.Count > index)
+                spells[index].activateSpell();
             OnAbilityListChange?.Invoke(this, EventArgs.Empty);
         }
 
         else if (Input.GetAxisRaw("Mouse ScrollWheel") > 0f) {
             if (index > 0)
                 index--;
-            spells[index].activateSpell();
+            if (spells.Count > index)
+                spells[index].activateSpell();
             OnAbilityListChange?.Invoke(this, EventArgs.Empty);
         }
 
 
     }
 
-    private int GetIndex(SpellScriptableObject check) {
+    private int GetIndex(Spell check) {
         for (int i = 0; i < spells.Count; i++) {
-            if (spells[i].spellId == check.spellId) {
+            if (spells[i].spell == check) {
                 return i;
             }
         }
@@ -107,13 +100,13 @@ public class HotKeySystem {
     }
 
     internal void RemoveSpell(UI_ItemManager.HotKeyAbility hotKeyAbility) {
-        if (CheckContainsSpell(hotKeyAbility) && spells.Count > 1) {
-            spells.Remove(hotKeyAbility);
+        
+        spells.Remove(hotKeyAbility);
 
-            if (GetCurrentSpellID() == hotKeyAbility.spell.spellId) {
-                spells[0].activateSpell();
-            }
+        if (GetCurrentSpell() == hotKeyAbility.spell) {
+            player.SetCurrentSpell(null);
         }
+        
 
         OnAbilityListChange?.Invoke(this, EventArgs.Empty);
     }
@@ -129,7 +122,7 @@ public class HotKeySystem {
 
     public bool CheckContainsSpell(UI_ItemManager.HotKeyAbility check) {
         foreach (UI_ItemManager.HotKeyAbility spell in spells) {
-            if (spell.spellId == check.spellId) {
+            if (spell.spell == check.spell) {
                 return true;
             }
         }
@@ -176,11 +169,8 @@ public class HotKeySystem {
     }
 
 
-    public SpellScriptableObject GetCurrentSpell() {
-        return player.GetCurrentSpell();
+    public Spell GetCurrentSpell() {
+        return player.currentSpell;
     }
 
-    public int GetCurrentSpellID() {
-        return player.GetCurrentSpellID();
-    }
 }

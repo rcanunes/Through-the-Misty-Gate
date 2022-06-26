@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -32,17 +33,19 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public void SwitchScene(String name)
+    public void SwitchScene(int name)
     {
-        if (!SceneLoader.SceneName.TryParse(name, out SceneLoader.SceneName sceneName))
-            return;
-
+        
         _titleScreenManager.FadeOut();
+        if (name > Enum.GetValues(typeof(SceneName)).Cast<int>().Max())
+            Debug.Log("No such scene");
+        if (name < Enum.GetValues(typeof(SceneName)).Cast<int>().Min())
+            Debug.Log("No such scene");
 
-        StartCoroutine(WaitAndLoad(sceneName));
+        StartCoroutine(WaitAndLoad((SceneName) name));
     }
     
-    private IEnumerator WaitAndLoad(SceneLoader.SceneName sceneName)
+    private IEnumerator WaitAndLoad(SceneName sceneName)
     {
         yield return new WaitForSeconds(1);
         _sceneLoader.LoadScene(sceneName);

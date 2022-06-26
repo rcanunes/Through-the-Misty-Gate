@@ -4,17 +4,12 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UI_Inventory : MonoBehaviour, IPointerExitHandler
+public class UI_Inventory : MonoBehaviour
 {
     private Transform itemSlot;
     private Transform itemSlotContainer;
     private Transform infoBox;
     Inventory inventory;
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        Debug.Log("Yeah Boy");
-    }
 
     private void Start()
     {
