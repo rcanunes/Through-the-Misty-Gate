@@ -1787,7 +1787,7 @@ GameObject:
   - component: {fileID: 251964160}
   - component: {fileID: 251964159}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1820,7 +1820,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b32d29f65b20ab8489e8cc07f94b0415, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiObject: {fileID: 0}
+  uiObject: {fileID: 2129971002}
 --- !u!61 &251964160
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12758,6 +12758,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &2129971002 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2422644190460692739, guid: b81a7dee52b524d4e9791d41104d6c27, type: 3}
+  m_PrefabInstance: {fileID: 105175607732425179}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2139768113
 PrefabInstance:
   m_ObjectHideFlags: 0

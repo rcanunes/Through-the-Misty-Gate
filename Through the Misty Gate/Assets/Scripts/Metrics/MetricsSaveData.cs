@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class MetricsSaveData : MonoBehaviour
@@ -19,7 +20,8 @@ public class MetricsSaveData : MonoBehaviour
     #endregion
 
     public MetricsData metricsData;
-    public string fileName;
+    string fileName;
+    public string url;
     private bool needsToSave;
 
 
@@ -28,7 +30,9 @@ public class MetricsSaveData : MonoBehaviour
     {
         needsToSave = true;
         metricsData = new MetricsData();
-        fileName = "demo_" + DateTime.Now.ToString("yyyy-dd-M--HH-mm-ss");
+        fileName = "/demo_" + DateTime.Now.ToString("yyyy-dd-M--HH-mm-ss") + ".json";
+        Debug.Log(Application.persistentDataPath);
+        url = Application.persistentDataPath + fileName;
     }
 
     // Update is called once per frame
@@ -50,9 +54,9 @@ public class MetricsSaveData : MonoBehaviour
     {
         yield return new WaitForSeconds(10f);
         string jsonString = JsonConvert.SerializeObject(metricsData);
-        Debug.Log("Save data to file - " + fileName);
+        Debug.Log("Save data to file - " + url);
         Debug.Log(jsonString);
-
+        File.WriteAllText(url, jsonString);
         needsToSave = true;
     }
 
@@ -64,9 +68,9 @@ public class MetricsSaveData : MonoBehaviour
 
         public List<SpellData> listSpellData;
         public List<ItemData> listItemData;
-        public List<Position> listPlayerPositions;
         public List<EnemyData> listEnemyData;
-        
+        public List<Position> listPlayerPositions;
+
         public MetricsData()
         {
             elapsedTime = 0;

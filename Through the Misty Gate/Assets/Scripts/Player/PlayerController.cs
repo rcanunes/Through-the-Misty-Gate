@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour {
     SpellCaster spellCaster;
 
     private bool hasMoved;
+    private bool savedPosition;
 
 
 
@@ -73,7 +74,7 @@ public class PlayerController : MonoBehaviour {
         playerStats     = gameObject.GetComponent<PlayerStats>();
         spellCaster     = gameObject.GetComponent<SpellCaster>();
 
-
+        savedPosition = true;
     }
 
 
@@ -92,7 +93,6 @@ public class PlayerController : MonoBehaviour {
         MoveCharacter();
         Jump();
 
-
         if (spellCaster.currentSpell != null)
         {
             if (hasMoved && spellCaster.currentSpell.cantMoveOnCharge)
@@ -107,6 +107,19 @@ public class PlayerController : MonoBehaviour {
         }
 
         hasMoved = false;
+
+        if (savedPosition)
+            StartCoroutine(AddPosition());
+    }
+
+    IEnumerator AddPosition()
+    {
+        savedPosition = false;
+        yield return new WaitForSeconds(1f);
+
+        MetricsSaveData.instance.metricsData.AddPosition(transform.position);
+        savedPosition = true;
+
 
     }
 

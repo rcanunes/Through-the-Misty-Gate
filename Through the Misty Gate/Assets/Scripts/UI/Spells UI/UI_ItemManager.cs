@@ -27,7 +27,8 @@ public class UI_ItemManager : MonoBehaviour {
 
     void Update() {
 
-        hotKeySystem.Update();
+        if(hotKeySystem != null)
+            hotKeySystem.Update();
 
         List<HotKeyAbility> hotKeys = hotKeySystem.GetSpells();
         foreach (HotKeyAbility spellKey in hotKeys)
