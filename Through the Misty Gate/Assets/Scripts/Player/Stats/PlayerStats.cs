@@ -53,7 +53,7 @@ public class PlayerStats : MonoBehaviour
         spellCaster = GetComponent<SpellCaster>();
     }
 
-    void TakeDamage(int originalDamage, string enemyType)
+    public void TakeDamage(int originalDamage, string enemyType)
     {
         int damage = (int) (originalDamage * armourModifier.GetValue());
 

@@ -15,7 +15,7 @@ namespace Enemies.BehaviourTrees.Actions {
         }
 
         public override Result Run() {
-            if (Vector3.Distance(enemy.transform.position, this.player.transform.position) <= enemy.GetAwakenDistance()) {
+            if (Vector3.Distance(enemy.transform.position, this.player.transform.position) <= enemy.GetSleepDistance()) {
                 return Result.Success;
             }
 

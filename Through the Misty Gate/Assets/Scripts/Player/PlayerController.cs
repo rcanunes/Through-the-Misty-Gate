@@ -275,7 +275,7 @@ public class PlayerController : MonoBehaviour {
 
     // Ouchie Methods
     public void BeAttacked(Enemy enemy, int damage) {
-        playerStats.TakeDamage(damage);
+        playerStats.TakeDamage(damage, enemy.GetName());
         Debug.Log("I was attacked by " + enemy.GetName() + " for " + damage);
     }
 }
