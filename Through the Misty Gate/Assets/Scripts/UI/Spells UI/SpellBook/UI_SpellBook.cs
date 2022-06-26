@@ -12,7 +12,6 @@ public class UI_SpellBook : MonoBehaviour, IDropHandler, IDragHandler, IPointerE
     private Transform spellSlotContainer;
 
     private SpellBookSystem spellBookSystem;
-    private CanvasGroup canvasGroup;
     private HotKeySystem hotKeySystem;
 
 
@@ -28,12 +27,6 @@ public class UI_SpellBook : MonoBehaviour, IDropHandler, IDragHandler, IPointerE
         spellSlotContainer = transform.Find("SpellSlotContainer");
         spellSlotTemplate = spellSlotContainer.Find("spellBookSlotTemplate");
         spellSlotTemplate.gameObject.SetActive(false);
-
-
-
-
-        //Hide Inventory
-        canvasGroup = GetComponent<CanvasGroup>();
 
         rectTransform = GetComponent<RectTransform>();
         canvas = GetComponentInParent<Canvas>();
@@ -64,12 +57,12 @@ public class UI_SpellBook : MonoBehaviour, IDropHandler, IDragHandler, IPointerE
 
     private void UpdateSpellBookVisual() {
 
-        Debug.Log("Updating Visual");
+
         foreach (Transform child in spellSlotContainer) {
             if (child == spellSlotTemplate) continue;
             Destroy(child.gameObject);
         }
-
+           
         foreach (UI_ItemManager.HotKeyAbility spell in spellBookSystem.GetAllSpells())
         {
             Transform spellSlotTransform = Instantiate(spellSlotTemplate, spellSlotContainer);

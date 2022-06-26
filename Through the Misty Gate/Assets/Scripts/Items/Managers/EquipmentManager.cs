@@ -17,11 +17,14 @@ public class EquipmentManager : MonoBehaviour
     #endregion
 
     public Equipment[] currentEquipment;
+
     Inventory inventory;
+    MetricsSaveData metricsSaveData;
 
     public delegate void ModifyEquipment(Equipment newItem, Equipment oldItem);
     public event ModifyEquipment modifyEquipment;
 
+ 
 
     private void Start()
     {
@@ -29,8 +32,29 @@ public class EquipmentManager : MonoBehaviour
         currentEquipment = new Equipment[numSlots];
 
         inventory = Inventory.instance;
+        metricsSaveData = MetricsSaveData.instance;
+
+
     }
 
+    private void Update()
+    {
+        //Metrics Functions
+        foreach (Equipment equip in currentEquipment)
+        {
+            if(equip != null)
+                metricsSaveData.metricsData.AddEquipmetnTimeEquiped(equip.itemName, Time.deltaTime);
+        }
+    }
+
+    public void AddDamageDEaltWhileEquiped(float damage)
+    {
+        foreach (Equipment equip in currentEquipment)
+        {
+            if (equip != null)
+                metricsSaveData.metricsData.AddEquipmentDamageDealt(equip.itemName, damage);
+        }
+    }
     public void Equip(Equipment item)
     {
         int index = (int)item.type;

@@ -6,10 +6,8 @@ using UnityEngine;
 public class Interactable : MonoBehaviour
 {
     [SerializeField] float radius = 1.5f;
-    GameObject player;
+    protected GameObject player;
     public bool hasInteracted;
-
-
 
     private void Awake()
     {

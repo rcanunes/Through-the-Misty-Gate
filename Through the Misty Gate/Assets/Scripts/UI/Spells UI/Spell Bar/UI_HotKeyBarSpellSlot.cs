@@ -1,7 +1,7 @@
 
 using UnityEngine;
 using UnityEngine.EventSystems;
-
+using UnityEngine.UI;
 
 public class UI_HotKeyBarSpellSlot : MonoBehaviour, IDragHandler, IDropHandler, IEndDragHandler, IBeginDragHandler,
     IPointerDownHandler {
@@ -15,14 +15,32 @@ public class UI_HotKeyBarSpellSlot : MonoBehaviour, IDragHandler, IDropHandler, 
     private HotKeySystem hotKeySystem;
     private SpellBookSystem spellBookSystem;
 
-    private Transform hotKeyBar;
+    private SpellCaster player;
+    private Image spellIcon;
 
     private void Awake() {
         rectTransform = GetComponent<RectTransform>();
         canvas = GetComponentInParent<Canvas>();
         canvasGroup = GetComponentInParent<CanvasGroup>();
+        player = GameObject.FindWithTag("Player").GetComponent<SpellCaster>();
+        spellIcon = transform.Find("SpellIcon").GetComponent<Image>();
+    }
+
+    private void Update()
+    {
+        if (hotKeyAbility == null)
+            return;
+        SpellCoolDown cooldown = player.FindSpellCoolDown(hotKeyAbility.spell);
+        if (cooldown != null)
+            spellIcon.fillAmount = cooldown.CurrentRatio();
+        else
+            spellIcon.fillAmount = 1;
+
+
 
     }
+
+
 
     public void SetUp(int index, HotKeySystem hotKeySystem, UI_ItemManager.HotKeyAbility hotKeyAbility,
         SpellBookSystem spellBookSystem) {
