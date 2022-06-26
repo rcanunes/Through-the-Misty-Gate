@@ -1,7 +1,7 @@
 ﻿using Enemies.EnemyTypes;
 
-namespace Enemies.Enemies.Ruins {
-    public class BatRuins : BatEnemy {
+namespace Enemies.Enemies.Cave {
+    public class MageCave : MageEnemy {
         protected override void Start() {
             base.Start();
 

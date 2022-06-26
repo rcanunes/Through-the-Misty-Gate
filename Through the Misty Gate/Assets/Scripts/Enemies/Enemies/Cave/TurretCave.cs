@@ -1,22 +1,16 @@
 ﻿using Enemies.EnemyTypes;
 
-namespace Enemies.Enemies.Ruins {
-    public class SlimeRuins : SlimeEnemy {
+namespace Enemies.Enemies.Cave {
+    public class TurretCave : TurretEnemy {
         protected override void Start() {
             base.Start();
 
             //Set attributes
             this.MaxHealth = 100;
             this.CurrentHealth = this.MaxHealth;
-            this.Damage = 5;
-
-            this.Speed = 2.0f;
-            this.JumpPower = 5.0f;
-            this.MaxFallingSpeed = 5.0f;
+            this.Damage = 120;
 
             this.AwakenDistance = 20.0f;
-            this.BreakOffDistance = 40.0f;
-            this.MeleeAttackRange = 2.0f;
             this.RangedAttackRange = 0.0f;
         }
     }

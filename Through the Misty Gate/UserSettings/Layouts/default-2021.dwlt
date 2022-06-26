@@ -19,9 +19,9 @@ MonoBehaviour:
     width: 1706.6667
     height: 976
   m_ShowMode: 4
-  m_Title: Hierarchy
+  m_Title: Project
   m_RootView: {fileID: 4}
-  m_MinSize: {x: 875, y: 421}
+  m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 1
 --- !u!114 &2
@@ -43,8 +43,8 @@ MonoBehaviour:
     y: 0
     width: 266
     height: 622.6667
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 168
+  controlID: 19
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -97,7 +97,7 @@ MonoBehaviour:
     y: 0
     width: 1706.6666
     height: 976
-  m_MinSize: {x: 875, y: 421}
+  m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
   m_UseTopView: 1
   m_TopViewHeight: 30
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 17
+  controlID: 69
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -271,8 +271,8 @@ MonoBehaviour:
     y: 0
     width: 276
     height: 926
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 19}
   m_Panes:
   - {fileID: 19}
@@ -619,7 +619,7 @@ MonoBehaviour:
   m_Position:
     m_Target: {x: 173.9151, y: 4.3118253, z: -0.22815105}
     speed: 2
-    m_Value: {x: 275.47357, y: 299.53177, z: -2.3683105}
+    m_Value: {x: 173.9151, y: 4.3118253, z: -0.22815105}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -672,7 +672,7 @@ MonoBehaviour:
   m_Size:
     m_Target: 87.01272
     speed: 2
-    m_Value: 310.63467
+    m_Value: 87.01272
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -902,9 +902,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: d8290000
       m_LastClickedID: 0
-      m_ExpandedIDs: 98f8ffff
+      m_ExpandedIDs: b4f9ffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -969,23 +969,23 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets
+    - Assets/Scripts/Enemies/EnemyTypes
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets
+  - Assets/Scripts/Enemies/EnemyTypes
   m_LastFoldersGridSize: -1
   m_LastProjectPath: "C:\\Users\\rodri\\OneDrive\\Documentos\\T\xE9cnico\\MEIC\\MDJ\\Through-the-Misty-Gate\\Through
     the Misty Gate"
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 74730000
-    m_LastClickedID: 29556
-    m_ExpandedIDs: 000000007473000000ca9a3b
+    scrollPos: {x: 0, y: 25.666687}
+    m_SelectedIDs: ec7a0000
+    m_LastClickedID: 31468
+    m_ExpandedIDs: 00000000a67a0000c27a0000da7a000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1013,7 +1013,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000074730000
+    m_ExpandedIDs: 00000000a67a0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1040,7 +1040,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000a084000090ca00006c0c0100e86c000066700000fc7100003c8b0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
