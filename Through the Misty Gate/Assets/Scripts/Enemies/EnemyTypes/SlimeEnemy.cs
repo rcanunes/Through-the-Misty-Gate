@@ -9,6 +9,10 @@ namespace Enemies.EnemyTypes {
             this.MovementStyle = _MovementStyle.Hopping;
             this.canJump = false;
             this.isFlying = false;
+            
+            this.AwakenDistance = 12.0f;
+            this.BreakOffDistance = 16.0f;
+            this.SleepDistance = 24.0f;
 
             this.BehaviourTree = new SlimeTree(this, Player);
         }

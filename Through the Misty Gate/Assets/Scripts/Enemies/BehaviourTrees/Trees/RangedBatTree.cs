@@ -13,6 +13,7 @@ namespace Enemies.BehaviourTrees.Trees {
                 // Chase player
                 // Ranged attack player
                 
+                new Sleep(enemy, player),
                 new RandomMove(enemy, player),
                 new PursuePlayer(enemy, player),
                 new RangedAttack(enemy, player)

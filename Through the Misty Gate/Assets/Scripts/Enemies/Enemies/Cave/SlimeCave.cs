@@ -8,14 +8,14 @@ namespace Enemies.Enemies.Cave {
             //Set attributes
             this.MaxHealth = 250;
             this.CurrentHealth = this.MaxHealth;
+            
             this.Damage = 200;
+            this.AttackSpeed = 1.5f;
 
-            this.Speed = 2.0f;
-            this.JumpPower = 5.0f;
+            this.Speed = 2.5f;
+            this.JumpPower = 6.0f;
             this.MaxFallingSpeed = 5.0f;
-
-            this.AwakenDistance = 20.0f;
-            this.BreakOffDistance = 40.0f;
+            
             this.MeleeAttackRange = 2.0f;
             this.RangedAttackRange = 0.0f;
         }

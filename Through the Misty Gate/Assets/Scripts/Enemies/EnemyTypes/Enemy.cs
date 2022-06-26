@@ -27,6 +27,7 @@ namespace Enemies.EnemyTypes {
         
         // Movement attributes
         protected float Speed;
+        protected float SpeedModifier = 1.0f;
         protected _MovementStyle MovementStyle;
         protected float RandomMoveCooldown;
 
@@ -40,11 +41,19 @@ namespace Enemies.EnemyTypes {
         // Distance attributes
         protected float AwakenDistance;
         protected float BreakOffDistance;
+        protected float SleepDistance;
         
         // Feet
         public Transform Feet;
         protected float CheckRadius = 0.2f;
         public LayerMask whatIsGround;   // Baby don't hurt me
+        
+        // Audio
+        public AudioSource WalkingSound;
+        public AudioSource JumpingSound;
+        public AudioSource AttackSound;
+        public AudioSource DeathSound;
+        protected float WalkingSoundCooldown = 3.0f;
 
         // Player and Manager
         protected PlayerController Player { get; private set; }
@@ -64,6 +73,12 @@ namespace Enemies.EnemyTypes {
             Player = GameObject.FindObjectOfType<PlayerController>();
             
             RigidBody = GetComponent<Rigidbody2D>();
+            
+            // Set audio sources
+            WalkingSound = transform.Find("Walking Sound").GetComponent<AudioSource>();
+            JumpingSound = transform.Find("Jumping Sound").GetComponent<AudioSource>();
+            AttackSound = transform.Find("Attack Sound").GetComponent<AudioSource>();
+            DeathSound = transform.Find("Death Sound").GetComponent<AudioSource>();
         }
 
         protected void FixedUpdate() {
@@ -84,11 +99,16 @@ namespace Enemies.EnemyTypes {
             if (AttackCooldown > 0) {
                 AttackCooldown -= Time.deltaTime;
             }
+            
+            if (WalkingSoundCooldown > 0) {
+                WalkingSoundCooldown -= Time.deltaTime;
+            }
         }
 
         // Attack methods
         public void AttackPlayer() {
             Player.BeAttacked(this, Damage);
+            AttackSound.PlayOneShot(AttackSound.clip);
         }
         
         public void AttackPlayerAtRange() {
@@ -98,31 +118,39 @@ namespace Enemies.EnemyTypes {
         }
         
         // Movement methods
-        public void Walk(string direction) {
+        public virtual void Walk(string direction) {
             if (direction == "left") {
-                this.RigidBody.velocity = new Vector2(-Speed, 0);
+                this.RigidBody.velocity = new Vector2(-Speed * SpeedModifier, 0);
             } else if (direction == "right") {
-                this.RigidBody.velocity = new Vector2(Speed, 0);
+                this.RigidBody.velocity = new Vector2(Speed * SpeedModifier, 0);
+            }
+
+            if (WalkingSoundCooldown <= 0) {
+                WalkingSound.PlayOneShot(WalkingSound.clip);
+                WalkingSoundCooldown = 3.0f;
             }
         }
 
         public void Jump() {
-            if (canJump && isGrounded)
+            if (canJump && isGrounded) {
                 RigidBody.velocity = Vector2.up * JumpPower;
+                JumpingSound.PlayOneShot(JumpingSound.clip);
+            }
         }
         
         public void Hop(string direction) {
             if (isGrounded) {
                 if (direction == "left") {
-                    RigidBody.velocity = Vector2.left * Speed + Vector2.up * JumpPower;
+                    RigidBody.velocity = Vector2.left * (Speed * SpeedModifier) + Vector2.up * JumpPower;
                 } else if (direction == "right") {
-                    RigidBody.velocity = Vector2.right * Speed + Vector2.up * JumpPower;
+                    RigidBody.velocity = Vector2.right * (Speed * SpeedModifier) + Vector2.up * JumpPower;
                 }
+                JumpingSound.PlayOneShot(JumpingSound.clip);
             }
         }
         
         public void Fly(Vector3 direction) {
-            RigidBody.velocity = new Vector2(direction.x * Speed, direction.y * Speed);
+            RigidBody.velocity = new Vector2(direction.x * Speed * SpeedModifier, direction.y * Speed * SpeedModifier);
         }
         
         // Getters
@@ -136,6 +164,10 @@ namespace Enemies.EnemyTypes {
         
         public float GetBreakOffDistance() {
             return BreakOffDistance;
+        }
+        
+        public float GetSleepDistance() {
+            return SleepDistance;
         }
 
         public float GetAttackRange() {
@@ -183,7 +215,12 @@ namespace Enemies.EnemyTypes {
 
             if (CurrentHealth < 0) {
                 // Die
+                DeathSound.PlayOneShot(DeathSound.clip);
             }
+        }
+
+        public void SetSpeedModifier(float modifier) {
+            SpeedModifier -= modifier;
         }
     }
 }
