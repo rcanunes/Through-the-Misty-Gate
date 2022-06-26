@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 181be7a9f4e81bc4ea7ec493689fd1ef
+guid: 2880f1f455cd6a54f82ea307049f7017
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -116,55 +116,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ruins_stairs1_0
-      rect:
-        serializedVersion: 2
-        x: 60
-        y: 162
-        width: 60
-        height: 54
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 07e0b23ce1b16f04baa118abb50eb497
-      internalID: 2119341186
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ruins_stairs1_1
-      rect:
-        serializedVersion: 2
-        x: 120
-        y: 162
-        width: 60
-        height: 54
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5a94e7b8cec00564f842958c604cfbb4
-      internalID: -129110680
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ruins_stairs1_2
+      name: wall_tilemap_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 108
-        width: 60
-        height: 54
+        y: 90
+        width: 120
+        height: 90
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -172,41 +130,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2866365ea12a38b4faa4cfe0cd60d37f
-      internalID: 1026557759
+      spriteID: e63b0799a478ba541822d7324b8a0f67
+      internalID: 1146450429
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ruins_stairs1_3
-      rect:
-        serializedVersion: 2
-        x: 60
-        y: 108
-        width: 60
-        height: 54
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 166e151fdb9687746904add636263f52
-      internalID: 2143828525
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ruins_stairs1_4
+      name: wall_tilemap_1
       rect:
         serializedVersion: 2
         x: 120
-        y: 108
-        width: 60
-        height: 54
+        y: 90
+        width: 120
+        height: 90
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -214,20 +151,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e30fa0a2664982d4c9b13dde5aa7c3b8
-      internalID: -296678519
+      spriteID: aefe2cbd36931794c8386e8dbb17d0c1
+      internalID: -908059978
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ruins_stairs1_5
+      name: wall_tilemap_2
       rect:
         serializedVersion: 2
-        x: 0
-        y: 54
-        width: 60
-        height: 54
+        x: 240
+        y: 90
+        width: 120
+        height: 90
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -235,20 +172,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 230354c7bd7665243a7703ff9d0ecf10
-      internalID: 566434047
+      spriteID: 13d247a23ec97fd48b326e82f7e81d81
+      internalID: -1301995687
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ruins_stairs1_6
+      name: wall_tilemap_3
       rect:
         serializedVersion: 2
-        x: 60
-        y: 54
-        width: 60
-        height: 54
+        x: 360
+        y: 90
+        width: 120
+        height: 90
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -256,41 +193,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6376bd5b42d6e0e43bbd30e85d243d36
-      internalID: 339816120
+      spriteID: 9eb98c4e7ee58b547b0af856b088a932
+      internalID: -730298606
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ruins_stairs1_7
-      rect:
-        serializedVersion: 2
-        x: 120
-        y: 54
-        width: 60
-        height: 54
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5fe39617f4366be498ebdfc61bdf4da9
-      internalID: -1542909102
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ruins_stairs1_8
+      name: wall_tilemap_4
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 60
-        height: 54
+        width: 120
+        height: 90
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -298,41 +214,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d1e60e1fea679a5469a3263c38b86ebb
-      internalID: 1032493658
+      spriteID: 5425bf84ddff05a488b3a62ccb8cc5f8
+      internalID: -710159640
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ruins_stairs1_9
-      rect:
-        serializedVersion: 2
-        x: 60
-        y: 0
-        width: 60
-        height: 54
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4c43cac8fea08eb479e085170f0cca9d
-      internalID: -1004449960
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ruins_stairs1_10
+      name: wall_tilemap_5
       rect:
         serializedVersion: 2
         x: 120
         y: 0
-        width: 60
-        height: 54
+        width: 120
+        height: 90
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -340,8 +235,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8e755ad17e190cb4cbd2ac1708e18b23
-      internalID: -2021182509
+      spriteID: fc7e60b6aaca9b24787e48ade2747950
+      internalID: -1336387516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall_tilemap_6
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 0
+        width: 120
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 620cc393a3ec7de458daf87807989f8e
+      internalID: 18921661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall_tilemap_7
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 0
+        width: 120
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7943ffb58fa51446afb243f522dabb2
+      internalID: -588539481
       vertices: []
       indices: 
       edges: []
@@ -357,17 +294,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      ruins_stairs1_4: -296678519
-      ruins_stairs1_1: -129110680
-      ruins_stairs1_7: -1542909102
-      ruins_stairs1_3: 2143828525
-      ruins_stairs1_0: 2119341186
-      ruins_stairs1_2: 1026557759
-      ruins_stairs1_5: 566434047
-      ruins_stairs1_10: -2021182509
-      ruins_stairs1_9: -1004449960
-      ruins_stairs1_6: 339816120
-      ruins_stairs1_8: 1032493658
+      wall_tilemap_3: -730298606
+      wall_tilemap_4: -710159640
+      wall_tilemap_7: -588539481
+      wall_tilemap_1: -908059978
+      wall_tilemap_0: 1146450429
+      wall_tilemap_6: 18921661
+      wall_tilemap_2: -1301995687
+      wall_tilemap_5: -1336387516
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
