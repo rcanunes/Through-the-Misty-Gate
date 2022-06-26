@@ -151,6 +151,11 @@ namespace Enemies.EnemyTypes {
         
         public void Fly(Vector3 direction) {
             RigidBody.velocity = new Vector2(direction.x * Speed * SpeedModifier, direction.y * Speed * SpeedModifier);
+            
+            if (WalkingSoundCooldown <= 0) {
+                WalkingSound.PlayOneShot(WalkingSound.clip);
+                WalkingSoundCooldown = 2.0f;
+            }
         }
         
         // Getters
