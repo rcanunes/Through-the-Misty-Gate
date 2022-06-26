@@ -1,18 +1,13 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileBehaviorScript : MonoBehaviour
-{
+public class ProjectileBehaviorScript : MonoBehaviour {
     private Vector2 _direction;
     private float _speed;
     private bool _attributed = false;
 
-    
+
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         if (!_attributed)
             return;
 
@@ -20,25 +15,21 @@ public class ProjectileBehaviorScript : MonoBehaviour
 
     }
 
-    public void SetAttributes(Vector3 direction, float speed)
-    {
+    public void SetAttributes(Vector3 direction, float speed) {
         _direction = direction;
         _speed = speed;
         _attributed = true;
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
-    {
+    private void OnCollisionEnter2D(Collision2D other) {
         //if (other.gameObject.CompareTag("Enemy"))
         //{
-            //other.gameObject.GetComponent<Enemy>().ReceiveAttack();
+        //other.gameObject.GetComponent<Enemy>().ReceiveAttack();
         //}
-        if (other.gameObject.CompareTag("Player"))
-        {
+        if (other.gameObject.CompareTag("Player")) {
             // nothing
         }
-        else
-        {
+        else {
             Destroy(gameObject);
         }
     }

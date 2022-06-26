@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 /// <summary>
 /// AOE sell affects an area, either leaving an effect on the ground that lasts a certain amount of time,
 /// or damaging the entities in the area instantly.
@@ -13,17 +12,15 @@ using UnityEngine;
 /// <param name="aoePrefab"> Prefab with the sprite and collider for the visual effects of the spell. Has to be spawned on the ground. </param>
 /// 
 [CreateAssetMenu(fileName = "AOESpellEffectsScriptableObject", menuName = "ScriptableObjects/AOESpellEffects")]
-public class AOESpellEffectsScriptableObject : SpellEffectsScriptableObject
-{
+public class AOESpellEffectsScriptableObject : SpellEffectsScriptableObject {
     public int damageOverTime = 10;
-    public float duration = 5.0f;  // How long the effect stays on the ground, if duration = 0, the damage is instant
+    public float duration = 5.0f; // How long the effect stays on the ground, if duration = 0, the damage is instant
 
     // Prefab of the aoe spell, should contain a sprite and a collider and be tagged
     public GameObject aoePrefab;
 
 
-    public override void Cast(MonoBehaviour caller, PlayerController player)
-    {
-        
+    public override void Cast(MonoBehaviour caller, PlayerController player) {
+
     }
 }

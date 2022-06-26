@@ -2,31 +2,25 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 [CreateAssetMenu(fileName = "SpellsDatabase", menuName = "ScriptableObjects/SpellsDatabase")]
-public class SpellsDatabase : ScriptableObject
-{
+public class SpellsDatabase : ScriptableObject {
     public List<SpellScriptableObject> spells;
 
 
-    public void OnEnable()
-    {
+    public void OnEnable() {
         // Assign correct ids to the spells
         int i = 0;
-        
-        foreach (var spell in spells)
-        {
+
+        foreach (var spell in spells) {
             spell.spellId = i;
             i++;
         }
     }
 
-    public void AssertCorrectIDs()
-    {
+    public void AssertCorrectIDs() {
         int i = 0;
-        
-        foreach (var spell in spells)
-        {
+
+        foreach (var spell in spells) {
             spell.spellId = i;
             i++;
         }

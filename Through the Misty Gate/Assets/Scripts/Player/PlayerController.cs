@@ -2,12 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Enemies.EnemyTypes;
 
-public class PlayerController : MonoBehaviour
-{
+public class PlayerController : MonoBehaviour {
     private Rigidbody2D playerRb;
 
-    private float speed;
+    private float baseSpeed;
 
     private float horizontalInput;
     private float verticalInput;
@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     public bool isLadder;
     public bool isClimbing;
 
-   
+
     //Jump Related variables
     public Collider2D isGrounded;
     public Transform feetPos;
@@ -27,11 +27,11 @@ public class PlayerController : MonoBehaviour
     public bool jumpEnded;
     private float jumpTimeCounter; //Current Jump Time
     private float jumpTime; //Max jump Time
-    private float jumpForce; // Jump Strength
+    private float baseJumpForce; // Jump Strength
     private float gravityScale;
 
     private float maxFallingSpped;
-    
+
     // Spell Casting Variables
     private bool enterChargedCast = false;
     private float chargeDuration;
@@ -51,19 +51,18 @@ public class PlayerController : MonoBehaviour
     public AudioClip jumpSound;
     private bool groundIsIce;
 
-
+    PlayerStats playerStats;
 
 
 
 
     // Start is called before the first frame update
-    void Start()
-    {
-        speed = 10;
+    void Start() {
+        baseSpeed = 10;
         climbingSpeed = 10;
         gravityScale = 5;
         jumpTime = 0.4f;
-        jumpForce = 11;
+        baseJumpForce = 11;
         maxFallingSpped = -10f;
         jumpEnded = true;
 
@@ -71,21 +70,21 @@ public class PlayerController : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
+        playerStats = GetComponent<PlayerStats>();
 
     }
 
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         AnimationSetup();
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, whatIsGround);
         groundIsIce = CheckIfIce();
 
-        
+
         if (enterChargedCast)
             ChargedCastingMovement();
-        
+
         if (ignoreInput)
             return;
 
@@ -94,19 +93,19 @@ public class PlayerController : MonoBehaviour
         MoveCharacter();
     }
 
-    private bool CheckIfIce()
-    {   if(isGrounded != null)
+    private bool CheckIfIce() {
+        if (isGrounded != null)
             return isGrounded.CompareTag("Ice");
+
         return false;
     }
 
-    private void Jump()
-    {
-        
-        playerRb.gravityScale = gravityScale;
+    private void Jump() {
 
-        if (isGrounded && GetJumpKeysDown() && jumpEnded)
-        {
+        playerRb.gravityScale = gravityScale;
+        float jumpForce = baseJumpForce * playerStats.jumpModifier.GetValue();
+
+        if (isGrounded && GetJumpKeysDown() && jumpEnded) {
             jumpEnded = false;
             jumpTimeCounter = jumpTime;
             playerRb.velocity = Vector2.up * jumpForce;
@@ -114,10 +113,8 @@ public class PlayerController : MonoBehaviour
 
         }
 
-        else if (GetJumpKeys() && !jumpEnded)
-        {
-            if (jumpTimeCounter > 0 && playerRb.velocity.y > 0)
-            {
+        else if (GetJumpKeys() && !jumpEnded) {
+            if (jumpTimeCounter > 0 && playerRb.velocity.y > 0) {
                 playerRb.velocity = Vector2.up * jumpForce;
                 jumpTimeCounter -= Time.deltaTime;
             }
@@ -126,27 +123,23 @@ public class PlayerController : MonoBehaviour
         if (GetJumpKeysUp())
             jumpEnded = true;
 
-        //ModifyPhysics();
+        ModifyPhysics();
 
     }
 
-    private void ModifyPhysics()
-    {
+    private void ModifyPhysics() {
         if (playerRb.velocity.y < 0 && playerRb.velocity.y > maxFallingSpped)
             playerRb.AddForce(Vector2.down);
     }
 
-    private void ChargedCastingMovement()
-    {
+    private void ChargedCastingMovement() {
         // Freeze position when casting a charged spell, enabled in EnterChargedCast()
-        if (enterChargedCast)
-        {
+        if (enterChargedCast) {
             ignoreInput = true;
             playerRb.constraints = RigidbodyConstraints2D.FreezeAll;
-            
+
             if (elapsedCharge < chargeDuration) elapsedCharge += Time.deltaTime;
-            else
-            {
+            else {
                 playerRb.constraints = RigidbodyConstraints2D.FreezeRotation;
                 enterChargedCast = false;
                 StartCoroutine(Knockback());
@@ -154,67 +147,50 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Climbing()
-    {
+    private void Climbing() {
         verticalInput = Input.GetAxis("Vertical");
-        if (isLadder && verticalInput != 0)
-        {
+        if (isLadder && verticalInput != 0) {
             isClimbing = true;
         }
-        else if (GetJumpKeysDown() || !isLadder)
-        {
+        else if (GetJumpKeysDown() || !isLadder) {
             isClimbing = false;
         }
 
-        if (isClimbing)
-        {
+        if (isClimbing) {
             playerRb.gravityScale = 0f;
             playerRb.velocity = new Vector2(playerRb.velocity.x, verticalInput * climbingSpeed);
         }
     }
-    private void MoveCharacter()
-    {
+
+    private void MoveCharacter() {
         horizontalInput = Input.GetAxis("Horizontal");
 
-        if (groundIsIce)
-        {
+        float speed = baseSpeed * playerStats.speedModifier.GetValue();
 
-            playerRb.velocity += new Vector2(horizontalInput * speed, playerRb.velocity.y);
+        if (groundIsIce || playerStats.iceBootsModifier.GetValue()) {
 
-            if(playerRb.velocity.x > speed)
-            {
-                playerRb.velocity = new Vector2(speed , playerRb.velocity.y);
-            }
-            else if (playerRb.velocity.x < -speed)
-            {
-                playerRb.velocity = new Vector2(-speed , playerRb.velocity.y);
-            }
+            playerRb.velocity += new Vector2(horizontalInput * speed, 0);
+
+            playerRb.velocity = new Vector2(Math.Clamp(playerRb.velocity.x,-speed,speed), playerRb.velocity.y);
 
             playerRb.velocity *= 0.99f;
-            if (Mathf.Abs(playerRb.velocity.x) < 0.01)
-            {
+            if (Mathf.Abs(playerRb.velocity.x) < 0.1) {
                 playerRb.velocity = new Vector2(0, playerRb.velocity.y);
             }
 
-
-
         }
-        else
-        {
+        else {
             playerRb.velocity = new Vector2(horizontalInput * speed, playerRb.velocity.y);
 
         }
-        //playerRb.AddForce(new Vector2(horizontalInput * speed, playerRb.velocity.y));
     }
 
-    private void AnimationSetup()
-    {
+    private void AnimationSetup() {
         idle = true;
         horizontalInput = Input.GetAxis("Horizontal");
 
         // Moving
-        if (horizontalInput != 0)
-        {
+        if (horizontalInput != 0) {
             idle = false;
         }
 
@@ -248,13 +224,12 @@ public class PlayerController : MonoBehaviour
     //        yield return new waitforendofframe();
     //    }
 
-        
+
     //    ignoreInput = false;
     //    Debug.Log("Exiting Knockback");
     //}
 
-    private IEnumerator Knockback()
-    {
+    private IEnumerator Knockback() {
         playerRb.AddForce(new Vector2(knockbackAmount, 0) * 4, ForceMode2D.Impulse);
         yield return new WaitForSeconds(0.5f);
         ignoreInput = false;
@@ -262,50 +237,47 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    public void EnterChargedCast(float chargeTime)
-    {
+    public void EnterChargedCast(float chargeTime) {
         chargeDuration = chargeTime;
         elapsedCharge = 0;
         enterChargedCast = true;
     }
 
-    public void SetKnockback(float amount, float burst)
-    {
+    public void SetKnockback(float amount, float burst) {
         knockbackAmount = amount;
         knockbackBurst = burst;
         Debug.Log("KnockbakAmount " + knockbackAmount.ToString() + " - KnockBackBurst" + knockbackBurst.ToString());
     }
 
 
-    private static bool GetJumpKeysDown()
-    {
+    private static bool GetJumpKeysDown() {
         return Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Z);
     }
 
-    private static bool GetJumpKeys()
-    {
+    private static bool GetJumpKeys() {
         return Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Z);
     }
-    private static bool GetJumpKeysUp()
-    {
+
+    private static bool GetJumpKeysUp() {
         return Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.Z);
     }
 
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Ladder"))
-        {
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if (collision.CompareTag("Ladder")) {
             isLadder = true;
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Ladder"))
-        {
+    private void OnTriggerExit2D(Collider2D collision) {
+        if (collision.CompareTag("Ladder")) {
             isLadder = false;
         }
     }
 
+    // Ouchie Methods
+    public void BeAttacked(Enemy enemy, int damage) {
+        playerStats.TakeDamage(damage);
+        Debug.Log("I was attacked by " + enemy.GetName() + " for " + damage);
+    }
 }
