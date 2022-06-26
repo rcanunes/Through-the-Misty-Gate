@@ -36,6 +36,13 @@ public class UI_ItemManager : MonoBehaviour {
             metricsSaveData.metricsData.AddSpellTimeInHorBar(spellKey.spell.spellName, Time.deltaTime);
         }
         
+
+        List<HotKeyAbility> hotKeys = hotKeySystem.GetSpells();
+        foreach (HotKeyAbility spellKey in hotKeys)
+        {
+            metricsSaveData.metricsData.AddSpellTimeInHorBar(spellKey.spell.spellName, Time.deltaTime);
+        }
+        
     }
 
 
