@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UI_SpellBook : MonoBehaviour, IDropHandler, IDragHandler, IPointerExitHandler
+public class UI_SpellBook : MonoBehaviour, IDropHandler, IPointerExitHandler
 {
     private Transform spellSlotTemplate;
     private Transform spellSlotContainer;
@@ -33,10 +33,10 @@ public class UI_SpellBook : MonoBehaviour, IDropHandler, IDragHandler, IPointerE
 
     }
 
-    public void OnDrag(PointerEventData eventData) {
-        rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+    //public void OnDrag(PointerEventData eventData) {
+    //    rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
 
-    }
+    //}
 
     public void SetSpellBookSystem(SpellBookSystem spellBookSystem, HotKeySystem hotKeySystem) {
         this.spellBookSystem = spellBookSystem;

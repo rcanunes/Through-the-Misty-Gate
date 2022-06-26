@@ -15,7 +15,7 @@ MonoBehaviour:
   affectedByGravity: 0
   speed: 50
   bulletsPerReload: 1
-  stopsOnEnemies: 1
+  stopsOnEnemies: 0
   stopsOnWalls: 0
   lifeTime: 10
   radius: 0

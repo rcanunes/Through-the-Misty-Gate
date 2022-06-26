@@ -13,14 +13,15 @@ MonoBehaviour:
   m_Name: Stoneskin
   m_EditorClassIdentifier: 
   spellName: Stoneskin
-  description: Druid Spell
+  description: Stoneskin is a buff earth spell. It adds a layer of protection on
+    top of your HP;
   image: {fileID: 21300000, guid: e35cd3bde015b48339d86b98c9be72cd, type: 3}
   chargeTime: 1
   cooldown: 10
   knockback: 0
-  cantMoveOnCharge: 0
+  cantMoveOnCharge: 1
   stopsMovementOnCharge: 0
-  damageStopsCasting: 0
+  damageStopsCasting: 1
   shakeIntensityOnCast: 0
   shakeDuration: 0
   castingEffects: {fileID: 17966149064300990, guid: ca7ae9d5080c69b41ab5bbbeb1c6e958, type: 3}

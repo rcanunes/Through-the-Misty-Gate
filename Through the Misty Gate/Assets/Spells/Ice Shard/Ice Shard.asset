@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Ice Shard
   m_EditorClassIdentifier: 
   spellName: Ice Shard
-  description: Banana mamaosdnasd
+  description: The Ice Shard  is a basic spell of the ice family. It is capable of
+    piercing through one or more enemies
   image: {fileID: 21300000, guid: f1ae94e1f0fa54d76bd257bd774f53ee, type: 3}
   chargeTime: 1
   cooldown: 1

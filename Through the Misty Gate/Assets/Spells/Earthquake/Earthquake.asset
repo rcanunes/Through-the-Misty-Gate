@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Earthquake
   m_EditorClassIdentifier: 
   spellName: Earthquake
-  description: Mighty earthquake that shakes the earth
+  description: "The Quake is a basic spell of the earth family. It\u2019s goal is
+    to slow down your enemies"
   image: {fileID: 21300000, guid: 6bf5f42e01b3f44aebab8910d4de131e, type: 3}
   chargeTime: 2
   cooldown: 5
@@ -23,6 +24,7 @@ MonoBehaviour:
   damageStopsCasting: 0
   shakeIntensityOnCast: 3
   shakeDuration: 1.5
+  castingEffects: {fileID: 354934955302842608, guid: 28472f2fc1afbaf408935f0772a35726, type: 3}
+  castingEffectsDuration: 2
   radius: 10
   spellEffect: {fileID: 11400000, guid: 04a271ee71cd91f41b537225b993bc79, type: 2}
-  castingEffects: {fileID: 354934955302842608, guid: 28472f2fc1afbaf408935f0772a35726, type: 3}
