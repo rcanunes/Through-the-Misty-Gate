@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Ice Spear
   m_EditorClassIdentifier: 
   spellName: Ice Spear
-  description: Ultimate Ice attack
+  description: The Ice Spear is an advanced ice spell. Besides piercing enemies it
+    is also capable of piercing through terrain
   image: {fileID: 21300000, guid: 20390950ff2924279a29b6ce5bc94177, type: 3}
   chargeTime: 1
   cooldown: 1

@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Max Healing
   m_EditorClassIdentifier: 
   spellName: Max Healing
-  description: You heal a lot
+  description: Burst Healing is a spell that gives you a large amount of healing,
+    but it has a high cooldown and requires absolute stillness
   image: {fileID: 21300000, guid: b72437f26efa146a1a067ecaa57317ef, type: 3}
   chargeTime: 5
   cooldown: 10

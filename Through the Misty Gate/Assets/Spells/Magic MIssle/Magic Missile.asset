@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Magic Missile
   m_EditorClassIdentifier: 
   spellName: Magi Missile
-  description: The most basic spell in all the land
+  description: The Magic Missile is a basic arcane spell. It causes low damage but,
+    at the same time, has low cooldown time
   image: {fileID: 21300000, guid: 385da099954d14cc28853d00b4f705b0, type: 3}
   chargeTime: 0.5
   cooldown: 0.2

@@ -19,8 +19,9 @@ public class MetricsSaveData : MonoBehaviour
     #endregion
 
     public MetricsData metricsData;
-    public string fileName;
+    private string fileName;
     private bool needsToSave;
+    [SerializeField] string name_modifier;
 
 
     // Start is called before the first frame update
@@ -28,7 +29,7 @@ public class MetricsSaveData : MonoBehaviour
     {
         needsToSave = true;
         metricsData = new MetricsData();
-        fileName = "demo_" + DateTime.Now.ToString("yyyy-dd-M--HH-mm-ss");
+        fileName = name_modifier + DateTime.Now.ToString("yyyy-dd-M--HH-mm-ss");
     }
 
     // Update is called once per frame
