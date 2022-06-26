@@ -20,6 +20,8 @@ public class SpellCaster : MonoBehaviour
     public delegate void ModifyKnownSpells(Spell spell);
     public event ModifyKnownSpells modifySpell;
 
+    private MetricsSaveData metricsSaveData;
+
     public enum CastingStatus
     {
         Idle,
@@ -28,6 +30,7 @@ public class SpellCaster : MonoBehaviour
 
     private void Awake()
     {
+        metricsSaveData = MetricsSaveData.instance;
         castingStatus = CastingStatus.Idle;
         castingTime = 0;
     }
@@ -135,6 +138,8 @@ public class SpellCaster : MonoBehaviour
         SpellCoolDown temp = gameObject.AddComponent<SpellCoolDown>();
         temp.Initialize(this, currentSpell);
         coolDowns.Add(temp);
+
+        metricsSaveData.metricsData.AddSpellUse(currentSpell.spellName);
         currentSpell.Cast(gameObject);
     }
 

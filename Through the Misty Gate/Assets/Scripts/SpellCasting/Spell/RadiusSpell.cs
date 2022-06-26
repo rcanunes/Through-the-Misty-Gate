@@ -24,7 +24,7 @@ public class RadiusSpell : Spell
         foreach (Collider2D item in affected)
         {
             if (item.CompareTag("Enemy"))
-                spellEffect.EffectOnEnemy(item, player, player.GetComponent<PlayerStats>());
+                spellEffect.EffectOnEnemy(item, player, player.GetComponent<PlayerStats>(), spellName);
             else
                 spellEffect.Effect(item, player);
         }

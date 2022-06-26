@@ -8,6 +8,7 @@ public class ProjectileBehaviour : MonoBehaviour
     protected ProjectileStats projectileStats;
     Rigidbody2D rb;
     PlayerStats playerStats;
+    string spellName;
 
     // Update is called once per frame
 
@@ -27,8 +28,9 @@ public class ProjectileBehaviour : MonoBehaviour
 
     }
 
-    internal void SetUp(Vector3 direction, ProjectileStats projectileStats)
+    internal void SetUp(Vector3 direction, ProjectileStats projectileStats, string spellName)
     {
+        this.spellName = spellName;
         this.projectileStats = projectileStats;
         rb = GetComponentInChildren<Rigidbody2D>();
         rb.velocity = direction * projectileStats.speed;
@@ -51,7 +53,7 @@ public class ProjectileBehaviour : MonoBehaviour
     {
         if(projectileStats.radius == 0 && collision.CompareTag("Enemy"))
         {
-            projectileStats.spellEffects.EffectOnEnemy(collision, gameObject, playerStats);
+            projectileStats.spellEffects.EffectOnEnemy(collision, gameObject, playerStats, spellName);
 
             if (projectileStats.stopsOnEnemies)
                 ProjectileCollision();
@@ -68,7 +70,7 @@ public class ProjectileBehaviour : MonoBehaviour
             foreach (Collider2D collider in colliders)
             {
                 if(collider.CompareTag("Enemy"))
-                    projectileStats.spellEffects.EffectOnEnemy(collider, gameObject, playerStats);
+                    projectileStats.spellEffects.EffectOnEnemy(collider, gameObject, playerStats, spellName);
                 else
                     projectileStats.spellEffects.Effect(collider, gameObject);
 

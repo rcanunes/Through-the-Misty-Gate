@@ -16,6 +16,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] HealthBar extraLife;
     [SerializeField] ParticleSystem healingParticles;
 
+    MetricsSaveData metricsSaveData;
     SpellCaster spellCaster;
 
     public Stat healthModifer;
@@ -33,6 +34,7 @@ public class PlayerStats : MonoBehaviour
 
     private void Start()
     {
+        metricsSaveData = MetricsSaveData.instance;
         currentHitPoints = maxHitPoints;
         healthBar.SetMaxHealth(maxHitPoints, currentHitPoints);
 
@@ -51,9 +53,11 @@ public class PlayerStats : MonoBehaviour
         spellCaster = GetComponent<SpellCaster>();
     }
 
-    void TakeDamage(int originalDamage)
+    void TakeDamage(int originalDamage, string enemyType)
     {
         int damage = (int) (originalDamage * armourModifier.GetValue());
+
+        metricsSaveData.metricsData.AddEnemyDamage(enemyType, damage);
 
         if (extraLifePoints != 0)
         {
@@ -80,17 +84,27 @@ public class PlayerStats : MonoBehaviour
 
         if (currentHitPoints == 0)
         {
-            //die
+            Die();
+            metricsSaveData.metricsData.AddEnemyKills(enemyType);
+            metricsSaveData.metricsData.AddDeathCount();
+
         }
 
-        if(spellCaster.currentSpell != null)
+        if (spellCaster.currentSpell != null)
             if(spellCaster.currentSpell.damageStopsCasting)
                 spellCaster.StopCasting();
     }
 
+    private void Die()
+    {
+        currentHitPoints = maxHitPoints;
+        healthBar.SetHealth(currentHitPoints, 0.1f);
+    }
 
     public void AddExtraLife(int newPoints)
     {
+        float originalExtraLife = extraLifePoints;
+
         if(extraLifePoints != 0)
         {
             if (newPoints > extraLifePoints)
@@ -102,6 +116,9 @@ public class PlayerStats : MonoBehaviour
         }
 
         extraLife.SetHealth(extraLifePoints);
+
+        metricsSaveData.metricsData.AddSpellHeal(spellCaster.currentSpell.spellName, extraLifePoints -  originalExtraLife);
+
 
     }
 
@@ -155,7 +172,7 @@ public class PlayerStats : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            TakeDamage(50);    
+            TakeDamage(50, "suicide");    
         }
         if (Input.GetKeyDown(KeyCode.H))
         {
@@ -176,10 +193,16 @@ public class PlayerStats : MonoBehaviour
 
     public void Heal(int heal, float timeToHeal = 0.01f)
     {
+
+        float originalHitPonts = currentHitPoints;
+
         currentHitPoints += heal;
         currentHitPoints = Mathf.Clamp(currentHitPoints, 0, maxHitPoints);
 
         healthBar.SetHealth(currentHitPoints, timeToHeal);
+
+
+        metricsSaveData.metricsData.AddSpellHeal(spellCaster.currentSpell.spellName, currentHitPoints - originalHitPonts);
 
         PlayHealingParticles(timeToHeal);
     }

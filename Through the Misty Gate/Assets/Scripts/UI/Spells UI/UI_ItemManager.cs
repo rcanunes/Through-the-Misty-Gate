@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class UI_ItemManager : MonoBehaviour {
@@ -10,21 +11,30 @@ public class UI_ItemManager : MonoBehaviour {
 
     private HotKeySystem hotKeySystem;
     private SpellBookSystem spellBookSystem;
+    private MetricsSaveData metricsSaveData;
 
     private void Start()
-{
+    {
     hotKeySystem = new HotKeySystem(player);
     spellBookSystem = new SpellBookSystem(player);
     uiSpellBook.SetSpellBookSystem(spellBookSystem, hotKeySystem);
     uiHotKeyBar.SetHotKeySystem(hotKeySystem, spellBookSystem);
 
-
+        metricsSaveData = MetricsSaveData.instance;
     }
 
 
 
     void Update() {
+
         hotKeySystem.Update();
+
+        List<HotKeyAbility> hotKeys = hotKeySystem.GetSpells();
+        foreach (HotKeyAbility spellKey in hotKeys)
+        {
+            metricsSaveData.metricsData.AddSpellTimeInHorBar(spellKey.spell.spellName, Time.deltaTime);
+        }
+        
     }
 
 

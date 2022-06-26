@@ -20,7 +20,7 @@ public class ProjectileSpell : Spell
         GameObject proj = Instantiate(projectileStats.projectile, player.transform.position, rotation);
 
         ProjectileBehaviour behaviour = proj.GetComponent<ProjectileBehaviour>();
-        behaviour.SetUp(direction, projectileStats);
+        behaviour.SetUp(direction, projectileStats, spellName);
 
         Vector3 aux = direction * -1;
         Vector2 knockbackVector = new Vector2(aux.x, aux.y) * knockback;

@@ -12,13 +12,15 @@ public class SpellEffect: ScriptableObject
     public DamageTypes damageType = DamageTypes.Default;
     //TODO: Debuffs
 
-    public void EffectOnEnemy(Collider2D enemy, GameObject projectile, PlayerStats player)
+    public void EffectOnEnemy(Collider2D enemy, GameObject projectile, PlayerStats player, string spellName)
     {
         Effect(enemy, projectile);
         if (damage > 0)
-            DealDamage(enemy, player);
+            DealDamage(enemy, player, spellName);
 
         //Todo: debufss
+
+        
 
     }
 
@@ -29,7 +31,7 @@ public class SpellEffect: ScriptableObject
 
     }
 
-    private void DealDamage(Collider2D enemy, PlayerStats player)
+    private void DealDamage(Collider2D enemy, PlayerStats player, string spellName)
     {
         damage *= player.baseDamageModifier.GetValue();
         if (damageType == DamageTypes.Fire)
@@ -38,7 +40,13 @@ public class SpellEffect: ScriptableObject
             damage *= player.iceDamageModifier.GetValue();
 
         Debug.Log("Hit " + enemy.gameObject.name + "  Damage: " + damage);
-        
+
+        //MetricStuff
+        MetricsSaveData.instance.metricsData.AddSpellDamage(spellName, damage);
+        MetricsSaveData.instance.metricsData.AddSpellEnemyHit(spellName);
+        EquipmentManager.instance.AddDamageDEaltWhileEquiped(damage);
+
+
     }
 
     private void AddForce(Collider2D enemy, GameObject projectile)

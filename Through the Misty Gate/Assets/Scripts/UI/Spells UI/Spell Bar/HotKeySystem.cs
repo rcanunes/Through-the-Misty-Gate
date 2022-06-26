@@ -19,17 +19,6 @@ public class HotKeySystem {
 
         spells = new List<UI_ItemManager.HotKeyAbility>();
 
-        //foreach (var spell in player.GetKnownSpells())
-        //{
-        //    Debug.Log("Spells: " + spell.spellName);
-        //    spells.Add(new UI_ItemManager.HotKeyAbility
-        //    {
-        //        spell = spell,
-        //        activateSpell = () => player.SetCurrentSpell(spell)
-        //    });
-        //}
-
-
     }
 
     public void Update()
