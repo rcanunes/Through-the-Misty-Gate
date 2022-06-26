@@ -30,10 +30,11 @@ public class SpellCaster : MonoBehaviour
 
     private void Awake()
     {
-        metricsSaveData = MetricsSaveData.instance;
+
         castingStatus = CastingStatus.Idle;
         castingTime = 0;
     }
+
 
     internal void RemoveCoolDown(SpellCoolDown spellCoolDown)
     {
@@ -46,6 +47,12 @@ public class SpellCaster : MonoBehaviour
             knownSpells.Add(newSpell);
 
         modifySpell?.Invoke(newSpell);
+    }
+
+    private void Start()
+    {
+        metricsSaveData = MetricsSaveData.instance;
+
     }
 
     private void Update()
@@ -139,7 +146,9 @@ public class SpellCaster : MonoBehaviour
         temp.Initialize(this, currentSpell);
         coolDowns.Add(temp);
 
+        Debug.Log(" - " + currentSpell.spellName);
         metricsSaveData.metricsData.AddSpellUse(currentSpell.spellName);
+
         currentSpell.Cast(gameObject);
     }
 

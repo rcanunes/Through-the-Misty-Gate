@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class MetricsSaveData : MonoBehaviour
@@ -14,7 +15,6 @@ public class MetricsSaveData : MonoBehaviour
     private void Awake()
     {
         instance = this;
-
     }
     #endregion
 
@@ -58,7 +58,7 @@ public class MetricsSaveData : MonoBehaviour
         string jsonString = JsonConvert.SerializeObject(metricsData);
 
         File.WriteAllText(url, jsonString);
-
+        Debug.Log("Saving");
         needsToSave = true;
     }
 
@@ -123,6 +123,7 @@ public class MetricsSaveData : MonoBehaviour
         #region spellMetricsFunctions
         public void AddSpellUse(string spellName)
         {
+            Debug.Log("here");
             SpellData spell = FindSpellData(spellName);
             spell.numberOfUses += 1;
             

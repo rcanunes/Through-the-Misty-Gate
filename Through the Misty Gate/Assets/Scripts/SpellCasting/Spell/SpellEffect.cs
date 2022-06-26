@@ -55,7 +55,9 @@ public class SpellEffect: ScriptableObject
         Vector2 sourcePos = projectile.transform.position;
         Vector2 knockbackDirection = targetPos - sourcePos;
         knockbackDirection.Normalize();
-        enemy.gameObject.GetComponent<Rigidbody2D>().AddForce(knockbackDirection * knockback, ForceMode2D.Impulse);
+        Rigidbody2D rb = enemy.gameObject.GetComponent<Rigidbody2D>();
+        if(rb != null)
+            rb.AddForce(knockbackDirection * knockback, ForceMode2D.Impulse);
 
         Debug.Log("Adding Force to " + enemy.gameObject.name + "  Knocjvac: " + knockback);
 

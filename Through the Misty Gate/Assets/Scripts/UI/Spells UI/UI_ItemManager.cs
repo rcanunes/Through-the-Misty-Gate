@@ -28,14 +28,7 @@ public class UI_ItemManager : MonoBehaviour {
     void Update() {
 
         if(hotKeySystem != null)
-            hotKeySystem.Update();
-
-        List<HotKeyAbility> hotKeys = hotKeySystem.GetSpells();
-        foreach (HotKeyAbility spellKey in hotKeys)
-        {
-            metricsSaveData.metricsData.AddSpellTimeInHorBar(spellKey.spell.spellName, Time.deltaTime);
-        }
-        
+            hotKeySystem.Update();   
 
         List<HotKeyAbility> hotKeys = hotKeySystem.GetSpells();
         foreach (HotKeyAbility spellKey in hotKeys)
