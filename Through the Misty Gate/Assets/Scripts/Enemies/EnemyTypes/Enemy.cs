@@ -67,6 +67,7 @@ namespace Enemies.EnemyTypes {
         }
 
         protected void FixedUpdate() {
+            
             //AnimationSetup();
             isGrounded = Physics2D.OverlapCircle(Feet.position, CheckRadius, whatIsGround);
             this.BehaviourTree.Run();
@@ -175,6 +176,14 @@ namespace Enemies.EnemyTypes {
         // Setters
         public void SetVelocity(float x, float y) {
             RigidBody.velocity = new Vector2(x, y);
+        }
+
+        public void TakeDamage(int damage) {
+            CurrentHealth -= damage;
+
+            if (CurrentHealth < 0) {
+                // Die
+            }
         }
     }
 }

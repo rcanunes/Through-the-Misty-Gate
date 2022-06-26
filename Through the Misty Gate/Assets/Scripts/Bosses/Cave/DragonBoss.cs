@@ -5,7 +5,6 @@ using Bosses.Dragon;
 
 namespace Bosses {
     public class DragonBoss : Boss {
-
         public class DragonBossTree : Sequence {
             public DragonBossTree(Boss boss, PlayerController player) {
                 this.children = new List<Task>() {
