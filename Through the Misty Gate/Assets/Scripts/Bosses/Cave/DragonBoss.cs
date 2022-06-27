@@ -6,7 +6,7 @@ using Bosses.Dragon;
 namespace Bosses {
     public class DragonBoss : Boss {
         public class DragonBossTree : Sequence {
-            public DragonBossTree(Boss boss, PlayerController player) {
+            public DragonBossTree(DragonBoss boss, PlayerController player) {
                 this.children = new List<Task>() {
                     new Intro(boss, player),
                     new DragonBossActionTree(boss, player),
@@ -16,7 +16,7 @@ namespace Bosses {
             
             
             public class DragonBossActionTree : RandomSelector {
-                public DragonBossActionTree(Boss boss, PlayerController player) {
+                public DragonBossActionTree(DragonBoss boss, PlayerController player) {
                     this.children = new List<Task>() {
                         new FlyBy(boss, player),
                         new FireBreath(boss, player),
@@ -27,15 +27,44 @@ namespace Bosses {
             }
         }
 
+        protected AudioSource RoarSound;
+        protected AudioSource WingSound;
+        protected AudioSource BreathSound;
+        protected AudioSource DeathSound;
+        
+
         protected override void Start() {
             base.Start();
 
-            this.BehaviourTree = new DragonBossTree(this, Player);
+            BehaviourTree = new DragonBossTree(this, Player);
             
             //Set attributes
-            this.MaxHealth = 5000;
-            this.CurrentHealth = this.MaxHealth;
-            this.ContactDamage = 150;
+            MaxHealth = 5000;
+            CurrentHealth = MaxHealth;
+            ContactDamage = 150;
+            
+            // Set audio sources
+            RoarSound = transform.Find("Roar Sound").GetComponent<AudioSource>();
+            WingSound = transform.Find("Jumping Sound").GetComponent<AudioSource>();
+            BreathSound = transform.Find("Attack Sound").GetComponent<AudioSource>();
+            DeathSound = transform.Find("Death Sound").GetComponent<AudioSource>();
+            
+        }
+
+        public void Roar() {
+            RoarSound.PlayOneShot(RoarSound.clip);
+        }
+
+        public void Move() {
+            // Move to other side of arena
+            
+            WingSound.PlayOneShot(WingSound.clip);
+        }
+
+        public void Die() {
+            DeathSound.PlayOneShot(DeathSound.clip);
+            
+            // Die
         }
     }
 }

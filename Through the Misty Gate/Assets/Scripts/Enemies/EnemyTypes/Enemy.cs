@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using Enemies.BehaviourTrees.Implementation;
-using Random = System.Random;
+using Enemies.Projectiles;
 
 namespace Enemies.EnemyTypes {
     public abstract class Enemy : MonoBehaviour {
@@ -21,6 +21,10 @@ namespace Enemies.EnemyTypes {
         protected bool hasRangedAttack = false;
         protected float AttackSpeed;
         protected float AttackCooldown;
+        
+        // Projectile
+        public GameObject Projectile;
+        protected float ProjectileSpeed;
         
         // Movement Style
         public enum _MovementStyle {Walking, Flying, Hopping, Immobile}
@@ -113,7 +117,11 @@ namespace Enemies.EnemyTypes {
         
         public void AttackPlayerAtRange() {
             if (hasRangedAttack) {
-                //Player.BeAttacked(this, Damage);
+                 Projectile projectile = (Instantiate(Projectile) as GameObject).GetComponent<Projectile>();
+                 projectile.SetParent(this);
+                 projectile.SetDamage(Damage);
+                 projectile.SetSpeed(ProjectileSpeed);
+                 projectile.Launch(transform.position, Player.transform.position);
             }
         }
         
