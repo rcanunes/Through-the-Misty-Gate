@@ -653,6 +653,7 @@ GameObject:
   - component: {fileID: 786460639106876947}
   - component: {fileID: 786460639106876944}
   - component: {fileID: 786460639106876945}
+  - component: {fileID: 187927563071656607}
   m_Layer: 0
   m_Name: Cave Skeleton
   m_TagString: Enemy
@@ -722,8 +723,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
+  m_SortingOrder: 5
+  m_Sprite: {fileID: -1504733653, guid: 44f71b5e434f7db468ce5d60caddf4f7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -746,6 +747,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cef0fa6c334c4edf8b21ab7828fad0fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Projectile: {fileID: 0}
   Feet: {fileID: 786460639776384801}
   whatIsGround:
     serializedVersion: 2
@@ -793,6 +795,26 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
+--- !u!95 &187927563071656607
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 786460639106877038}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f4528983f5118c540895466ec09d84f2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &786460639776384830
 GameObject:
   m_ObjectHideFlags: 0
