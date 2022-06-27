@@ -10,6 +10,10 @@ namespace Enemies.EnemyTypes {
             this.canJump = false;
             this.isFlying = true;
             
+            this.AwakenDistance = 15.0f;
+            this.BreakOffDistance = 25.0f;
+            this.SleepDistance = 30.0f;
+            
             this.BehaviourTree = new BatTree(this, Player);
         }
     }
