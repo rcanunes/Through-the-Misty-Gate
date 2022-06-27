@@ -16,6 +16,9 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] HealthBar extraLife;
     [SerializeField] ParticleSystem healingParticles;
 
+    private RespawnPlayer _respawnPlayer;
+
+
     MetricsSaveData metricsSaveData;
     SpellCaster spellCaster;
 
@@ -51,6 +54,8 @@ public class PlayerStats : MonoBehaviour
         EquipmentManager.instance.modifyEquipment += OnEquipItems;
 
         spellCaster = GetComponent<SpellCaster>();
+
+        _respawnPlayer = transform.GetComponent<RespawnPlayer>();
     }
 
     public void TakeDamage(int originalDamage, string enemyType)
@@ -99,6 +104,7 @@ public class PlayerStats : MonoBehaviour
     {
         currentHitPoints = maxHitPoints;
         healthBar.SetHealth(currentHitPoints, 0.1f);
+        _respawnPlayer.Respawn();
     }
 
     public void AddExtraLife(int newPoints)
@@ -186,7 +192,7 @@ public class PlayerStats : MonoBehaviour
 
 
        
-
+        
 
     }
 
