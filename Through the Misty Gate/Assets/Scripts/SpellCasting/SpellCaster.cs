@@ -30,9 +30,13 @@ public class SpellCaster : MonoBehaviour
 
     private void Awake()
     {
-        metricsSaveData = MetricsSaveData.instance;
         castingStatus = CastingStatus.Idle;
         castingTime = 0;
+    }
+
+    private void Start()
+    {
+        metricsSaveData = MetricsSaveData.instance;
     }
 
     internal void RemoveCoolDown(SpellCoolDown spellCoolDown)

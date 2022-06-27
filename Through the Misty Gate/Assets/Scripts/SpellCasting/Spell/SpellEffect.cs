@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Enemies.EnemyTypes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -39,7 +40,7 @@ public class SpellEffect: ScriptableObject
         else if(damageType == DamageTypes.Ice)
             damage *= player.iceDamageModifier.GetValue();
 
-        Debug.Log("Hit " + enemy.gameObject.name + "  Damage: " + damage);
+        enemy.GetComponent<Enemy>().TakeDamage((int)damage);
 
         //MetricStuff
         MetricsSaveData.instance.metricsData.AddSpellDamage(spellName, damage);
@@ -55,7 +56,9 @@ public class SpellEffect: ScriptableObject
         Vector2 sourcePos = projectile.transform.position;
         Vector2 knockbackDirection = targetPos - sourcePos;
         knockbackDirection.Normalize();
-        enemy.gameObject.GetComponent<Rigidbody2D>().AddForce(knockbackDirection * knockback, ForceMode2D.Impulse);
+        Rigidbody2D rb = enemy.gameObject.GetComponent<Rigidbody2D>();
+            if(rb != null)
+                rb.AddForce(knockbackDirection * knockback, ForceMode2D.Impulse);
 
         Debug.Log("Adding Force to " + enemy.gameObject.name + "  Knocjvac: " + knockback);
 

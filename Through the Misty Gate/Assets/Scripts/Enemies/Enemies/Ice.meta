@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: 827c770407dad9242a596f2651b31a25
+<<<<<<<< HEAD:Through the Misty Gate/Assets/Scripts/Enemies/Enemies/Ice.meta
+guid: 23ed0f1791e876b49be764d59b1ed4e4
+========
+guid: 57cb0b1866ae8de4fa32836851e1d7d1
+>>>>>>>> main:Through the Misty Gate/Assets/Prefabs/Enemies.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

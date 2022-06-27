@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Fireball
   m_EditorClassIdentifier: 
   spellName: Fireball
-  description: Fireball
+  description: The Fireball is a basic fire attack with a small area of effect
   image: {fileID: 21300000, guid: 3b7ed903b4c0842739c371a85ad4740b, type: 3}
   chargeTime: 0.5
   cooldown: 0.5
