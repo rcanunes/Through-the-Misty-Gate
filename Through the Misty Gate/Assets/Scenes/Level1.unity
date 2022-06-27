@@ -1936,7 +1936,7 @@ Animator:
   m_GameObject: {fileID: 33012591}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5af12630272992d4da76654fd3d9552f, type: 2}
+  m_Controller: {fileID: 9100000, guid: 99cdeb0faacabe24eb1625e39793a88b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -9779,7 +9779,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7772675, y: 1}
+    m_SensorSize: {x: 3.005168, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -52637,7 +52637,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7772675, y: 1}
+    m_SensorSize: {x: 3.005168, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -87786,6 +87786,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5443659999593446822, guid: a84cbc1274f43c04187bc612d7750fb6, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 6c55445ac112c664b932ffd42688e6a0, type: 2}
     - target: {fileID: 5443659999593446823, guid: a84cbc1274f43c04187bc612d7750fb6, type: 3}
       propertyPath: m_Size.x
       value: 1.44
@@ -87805,6 +87809,10 @@ PrefabInstance:
     - target: {fileID: 5443659999593446837, guid: a84cbc1274f43c04187bc612d7750fb6, type: 3}
       propertyPath: m_Name
       value: Character
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443660000001726118, guid: a84cbc1274f43c04187bc612d7750fb6, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5525934859114522464, guid: a84cbc1274f43c04187bc612d7750fb6, type: 3}
       propertyPath: spellCharging
