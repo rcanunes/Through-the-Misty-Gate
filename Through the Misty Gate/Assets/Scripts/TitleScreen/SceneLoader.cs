@@ -39,6 +39,6 @@ public enum SceneName
 {
     TitleScreenScene = 0,
     LoadingScene = 1,
-    GameScene = 2,
+    Level1 = 2,
     SpellsTestingScene = 3
 }
