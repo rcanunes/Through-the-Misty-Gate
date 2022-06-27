@@ -24,7 +24,7 @@ public class UI_SpellBook : MonoBehaviour, IDropHandler, IPointerExitHandler
 
 
     private void Awake() {
-        spellSlotContainer = transform.Find("SpellSlotContainer");
+        spellSlotContainer = transform.Find("ScrollView/Viewport/SpellSlotContainer");
         spellSlotTemplate = spellSlotContainer.Find("spellBookSlotTemplate");
         spellSlotTemplate.gameObject.SetActive(false);
 
@@ -47,7 +47,8 @@ public class UI_SpellBook : MonoBehaviour, IDropHandler, IPointerExitHandler
     }
 
     private void SpellBookSystem_OnSpellChange(object sender, EventArgs e) {
-        UpdateSpellBookVisual();
+        if(LevelManager.instance.spellBookUI.activeSelf)
+            UpdateSpellBookVisual();
     }
 
     private void OnEnable()

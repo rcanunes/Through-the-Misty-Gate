@@ -68,8 +68,17 @@ public class UI_SpellBookSlot : MonoBehaviour, IPointerDownHandler
     {
         if (eventData.button == PointerEventData.InputButton.Right)
         {
-            hotKeySystem.AddSpell(hotKeyAbility);
-            spellBookSystem.InvokeOnSpellChange();
+            if (hotKeySystem.CheckContainsSpell(hotKeyAbility))
+            {
+                hotKeySystem.RemoveSpell(hotKeyAbility);
+                spellBookSystem.InvokeOnSpellChange();
+            }
+            else
+            {
+                hotKeySystem.AddSpell(hotKeyAbility);
+                spellBookSystem.InvokeOnSpellChange();
+            }
+           
         }
 
         else if(eventData.button == PointerEventData.InputButton.Left)

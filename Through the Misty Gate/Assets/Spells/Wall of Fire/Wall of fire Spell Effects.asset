@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1199c009fdea4424189fa8a5f35e2011, type: 3}
   m_Name: Wall of fire Spell Effects
   m_EditorClassIdentifier: 
-  damage: 80
+  damage: 300
   knockback: 5
   damageType: 0

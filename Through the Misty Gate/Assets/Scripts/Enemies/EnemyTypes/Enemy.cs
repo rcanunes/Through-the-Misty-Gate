@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using Enemies.BehaviourTrees.Implementation;
+using System.Collections;
 using Enemies.Projectiles;
 
 namespace Enemies.EnemyTypes {
@@ -59,6 +60,8 @@ namespace Enemies.EnemyTypes {
         public AudioSource DeathSound;
         protected float WalkingSoundCooldown = 3.0f;
 
+        public bool ignoreMovement = false;
+
         // Player and Manager
         protected PlayerController Player { get; private set; }
         protected GameManager Manager { get; private set; }
@@ -68,6 +71,8 @@ namespace Enemies.EnemyTypes {
         
         // Behaviour Tree
         protected Task BehaviourTree;
+
+        [SerializeField] GameObject destryAnimation;
         
         protected virtual void Start() {
             this.Name = this.transform.gameObject.name;
@@ -219,16 +224,42 @@ namespace Enemies.EnemyTypes {
         }
 
         public void TakeDamage(int damage) {
+
+
             CurrentHealth -= damage;
 
             if (CurrentHealth < 0) {
-                // Die
+                Debug.Log("Die");
+
                 DeathSound.PlayOneShot(DeathSound.clip);
+
+                if (destryAnimation != null)
+                {
+                    Debug.Log("Die2" + gameObject.transform);
+
+                    var test = Instantiate(destryAnimation, transform.position, transform.rotation);
+                    Destroy(test, 3f);
+                }
+
+                Destroy(gameObject);
             }
         }
 
         public void SetSpeedModifier(float modifier) {
             SpeedModifier -= modifier;
+        }
+
+        public void IgnoreMovement()
+        {
+            StartCoroutine(KnockbackRoutine());
+        }
+
+        private IEnumerator KnockbackRoutine()
+        {
+            ignoreMovement = true;
+
+            yield return new WaitForSeconds(0.2f);
+            ignoreMovement = false;
         }
     }
 }

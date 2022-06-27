@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: Crown of Madness
   m_EditorClassIdentifier: 
   itemName: Crown of madnness
-  description: Bazinga
+  description: Crown of a forgoten mad king
   image: {fileID: 21300000, guid: f30c689e1cd8caa45a28c4947f382374, type: 3}
   type: 0
   modifiers:
-    healthModifer: 0
-    baseDamageModifier: 5
+    healthModifer: 5
+    armourModifier: 0
+    baseDamageModifier: 10
     jumpModifier: 0
     speedModifier: 0
     fireDamageModifer: 0

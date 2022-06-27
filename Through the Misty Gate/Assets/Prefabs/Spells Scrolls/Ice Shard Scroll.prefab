@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4460876837075615788}
   - component: {fileID: 6399161834140784847}
   m_Layer: 0
-  m_Name: Ice Spear Scroll
+  m_Name: Ice Shard Scroll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: -147071979, guid: 72d07fee22f493948b72208ccb15d3f0, type: 3}
   m_Color: {r: 0.3820755, g: 0.6744826, b: 1, a: 1}
   m_FlipX: 0

@@ -10,7 +10,7 @@ public class HotKeySystem {
 
     public event EventHandler OnAbilityListChange;
 
-    public int MaxSpells = 7;
+    public int MaxSpells = 5;
 
     public HotKeySystem(SpellCaster player) {
 

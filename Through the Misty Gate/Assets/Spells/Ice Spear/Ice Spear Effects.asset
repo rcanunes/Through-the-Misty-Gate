@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1199c009fdea4424189fa8a5f35e2011, type: 3}
   m_Name: Ice Spear Effects
   m_EditorClassIdentifier: 
-  damage: 40
+  damage: 200
   knockback: 12
   damageType: 1

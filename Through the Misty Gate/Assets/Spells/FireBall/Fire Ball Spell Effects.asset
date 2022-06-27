@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1199c009fdea4424189fa8a5f35e2011, type: 3}
   m_Name: Fire Ball Spell Effects
   m_EditorClassIdentifier: 
-  damage: 30
+  damage: 240
   knockback: 20
   damageType: 0

@@ -60,7 +60,7 @@ public class ProjectileBehaviour : MonoBehaviour
         }
         else if (projectileStats.radius == 0)
         {
-            if (projectileStats.stopsOnWalls)
+            if (projectileStats.stopsOnWalls && !collision.CompareTag("Trigger"))
                 ProjectileCollision();
         }
         else

@@ -16,7 +16,7 @@ namespace Enemies.Enemies.Cave {
             this.JumpPower = 6.0f;
             this.MaxFallingSpeed = 5.0f;
             
-            this.MeleeAttackRange = 2.0f;
+            this.MeleeAttackRange = 4.0f;
             this.RangedAttackRange = 0.0f;
         }
     }

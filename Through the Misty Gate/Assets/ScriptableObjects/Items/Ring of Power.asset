@@ -17,12 +17,13 @@ MonoBehaviour:
   image: {fileID: 21300000, guid: ec3f5c9d06947e7458e9626551938feb, type: 3}
   type: 2
   modifiers:
-    healthModifer: 0
-    baseDamageModifier: 0
+    healthModifer: -10
+    armourModifier: 0
+    baseDamageModifier: 15
     jumpModifier: 0
     speedModifier: 0
     fireDamageModifer: 0
-    iceDamageModifier: 5
+    iceDamageModifier: 0
     iceBootsModifier: 0
     doubleJumpModifier: 0
     grabWallModifier: 0

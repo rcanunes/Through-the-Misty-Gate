@@ -35,6 +35,8 @@ public class SpellBookSystem {
                 activateSpell = () => player.SetCurrentSpell(s)
             });
         }
+
+        OnSpellChange?.Invoke(null, EventArgs.Empty);
     }
 
     public List<UI_ItemManager.HotKeyAbility> GetAllSpells() {

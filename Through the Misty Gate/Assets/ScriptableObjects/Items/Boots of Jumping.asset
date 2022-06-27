@@ -18,9 +18,10 @@ MonoBehaviour:
   type: 3
   modifiers:
     healthModifer: 0
+    armourModifier: 0
     baseDamageModifier: 0
-    jumpModifier: 100
-    speedModifier: 0
+    jumpModifier: 10
+    speedModifier: 5
     fireDamageModifer: 0
     iceDamageModifier: 0
     iceBootsModifier: 0

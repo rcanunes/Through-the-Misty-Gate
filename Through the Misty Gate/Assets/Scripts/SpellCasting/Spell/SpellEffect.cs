@@ -18,11 +18,7 @@ public class SpellEffect: ScriptableObject
         Effect(enemy, projectile);
         if (damage > 0)
             DealDamage(enemy, player, spellName);
-
-        //Todo: debufss
-
-        
-
+      
     }
 
     public void Effect(Collider2D enemy, GameObject projectile)
@@ -47,6 +43,7 @@ public class SpellEffect: ScriptableObject
         MetricsSaveData.instance.metricsData.AddSpellEnemyHit(spellName);
         EquipmentManager.instance.AddDamageDEaltWhileEquiped(damage);
 
+        Debug.Log("Adding Damage to " + enemy.gameObject.name + "  Damage: " + damage);
 
     }
 
@@ -56,6 +53,12 @@ public class SpellEffect: ScriptableObject
         Vector2 sourcePos = projectile.transform.position;
         Vector2 knockbackDirection = targetPos - sourcePos;
         knockbackDirection.Normalize();
+
+        if (enemy.CompareTag("Enemy"))
+        {
+            enemy.GetComponent<Enemy>().IgnoreMovement();
+        }
+
         Rigidbody2D rb = enemy.gameObject.GetComponent<Rigidbody2D>();
             if(rb != null)
                 rb.AddForce(knockbackDirection * knockback, ForceMode2D.Impulse);

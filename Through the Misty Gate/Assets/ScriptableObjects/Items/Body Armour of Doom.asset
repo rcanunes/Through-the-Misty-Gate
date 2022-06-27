@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Body Armour of Doom
   m_EditorClassIdentifier: 
   itemName: Body Armour of Doom
-  description: Very cool
+  description: Old and battered chestplate. Used by generals of old as a symbol of
+    power.
   image: {fileID: 79862522, guid: 83bf93558b0ec514a95bd6edcd67f7ac, type: 3}
   type: 1
   modifiers:

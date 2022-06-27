@@ -35,19 +35,59 @@ public class ItemSlot : MonoBehaviour, IPointerExitHandler
 
         itemInfo.Find("Item Name").GetComponent<TextMeshProUGUI>().text = item.itemName;
 
-        if(item is Equipment)
+        string extraDescription = "";
+
+        if (item is Equipment)
         {
             itemInfo.Find("Type").GetComponent<TextMeshProUGUI>().text = "Type: " + ((Equipment)item).type.ToString();
+            Equipment equip = (Equipment)item;
+
+            if (equip.modifiers.healthModifer != 0)
+            {
+                extraDescription += "It modifies the health of the wearer by " + equip.modifiers.healthModifer + "%\n";
+            }
+            if (equip.modifiers.armourModifier != 0)
+            {
+                extraDescription += "It modifies the damage taken by " + equip.modifiers.armourModifier + "%\n";
+            }
+            if (equip.modifiers.jumpModifier != 0)
+            {
+                extraDescription += "It modifies the jump height by " + equip.modifiers.jumpModifier + "%\n";
+            }
+            if (equip.modifiers.speedModifier != 0)
+            {
+                extraDescription += "It modifies the moement speed by " + equip.modifiers.speedModifier + "%\n";
+            }
+            if (equip.modifiers.baseDamageModifier != 0)
+            {
+                extraDescription += "It modifies the damage dealt by " + equip.modifiers.baseDamageModifier + "%\n";
+            }
+            if (equip.modifiers.fireDamageModifer != 0)
+            {
+                extraDescription += "It modifies the fire damage dealt by " + equip.modifiers.fireDamageModifer + "%\n";
+            }
+            if (equip.modifiers.iceDamageModifier != 0)
+            {
+                extraDescription += "It modifies the ice damage dealt by " + equip.modifiers.iceDamageModifier + "%\n";
+            }
+
         }
         else
         {
             itemInfo.Find("Type").GetComponent<TextMeshProUGUI>().text = "";
         }
 
+
+        //Get Descriptors:
+       
+
+
         if(item is LoreItem)
             itemInfo.Find("Info").GetComponent<TextMeshProUGUI>().text = "";
         else
-            itemInfo.Find("Info").GetComponent<TextMeshProUGUI>().text = "Info: " + item.description;
+            itemInfo.Find("Info").GetComponent<TextMeshProUGUI>().text = "Info: " + item.description + "\n" + extraDescription;
+
+
 
         itemInfo.gameObject.SetActive(true);
 

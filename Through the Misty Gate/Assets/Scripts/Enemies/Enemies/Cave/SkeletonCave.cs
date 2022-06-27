@@ -6,7 +6,7 @@ namespace Enemies.Enemies.Cave {
             base.Start();
 
             //Set attributes
-            this.MaxHealth = 400;
+            this.MaxHealth = 100;
             this.CurrentHealth = this.MaxHealth;
             
             this.Damage = 200;
@@ -16,7 +16,7 @@ namespace Enemies.Enemies.Cave {
             this.JumpPower = 4.0f;
             this.MaxFallingSpeed = 5.0f;
             
-            this.MeleeAttackRange = 3.0f;
+            this.MeleeAttackRange = 5.0f;
             this.RangedAttackRange = 0.0f;
         }
     }

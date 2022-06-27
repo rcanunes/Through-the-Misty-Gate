@@ -30,11 +30,43 @@ public class EquipmentSlot : MonoBehaviour, IPointerExitHandler
 
     private void SetUpItemInfo()
     {
-        if (item == null)
+        if (this.item == null)
             return;
-        itemInfo.Find("Item Name").GetComponent<TextMeshProUGUI>().text = item.itemName;
-        itemInfo.Find("Type").GetComponent<TextMeshProUGUI>().text = "Type: " + item.type.ToString();
-        itemInfo.Find("Info").GetComponent<TextMeshProUGUI>().text = "Info: " + item.description;
+        itemInfo.Find("Item Name").GetComponent<TextMeshProUGUI>().text = this.item.itemName;
+        itemInfo.Find("Type").GetComponent<TextMeshProUGUI>().text = "Type: " + this.item.type.ToString();
+
+        string extraDescription = "";
+
+        if (item.modifiers.healthModifer != 0)
+        {
+            extraDescription += "It modifies the health of the wearer by " + item.modifiers.healthModifer + "%\n";
+        }
+        if (item.modifiers.armourModifier != 0)
+        {
+            extraDescription += "It modifies the damage taken by " + item.modifiers.armourModifier + "%\n";
+        }
+        if (item.modifiers.jumpModifier != 0)
+        {
+            extraDescription += "It modifies the jump height by " + item.modifiers.jumpModifier + "%\n";
+        }
+        if (item.modifiers.speedModifier != 0)
+        {
+            extraDescription += "It modifies the moement speed by " + item.modifiers.speedModifier + "%\n";
+        }
+        if (item.modifiers.baseDamageModifier != 0)
+        {
+            extraDescription += "It modifies the damage dealt by " + item.modifiers.baseDamageModifier + "%\n";
+        }
+        if (item.modifiers.fireDamageModifer != 0)
+        {
+            extraDescription += "It modifies the fire damage dealt by " + item.modifiers.fireDamageModifer + "%\n";
+        }
+        if (item.modifiers.iceDamageModifier != 0)
+        {
+            extraDescription += "It modifies the ice damage dealt by " + item.modifiers.iceDamageModifier + "%\n";
+        }
+
+        itemInfo.Find("Info").GetComponent<TextMeshProUGUI>().text = "Info: " + this.item.description + "\n" + extraDescription;
 
         if (!itemInfo.gameObject.activeSelf)
             itemInfo.gameObject.SetActive(true);

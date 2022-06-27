@@ -18,7 +18,6 @@ public class PlayerStats : MonoBehaviour
 
     private RespawnPlayer _respawnPlayer;
 
-
     MetricsSaveData metricsSaveData;
     SpellCaster spellCaster;
 

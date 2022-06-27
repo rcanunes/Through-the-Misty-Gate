@@ -21,9 +21,11 @@ namespace Enemies.Enemies {
             SpikingSound = transform.Find("Spiking Sound").GetComponent<AudioSource>();
         }
         
-        public void OnCollisionEnter2D() {
-            Player.BeSpiked();
-            SpikingSound.PlayOneShot(SpikingSound.clip);
+        private void OnCollisionEnter2D(Collision2D other) {
+            if (other.gameObject.CompareTag("Player")) {
+                Player.BeSpiked();
+                SpikingSound.PlayOneShot(SpikingSound.clip);
+            }
         }
     }
 }

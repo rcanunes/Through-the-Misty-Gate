@@ -24,10 +24,13 @@ namespace Enemies.EnemyTypes {
         }
         
         public override void Walk(string direction) {
-            if (direction == "left") {
-                this.RigidBody.velocity = new Vector2(-Speed * SpeedModifier, 0);
-            } else if (direction == "right") {
-                this.RigidBody.velocity = new Vector2(Speed * SpeedModifier, 0);
+
+
+
+            if (direction == "left" && !ignoreMovement) {
+                this.RigidBody.velocity = new Vector2(-Speed * SpeedModifier, this.RigidBody.velocity.y);
+            } else if (direction == "right" && !ignoreMovement) {
+                this.RigidBody.velocity = new Vector2(Speed * SpeedModifier, this.RigidBody.velocity.y);
             }
 
             if (WalkingSoundCooldown <= 0) {

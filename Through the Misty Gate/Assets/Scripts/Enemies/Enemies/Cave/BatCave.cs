@@ -14,7 +14,7 @@ namespace Enemies.Enemies.Cave {
 
             this.Speed = 4.0f;
 
-            this.MeleeAttackRange = 1.5f;
+            this.MeleeAttackRange = 2.5f;
             this.RangedAttackRange = 0.0f;
         }
     }

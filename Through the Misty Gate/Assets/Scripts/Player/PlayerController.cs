@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour {
     SpellCaster spellCaster;
 
     private bool hasMoved;
-
+    private bool needsSaving;
 
 
     // Start is called before the first frame update
@@ -66,6 +66,7 @@ public class PlayerController : MonoBehaviour {
         baseJumpForce = 11;
         maxFallingSpped = -10f;
         jumpEnded = true;
+        needsSaving = true;
 
         playerRb        = GetComponent<Rigidbody2D>();
         audioSource     = GetComponent<AudioSource>();
@@ -109,6 +110,20 @@ public class PlayerController : MonoBehaviour {
 
         hasMoved = false;
 
+
+        if (needsSaving)
+        {
+            MetricsSaveData.instance.metricsData.AddPosition(transform.position);
+            StartCoroutine(SaveTimer());
+        }    
+
+    }
+
+    IEnumerator SaveTimer()
+    {
+        needsSaving = false;
+        yield return new WaitForSeconds(1f);
+        needsSaving = true;
     }
 
 
@@ -221,7 +236,7 @@ public class PlayerController : MonoBehaviour {
 
         // Jumping
         if (!isGrounded)
-            idle = false;
+            idle = true;
 
         if (idle)
             animator.SetTrigger("Idle");

@@ -20,5 +20,5 @@ MonoBehaviour:
   lifeTime: 10
   radius: 0
   projectile: {fileID: 1556621154285097090, guid: bb3a6651901a43845a03b22e8ca56db4, type: 3}
-  spellEfectsOnCollision: {fileID: 0}
+  spellEfectsOnCollision: {fileID: 2618655849964572552, guid: f7ac72a5a1aa37d499848533a8f7b563, type: 3}
   spellEffects: {fileID: 11400000, guid: b1612dadc21521e4ca024a55353e649b, type: 2}

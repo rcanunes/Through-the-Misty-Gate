@@ -14,6 +14,8 @@ namespace Enemies.EnemyTypes {
             this.BreakOffDistance = 16.0f;
             this.SleepDistance = 24.0f;
 
+            this.hasRangedAttack = false;
+
             this.BehaviourTree = new SlimeTree(this, Player);
         }
     }
