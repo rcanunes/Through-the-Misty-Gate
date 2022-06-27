@@ -119,6 +119,11 @@ public class PlayerController : MonoBehaviour {
         return false;
     }
 
+    public void SetIgnoreInput(bool val)
+    {
+        ignoreInput = val;
+    }
+
     private void Jump() {
 
         float jumpForce = baseJumpForce * playerStats.jumpModifier.GetValue();

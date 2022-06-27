@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 5443659999593446825}
   - component: {fileID: 5443659999593446824}
   - component: {fileID: 4123029523799089589}
+  - component: {fileID: 1761601958412673891}
   m_Layer: 0
   m_Name: Character
   m_TagString: Player
@@ -228,6 +229,19 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5443659999593446837}
   m_Enabled: 1
+--- !u!114 &1761601958412673891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5443659999593446837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa4a0b4e568c9aa479333322a19766c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  respawnCanvas: {fileID: 7460793308159953508, guid: aa92ffd5553f5974fb4b3ff716b4178b, type: 3}
 --- !u!1 &5443660000543492060
 GameObject:
   m_ObjectHideFlags: 0
