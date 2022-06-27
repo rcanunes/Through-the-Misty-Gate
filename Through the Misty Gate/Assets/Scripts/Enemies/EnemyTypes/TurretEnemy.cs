@@ -9,6 +9,8 @@ namespace Enemies.EnemyTypes {
             this.MovementStyle = _MovementStyle.Immobile;
             this.canJump = false;
             this.isFlying = false;
+            
+            this.SleepDistance = 20.0f;
 
             this.BehaviourTree = new TurretTree(this, Player);
         }

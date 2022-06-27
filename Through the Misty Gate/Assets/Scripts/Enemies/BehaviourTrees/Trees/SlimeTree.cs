@@ -13,6 +13,7 @@ namespace Enemies.BehaviourTrees.Trees {
                 // Bounce towards player
                 // Melee attack the player
                 
+                new Sleep(enemy, player),
                 new RandomMove(enemy, player),
                 new PursuePlayer(enemy, player),
                 new MeleeAttack(enemy, player)

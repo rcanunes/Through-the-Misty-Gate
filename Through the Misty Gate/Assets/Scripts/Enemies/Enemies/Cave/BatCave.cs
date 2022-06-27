@@ -8,7 +8,9 @@ namespace Enemies.Enemies.Cave {
             //Set attributes
             this.MaxHealth = 150;
             this.CurrentHealth = this.MaxHealth;
+            
             this.Damage = 220;
+            this.AttackSpeed = 1.0f;
 
             this.Speed = 4.0f;
 

@@ -8,18 +8,37 @@ public class HealthBar : MonoBehaviour
     [SerializeField] Slider healthBar;
     [SerializeField] Gradient gradient;
     [SerializeField] Image fill;
-    public void SetMaxHealth(int health)
+
+    private int targetHealth;
+    private float slowHealth;
+    private float originHealth;
+    private float t;
+    private float timeToReach;
+    public void SetMaxHealth(int health, int currentHealth)
     {
         healthBar.maxValue = health;
-        healthBar.value = health;
-
+        healthBar.value = currentHealth;
         fill.color = gradient.Evaluate(1f);
     }
 
-    public void SetHealth(int newHealh)
+    public void SetHealth(int newHealh, float time = 0.1f)
     {
-        healthBar.value = newHealh;
-        fill.color = gradient.Evaluate(healthBar.value / healthBar.maxValue);
+        originHealth = healthBar.value;
+        targetHealth = newHealh;
+        t = 0;
+        timeToReach = time;
+    }
+
+    private void Update()
+    {
+        if(slowHealth != targetHealth)
+        {
+            t += Time.deltaTime / timeToReach;
+            slowHealth = Mathf.Lerp(originHealth, targetHealth, t);
+            healthBar.value = slowHealth;
+            fill.color = gradient.Evaluate(healthBar.value / healthBar.maxValue);
+        }
+        
     }
 
 }

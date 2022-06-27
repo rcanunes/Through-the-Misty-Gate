@@ -32,10 +32,9 @@ public class PlayerController : MonoBehaviour {
 
     private float maxFallingSpped;
 
+   
+
     // Spell Casting Variables
-    private bool enterChargedCast = false;
-    private float chargeDuration;
-    private float elapsedCharge;
     private float knockbackAmount;
     private float knockbackBurst;
     private bool ignoreInput = false;
@@ -52,7 +51,9 @@ public class PlayerController : MonoBehaviour {
     private bool groundIsIce;
 
     PlayerStats playerStats;
+    SpellCaster spellCaster;
 
+    private bool hasMoved;
 
 
 
@@ -66,11 +67,13 @@ public class PlayerController : MonoBehaviour {
         maxFallingSpped = -10f;
         jumpEnded = true;
 
-        playerRb = GetComponent<Rigidbody2D>();
-        audioSource = GetComponent<AudioSource>();
-        animator = GetComponent<Animator>();
-        sr = GetComponent<SpriteRenderer>();
-        playerStats = GetComponent<PlayerStats>();
+        playerRb        = GetComponent<Rigidbody2D>();
+        audioSource     = GetComponent<AudioSource>();
+        animator        = GetComponent<Animator>();
+        sr              = GetComponent<SpriteRenderer>();
+        playerStats     = gameObject.GetComponent<PlayerStats>();
+        spellCaster     = gameObject.GetComponent<SpellCaster>();
+
 
     }
 
@@ -80,18 +83,34 @@ public class PlayerController : MonoBehaviour {
         AnimationSetup();
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, whatIsGround);
         groundIsIce = CheckIfIce();
-
-
-        if (enterChargedCast)
-            ChargedCastingMovement();
+        hasMoved = false;
+        playerRb.gravityScale = gravityScale;
 
         if (ignoreInput)
             return;
 
-        Jump();
         Climbing();
         MoveCharacter();
+        Jump();
+
+
+        if (spellCaster.currentSpell != null)
+        {
+            if (hasMoved && spellCaster.currentSpell.cantMoveOnCharge)
+                spellCaster.StopCasting();
+
+            if (spellCaster.currentSpell.stopsMovementOnCharge && spellCaster.castingStatus == SpellCaster.CastingStatus.Casting)
+            {
+                playerRb.velocity *= 0;
+                playerRb.gravityScale = 0;
+            }
+
+        }
+
+        hasMoved = false;
+
     }
+
 
     private bool CheckIfIce() {
         if (isGrounded != null)
@@ -102,20 +121,20 @@ public class PlayerController : MonoBehaviour {
 
     private void Jump() {
 
-        playerRb.gravityScale = gravityScale;
         float jumpForce = baseJumpForce * playerStats.jumpModifier.GetValue();
 
         if (isGrounded && GetJumpKeysDown() && jumpEnded) {
             jumpEnded = false;
             jumpTimeCounter = jumpTime;
-            playerRb.velocity = Vector2.up * jumpForce;
+            playerRb.velocity = new Vector2(playerRb.velocity.x, jumpForce);
             audioSource.PlayOneShot(jumpSound, 1);
+            hasMoved = true;
 
         }
 
         else if (GetJumpKeys() && !jumpEnded) {
             if (jumpTimeCounter > 0 && playerRb.velocity.y > 0) {
-                playerRb.velocity = Vector2.up * jumpForce;
+                playerRb.velocity = new Vector2(playerRb.velocity.x ,jumpForce);
                 jumpTimeCounter -= Time.deltaTime;
             }
         }
@@ -132,24 +151,10 @@ public class PlayerController : MonoBehaviour {
             playerRb.AddForce(Vector2.down);
     }
 
-    private void ChargedCastingMovement() {
-        // Freeze position when casting a charged spell, enabled in EnterChargedCast()
-        if (enterChargedCast) {
-            ignoreInput = true;
-            playerRb.constraints = RigidbodyConstraints2D.FreezeAll;
-
-            if (elapsedCharge < chargeDuration) elapsedCharge += Time.deltaTime;
-            else {
-                playerRb.constraints = RigidbodyConstraints2D.FreezeRotation;
-                enterChargedCast = false;
-                StartCoroutine(Knockback());
-            }
-        }
-    }
-
     private void Climbing() {
         verticalInput = Input.GetAxis("Vertical");
         if (isLadder && verticalInput != 0) {
+            hasMoved = true;
             isClimbing = true;
         }
         else if (GetJumpKeysDown() || !isLadder) {
@@ -162,28 +167,36 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    private void MoveCharacter() {
+    private void MoveCharacter()
+    {
         horizontalInput = Input.GetAxis("Horizontal");
 
         float speed = baseSpeed * playerStats.speedModifier.GetValue();
 
-        if (groundIsIce || playerStats.iceBootsModifier.GetValue()) {
+        if (groundIsIce || playerStats.iceBootsModifier.GetValue())
+        {
 
             playerRb.velocity += new Vector2(horizontalInput * speed, 0);
 
-            playerRb.velocity = new Vector2(Math.Clamp(playerRb.velocity.x,-speed,speed), playerRb.velocity.y);
+            playerRb.velocity = new Vector2(Math.Clamp(playerRb.velocity.x, -speed, speed), playerRb.velocity.y);
 
             playerRb.velocity *= 0.99f;
-            if (Mathf.Abs(playerRb.velocity.x) < 0.1) {
+            if (Mathf.Abs(playerRb.velocity.x) < 0.1)
+            {
                 playerRb.velocity = new Vector2(0, playerRb.velocity.y);
             }
 
         }
-        else {
+        else
+        {
             playerRb.velocity = new Vector2(horizontalInput * speed, playerRb.velocity.y);
 
         }
+
+        if (horizontalInput != 0)
+            hasMoved = true;
     }
+
 
     private void AnimationSetup() {
         idle = true;
@@ -211,37 +224,22 @@ public class PlayerController : MonoBehaviour {
             animator.SetTrigger("Running");
     }
 
-    //private IEnumerator Knockback()
-    //{
-    //    float elapsed = 0;
-    //    float duration = Mathf.Abs(1 / knockbackBurst);
+    public void KnockBack(Vector2 knockback)
+    {
+        StartCoroutine(KnockbackRoutine(knockback));
+    }
 
-    //    while (elapsed < duration)
-    //    {
-    //        elapsed += time.deltatime;
-    //        transform.position += new vector3(knockbackamount * time.deltatime, 0, 0);
+    private IEnumerator KnockbackRoutine(Vector2 knockback) {
 
-    //        yield return new waitforendofframe();
-    //    }
+        if (knockback.magnitude == 0)
+            yield break;
 
-
-    //    ignoreInput = false;
-    //    Debug.Log("Exiting Knockback");
-    //}
-
-    private IEnumerator Knockback() {
-        playerRb.AddForce(new Vector2(knockbackAmount, 0) * 4, ForceMode2D.Impulse);
-        yield return new WaitForSeconds(0.5f);
+        ignoreInput = true;
+        playerRb.velocity += knockback;
+        yield return new WaitForSeconds(0.2f);
         ignoreInput = false;
-
     }
 
-
-    public void EnterChargedCast(float chargeTime) {
-        chargeDuration = chargeTime;
-        elapsedCharge = 0;
-        enterChargedCast = true;
-    }
 
     public void SetKnockback(float amount, float burst) {
         knockbackAmount = amount;
@@ -277,7 +275,7 @@ public class PlayerController : MonoBehaviour {
 
     // Ouchie Methods
     public void BeAttacked(Enemy enemy, int damage) {
-        playerStats.TakeDamage(damage);
+        playerStats.TakeDamage(damage, enemy.GetName());
         Debug.Log("I was attacked by " + enemy.GetName() + " for " + damage);
     }
 }

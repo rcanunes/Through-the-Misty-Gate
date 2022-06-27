@@ -12,7 +12,6 @@ public class PickableItems : Interactable
     public void OnPickUp()
     {
         bool added = Inventory.instance.AddItem(item);
-        Debug.Log("Adding Object");
         if (added)
             Destroy(gameObject);
         else

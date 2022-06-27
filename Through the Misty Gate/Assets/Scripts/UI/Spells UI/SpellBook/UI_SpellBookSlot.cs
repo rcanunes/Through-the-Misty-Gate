@@ -84,13 +84,34 @@ public class UI_SpellBookSlot : MonoBehaviour, IPointerDownHandler
         //SetUpSpellInfo();
     //}
 
-        private void SetUpSpellInfo() {
+    private void SetUpSpellInfo() {
 
-            spellInfo.Find("Spell Name").GetComponent<TextMeshProUGUI>().text = hotKeyAbility.spell.name;
-            spellInfo.Find("Cooldown").GetComponent<TextMeshProUGUI>().text =
+        string aux = "";
+        if (hotKeyAbility.spell.damageStopsCasting)
+        {
+            aux += "taking damage; ";
+        }
+        if (hotKeyAbility.spell.cantMoveOnCharge)
+        {
+            aux += "moving;";
+        }
+
+        if (aux != "")
+        {
+            aux = "Casting stops on: " + aux;
+        }
+
+        string aux2 = (hotKeyAbility.spell.stopsMovementOnCharge) ? "You stop moving while casting" : "";
+
+        spellInfo.Find("Spell Name").GetComponent<TextMeshProUGUI>().text = hotKeyAbility.spell.name;
+        spellInfo.Find("Cooldown").GetComponent<TextMeshProUGUI>().text =
                 "Cooldown: " + hotKeyAbility.spell.cooldown.ToString();
-            spellInfo.Find("Description").GetComponent<TextMeshProUGUI>().text =
-                "Info: " + hotKeyAbility.spell.spellDescription;
+        spellInfo.Find("Description").GetComponent<TextMeshProUGUI>().text =
+                "Info: " + hotKeyAbility.spell.description + '\n' + aux + '\n' + aux2;
+        spellInfo.Find("Charge").GetComponent<TextMeshProUGUI>().text =
+                "Charge: " + hotKeyAbility.spell.chargeTime;
+
+       
 
         spellInfo.gameObject.SetActive(true);
 

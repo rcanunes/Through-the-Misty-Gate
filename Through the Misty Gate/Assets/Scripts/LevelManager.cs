@@ -82,9 +82,10 @@ public class LevelManager : MonoBehaviour
     }
 
 
-    public bool CanClick()
+  
+    public bool CantCast()
     {
-        return !spellBookUI.activeSelf && !isMouseOverUI();
+        return spellBookUI.activeSelf || inventoryUI.activeSelf || pageLoreUI.activeSelf;
     }
 
     public bool IsSpellBookVisible()
@@ -97,25 +98,7 @@ public class LevelManager : MonoBehaviour
         return spellBookUI.activeSelf;
     }
 
-    private bool isMouseOverUI()
-    {
-        PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
-        pointerEventData.position = Input.mousePosition;
-
-        List<RaycastResult> raycastResults = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(pointerEventData, raycastResults);
-
-        foreach (RaycastResult ray in raycastResults)
-        {
-
-            if (ray.gameObject.GetComponent<MouseUIClickThrough>() != null)
-            {
-                raycastResults.Remove(ray);
-            }
-        }
-
-        return raycastResults.Count > 0;
-    }
+    
 
 
 }

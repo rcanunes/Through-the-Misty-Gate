@@ -6,13 +6,12 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UI_SpellBook : MonoBehaviour, IDropHandler, IDragHandler, IPointerExitHandler
+public class UI_SpellBook : MonoBehaviour, IDropHandler, IPointerExitHandler
 {
     private Transform spellSlotTemplate;
     private Transform spellSlotContainer;
 
     private SpellBookSystem spellBookSystem;
-    private CanvasGroup canvasGroup;
     private HotKeySystem hotKeySystem;
 
 
@@ -29,21 +28,15 @@ public class UI_SpellBook : MonoBehaviour, IDropHandler, IDragHandler, IPointerE
         spellSlotTemplate = spellSlotContainer.Find("spellBookSlotTemplate");
         spellSlotTemplate.gameObject.SetActive(false);
 
-
-
-
-        //Hide Inventory
-        canvasGroup = GetComponent<CanvasGroup>();
-
         rectTransform = GetComponent<RectTransform>();
         canvas = GetComponentInParent<Canvas>();
 
     }
 
-    public void OnDrag(PointerEventData eventData) {
-        rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+    //public void OnDrag(PointerEventData eventData) {
+    //    rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
 
-    }
+    //}
 
     public void SetSpellBookSystem(SpellBookSystem spellBookSystem, HotKeySystem hotKeySystem) {
         this.spellBookSystem = spellBookSystem;
@@ -64,12 +57,12 @@ public class UI_SpellBook : MonoBehaviour, IDropHandler, IDragHandler, IPointerE
 
     private void UpdateSpellBookVisual() {
 
-        Debug.Log("Updating Visual");
+
         foreach (Transform child in spellSlotContainer) {
             if (child == spellSlotTemplate) continue;
             Destroy(child.gameObject);
         }
-
+           
         foreach (UI_ItemManager.HotKeyAbility spell in spellBookSystem.GetAllSpells())
         {
             Transform spellSlotTransform = Instantiate(spellSlotTemplate, spellSlotContainer);

@@ -15,5 +15,7 @@ public class UI_Button : MonoBehaviour, IPointerClickHandler
             leftClick.Invoke();
         else if (eventData.button == PointerEventData.InputButton.Right)
             rightClick.Invoke();
+
+        Debug.Log("Clicking On Inventory");
     }
 }

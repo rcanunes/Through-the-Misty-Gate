@@ -8,11 +8,7 @@ public class SceneLoader : MonoBehaviour {
 
     public float loadTime = 5.0f;
 
-    public enum SceneName {
-        TitleScreenScene,
-        LoadingScene,
-        GameScene
-    }
+ 
 
     private void Awake() {
         if (instance != null && instance != this)
@@ -34,4 +30,15 @@ public class SceneLoader : MonoBehaviour {
 
         SceneManager.LoadScene(name.ToString());
     }
+
+   
+}
+
+[System.Serializable]
+public enum SceneName
+{
+    TitleScreenScene = 0,
+    LoadingScene = 1,
+    GameScene = 2,
+    SpellsTestingScene = 3
 }

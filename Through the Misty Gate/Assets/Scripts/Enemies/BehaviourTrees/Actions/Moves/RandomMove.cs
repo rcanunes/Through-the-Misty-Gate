@@ -16,6 +16,9 @@ namespace Enemies.BehaviourTrees.Actions {
         public override Result Run() {
             if (player != null && Vector3.Distance(enemy.transform.position, this.player.transform.position) <=
                 enemy.GetAwakenDistance()) return Result.Success;
+            
+            if (player != null && Vector3.Distance(enemy.transform.position, this.player.transform.position) >=
+                enemy.GetSleepDistance()) return Result.Failure;
 
             if (enemy.ReadyForRandom()) {
                 if (enemy.GetMovementStyle() == Enemy._MovementStyle.Walking) {

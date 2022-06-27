@@ -5,7 +5,6 @@ using Cinemachine;
 
 public class CameraTrigger : MonoBehaviour
 {
-    // Start is called before the first frame update
     [SerializeField] CinemachineVirtualCamera cinematicCamera;
     private AudioSource source;
     private bool hasHappened = false;
