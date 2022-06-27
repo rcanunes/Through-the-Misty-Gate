@@ -4,11 +4,11 @@ using Enemies.EnemyTypes;
 
 namespace Bosses.Dragon {
     public class FlyBy : Task {
-        private Boss enemy;
+        private DragonBoss enemy;
         
         private PlayerController player;
 
-        public FlyBy(Boss enemy, PlayerController player) {
+        public FlyBy(DragonBoss enemy, PlayerController player) {
             this.enemy = enemy;
             this.player = player;
         }

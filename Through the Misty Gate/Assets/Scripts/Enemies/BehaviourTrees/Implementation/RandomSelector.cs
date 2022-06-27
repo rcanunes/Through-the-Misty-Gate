@@ -25,7 +25,7 @@ namespace Enemies.BehaviourTrees.Implementation {
             if (result == Result.Success || result == Result.Running)
                 return Result.Running;
 
-            return Result.Failure;
+            return Result.Success;
         }
     }
 }

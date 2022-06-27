@@ -4,11 +4,11 @@ using Enemies.EnemyTypes;
 
 namespace Bosses.Dragon {
     public class FireRain : Task {
-        private Boss enemy;
+        private DragonBoss enemy;
         
         private PlayerController player;
 
-        public FireRain(Boss enemy, PlayerController player) {
+        public FireRain(DragonBoss enemy, PlayerController player) {
             this.enemy = enemy;
             this.player = player;
         }

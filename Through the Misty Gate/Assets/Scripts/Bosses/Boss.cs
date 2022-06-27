@@ -13,6 +13,9 @@ namespace Bosses {
         
         // Attack attributes
         protected int ContactDamage;
+        
+        // Distance to start fight
+        protected float StartDistance;
 
         // Player and Manager
         protected PlayerController Player { get; private set; }
@@ -25,8 +28,8 @@ namespace Bosses {
         protected Task BehaviourTree;
         
         protected virtual void Start() {
-            this.Name = this.transform.gameObject.name;
-            this.Type = this.transform.gameObject.tag;
+            Name = this.transform.gameObject.name;
+            Type = this.transform.gameObject.tag;
             
             Manager = GameObject.FindObjectOfType<GameManager>();
             Player = GameObject.FindObjectOfType<PlayerController>();
@@ -37,7 +40,16 @@ namespace Bosses {
         protected void FixedUpdate() {
             //AnimationSetup();
 
-            this.BehaviourTree.Run();
+            BehaviourTree.Run();
+        }
+        
+        // Getters
+        public int GetHealth() {
+            return CurrentHealth;
+        }
+
+        public float GetStartDistance() {
+            return StartDistance;
         }
     }
 }
