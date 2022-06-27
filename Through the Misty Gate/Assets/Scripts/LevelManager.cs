@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,104 +8,97 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager instance;
 
-    private bool toogleSpellBook;
-    [SerializeField] CanvasGroup spellBookCanvasGroup;
-    [SerializeField] RectTransform spellInfo;
     [SerializeField] Camera mainCamera;
+
+    public GameObject inventoryUI;
+    public GameObject pageLoreUI;
+    public GameObject spellBookUI;
 
 
     private void Awake()
     {
         instance = this;
-        toogleSpellBook = false;
-        MakeSpellBookInvisible();
+        inventoryUI.SetActive(false);
+        pageLoreUI.SetActive(false);
+        spellBookUI.SetActive(false);
     }
 
-    public void MakeSpellBookVisible()
-    {
-        spellBookCanvasGroup.interactable = true;
-        spellBookCanvasGroup.alpha = 1;
-        spellBookCanvasGroup.blocksRaycasts = true;
 
-    }
-
-    public void MakeSpellBookInvisible()
-    {
-        spellBookCanvasGroup.interactable = false;
-        spellBookCanvasGroup.alpha = 0;
-        spellBookCanvasGroup.blocksRaycasts = false;
-
-    }
 
     private void Update()
     {
-        if (ToogleKeysDown())
+        if (ToogleSpellBookKeysDown())
         {
             ToogleSpellBook();
         }
 
-    }
-
-    public void CheckSpellInfo()
-    {
-        if (spellInfo.parent.GetComponent<RectTransform>().anchoredPosition.x < 0 && spellInfo.anchoredPosition.x < 0)
+        if (ToogleInventoryKeysDown())
         {
-            spellInfo.anchoredPosition = new Vector2( - spellInfo.anchoredPosition.x, spellInfo.anchoredPosition.y);
-        }
-        else if (spellInfo.parent.GetComponent<RectTransform>().anchoredPosition.x > 0 && spellInfo.anchoredPosition.x > 0)
-        {
-            spellInfo.anchoredPosition = new Vector2(-spellInfo.anchoredPosition.x, spellInfo.anchoredPosition.y);
+            ToogleInventory();
         }
 
     }
 
-    private bool ToogleKeysDown()
+    private void ToogleInventory()
     {
-        return Input.GetKeyDown(KeyCode.T);
+        if (inventoryUI.activeSelf)
+            inventoryUI.SetActive(false);
+        else
+        {
+            spellBookUI.SetActive(false);
+            pageLoreUI.SetActive(false);
+            inventoryUI.SetActive(true);
+        }
     }
 
     private void ToogleSpellBook()
     {
-        toogleSpellBook = !toogleSpellBook;
-        if (toogleSpellBook)
-        {
-            MakeSpellBookVisible();
-        }
+        if (spellBookUI.activeSelf)
+            spellBookUI.SetActive(false);
         else
-            MakeSpellBookInvisible();
+        {
+            inventoryUI.SetActive(false);
+            pageLoreUI.SetActive(false);
+            spellBookUI.SetActive(true);
+
+        }
     }
 
-    public bool CanClick()
+    internal void ActivateLorePage()
     {
-        Debug.Log("IsOver? - " + isMouseOverUI().ToString());
-        return !toogleSpellBook && !isMouseOverUI();
+        pageLoreUI.SetActive(true);
+        spellBookUI.SetActive(false);
+        inventoryUI.SetActive(false);
+    }
+
+    private bool ToogleInventoryKeysDown()
+    {
+        return Input.GetKeyDown(KeyCode.I);
+    }
+
+    private bool ToogleSpellBookKeysDown()
+    {
+        return Input.GetKeyDown(KeyCode.T);
+    }
+
+
+  
+    public bool CantCast()
+    {
+        return spellBookUI.activeSelf || inventoryUI.activeSelf || pageLoreUI.activeSelf;
     }
 
     public bool IsSpellBookVisible()
     {
-        return toogleSpellBook;
+        return spellBookUI.activeSelf;
     }
 
-    private bool isMouseOverUI()
+    public bool IsInventoryVisible()
     {
-        PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
-        pointerEventData.position = Input.mousePosition;
-
-        List<RaycastResult> raycastResults = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(pointerEventData, raycastResults);
-
-        foreach (RaycastResult ray in raycastResults)
-        {
-
-            if (ray.gameObject.GetComponent<MouseUIClickThrough>() != null)
-            {
-                raycastResults.Remove(ray);
-            }
-
-        }
-
-        return raycastResults.Count > 0;
+        return spellBookUI.activeSelf;
     }
+
+    
 
 
 }
