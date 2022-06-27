@@ -278,4 +278,9 @@ public class PlayerController : MonoBehaviour {
         playerStats.TakeDamage(damage, enemy.GetName());
         Debug.Log("I was attacked by " + enemy.GetName() + " for " + damage);
     }
+
+    public void BeSpiked() {
+        playerStats.TakeDamage(playerStats.currentHitPoints * 2, "Spikes");
+        Debug.Log("I got spiked :(");
+    }
 }
