@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: 7bb3dd531db335141b2bf5ac25b84925
+<<<<<<<< HEAD:Through the Misty Gate/Assets/Scripts/Enemies/Enemies/Cave.meta
+guid: 285369b5317db0c4b89c9ac25e351392
+========
+guid: 8706dd9541e4fc94e95a0a22a4977dbc
+>>>>>>>> main:Through the Misty Gate/Assets/Animation/Enemy.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Through the Misty Gate/Assets/Scripts/Enemies/Enemies/Jungle.meta
+guid: 48490d85d92425542b0783cdce62ccdb
+========
 guid: 16f2fae8dd53bd141b8a287afffe70b9
+>>>>>>>> main:Through the Misty Gate/Assets/Prefabs/Spells Scrolls.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
