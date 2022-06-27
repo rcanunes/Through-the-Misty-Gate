@@ -1,6 +1,10 @@
 fileFormatVersion: 2
-guid: 190325dc6c43afa46b682acf6fb9def0
+<<<<<<<< HEAD:Through the Misty Gate/Assets/Scripts/Enemies/Enemies.meta
+guid: 16684bb536d036740bede8b348a26605
 folderAsset: yes
+========
+guid: bc391e63eb890a5438b569dbb2b0a7c5
+>>>>>>>> main:Through the Misty Gate/Assets/Scenes/DefaultScene.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
