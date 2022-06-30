@@ -18,8 +18,8 @@ MonoBehaviour:
   type: 0
   modifiers:
     healthModifer: 0
-    armourModifier: 2
-    baseDamageModifier: 3
+    armourModifier: 10
+    baseDamageModifier: 20
     jumpModifier: 0
     speedModifier: 0
     fireDamageModifer: 0

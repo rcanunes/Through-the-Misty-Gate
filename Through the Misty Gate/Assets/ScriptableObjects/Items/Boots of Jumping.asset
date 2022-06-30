@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Boots of Jumping
   m_EditorClassIdentifier: 
   itemName: Boots of Jumping
-  description: They allow the user to jum twice
+  description: They allow the user to double jump
   image: {fileID: -1603717535, guid: 83bf93558b0ec514a95bd6edcd67f7ac, type: 3}
   type: 3
   modifiers:
@@ -21,9 +21,9 @@ MonoBehaviour:
     armourModifier: 0
     baseDamageModifier: 0
     jumpModifier: 10
-    speedModifier: 5
+    speedModifier: 1
     fireDamageModifer: 0
     iceDamageModifier: 0
     iceBootsModifier: 0
-    doubleJumpModifier: 0
+    doubleJumpModifier: 1
     grabWallModifier: 0

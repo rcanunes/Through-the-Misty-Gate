@@ -5599,7 +5599,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2422644190904274028}
         m_TargetAssemblyTypeName: EquipmentSlot, Assembly-CSharp
-        m_MethodName: ShowInfo
+        m_MethodName: UnequipItem
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5614,7 +5614,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2422644190904274028}
         m_TargetAssemblyTypeName: EquipmentSlot, Assembly-CSharp
-        m_MethodName: UnequipItem
+        m_MethodName: ShowInfo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6448,7 +6448,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2422644191332603736}
         m_TargetAssemblyTypeName: ItemSlot, Assembly-CSharp
-        m_MethodName: ShowInfo
+        m_MethodName: UseItem
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6463,7 +6463,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2422644191332603736}
         m_TargetAssemblyTypeName: ItemSlot, Assembly-CSharp
-        m_MethodName: UseItem
+        m_MethodName: ShowInfo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

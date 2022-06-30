@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 671a64866a60fbf408412a50e9ee9054, type: 3}
   m_Name: Crown of Madness
   m_EditorClassIdentifier: 
-  itemName: Crown of madnness
-  description: Crown of a forgoten mad king
+  itemName: Crown of Madness
+  description: The crown of a forgotten king
   image: {fileID: 21300000, guid: f30c689e1cd8caa45a28c4947f382374, type: 3}
   type: 0
   modifiers:
-    healthModifer: 5
-    armourModifier: 0
-    baseDamageModifier: 10
+    healthModifer: 15
+    armourModifier: 25
+    baseDamageModifier: 25
     jumpModifier: 0
     speedModifier: 0
     fireDamageModifer: 0

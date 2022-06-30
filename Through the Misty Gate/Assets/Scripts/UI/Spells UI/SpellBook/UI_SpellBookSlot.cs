@@ -66,7 +66,7 @@ public class UI_SpellBookSlot : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Right)
+        if (eventData.button == PointerEventData.InputButton.Left)
         {
             if (hotKeySystem.CheckContainsSpell(hotKeyAbility))
             {
@@ -81,7 +81,7 @@ public class UI_SpellBookSlot : MonoBehaviour, IPointerDownHandler
            
         }
 
-        else if(eventData.button == PointerEventData.InputButton.Left)
+        else if(eventData.button == PointerEventData.InputButton.Right)
         {
             SetUpSpellInfo();
         }

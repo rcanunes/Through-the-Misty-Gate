@@ -83,9 +83,10 @@ public class ProjectileBehaviour : MonoBehaviour
 
     private void ProjectileCollision()
     {
-        if(projectileStats.spellEfectsOnCollision != null)
-        {
-            var aux = Instantiate(projectileStats.spellEfectsOnCollision, transform.position, transform.rotation);
+        if(projectileStats.spellEfectsOnCollision != null) {
+            Vector3 position = transform.position;
+            position.z = -10;
+            var aux = Instantiate(projectileStats.spellEfectsOnCollision, position, transform.rotation);
             Destroy(aux.gameObject, 1f);
         }
             

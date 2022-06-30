@@ -2,9 +2,12 @@
 
 using Newtonsoft.Json;
 using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Windows;
+using File = System.IO.File;
 
 public class MetricsSaveData : MonoBehaviour
 {
@@ -20,6 +23,7 @@ public class MetricsSaveData : MonoBehaviour
 
     public MetricsData metricsData;
     private string fileName;
+    private string url;
     private bool needsToSave;
     [SerializeField] string name_modifier;
 
@@ -29,7 +33,9 @@ public class MetricsSaveData : MonoBehaviour
     {
         needsToSave = true;
         metricsData = new MetricsData();
-        fileName = name_modifier + DateTime.Now.ToString("yyyy-dd-M--HH-mm-ss");
+        fileName = name_modifier + DateTime.Now.ToString("yyyy-dd-M--HH-mm-ss") + ".json";
+
+        url = Application.persistentDataPath + fileName;
     }
 
     // Update is called once per frame
@@ -51,9 +57,11 @@ public class MetricsSaveData : MonoBehaviour
     {
         yield return new WaitForSeconds(10f);
         string jsonString = JsonConvert.SerializeObject(metricsData);
-        Debug.Log("Save data to file - " + fileName);
-        Debug.Log(jsonString);
-
+        
+        File.WriteAllText(url, jsonString);
+        
+        Debug.Log("Saving at " + url);
+        
         needsToSave = true;
     }
 

@@ -7,6 +7,7 @@ public class RespawnPlayer : MonoBehaviour
     [SerializeField] private GameObject respawnCanvas;
     private GameObject spawnPoint;
     private PlayerController player;
+    private GameObject canvas;
     
     // Start is called before the first frame update
     void Start()
@@ -19,7 +20,7 @@ public class RespawnPlayer : MonoBehaviour
     public void Respawn()
     {
         player.SetIgnoreInput(true);
-        Instantiate(respawnCanvas);
+        canvas = Instantiate(respawnCanvas) as GameObject;
         StartCoroutine(StartRespawn());
 
     }
@@ -29,5 +30,6 @@ public class RespawnPlayer : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         transform.position = spawnPoint.transform.position;
         player.SetIgnoreInput(false);
+        Destroy(canvas);
     }
 }

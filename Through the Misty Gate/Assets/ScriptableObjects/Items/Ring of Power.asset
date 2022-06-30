@@ -17,9 +17,9 @@ MonoBehaviour:
   image: {fileID: 21300000, guid: ec3f5c9d06947e7458e9626551938feb, type: 3}
   type: 2
   modifiers:
-    healthModifer: -10
+    healthModifer: -20
     armourModifier: 0
-    baseDamageModifier: 15
+    baseDamageModifier: 30
     jumpModifier: 0
     speedModifier: 0
     fireDamageModifer: 0

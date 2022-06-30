@@ -593,7 +593,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 1718010991, guid: b1b0532a42cf4734392670f4f85d6639, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -626,6 +626,8 @@ MonoBehaviour:
   JumpingSound: {fileID: 2190976566604574793}
   AttackSound: {fileID: 2190976566813455268}
   DeathSound: {fileID: 2190976565659830480}
+  ignoreMovement: 0
+  destryAnimation: {fileID: 0}
 --- !u!70 &2190976567671309908
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
