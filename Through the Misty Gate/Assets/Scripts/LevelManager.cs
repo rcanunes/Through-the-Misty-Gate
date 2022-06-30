@@ -37,6 +37,18 @@ public class LevelManager : MonoBehaviour
             ToogleInventory();
         }
 
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            TooglAllOff();
+        }
+
+    }
+
+    private void TooglAllOff()
+    {
+        inventoryUI.SetActive(false);
+        pageLoreUI.SetActive(false);
+        spellBookUI.SetActive(false);
     }
 
     private void ToogleInventory()
