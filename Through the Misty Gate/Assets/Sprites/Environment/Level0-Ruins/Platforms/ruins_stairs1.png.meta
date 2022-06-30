@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 75
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -119,10 +119,10 @@ TextureImporter:
       name: ruins_stairs1_0
       rect:
         serializedVersion: 2
-        x: 60
-        y: 162
-        width: 60
-        height: 54
+        x: 0
+        y: 144
+        width: 90
+        height: 72
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,10 +140,10 @@ TextureImporter:
       name: ruins_stairs1_1
       rect:
         serializedVersion: 2
-        x: 120
-        y: 162
-        width: 60
-        height: 54
+        x: 90
+        y: 144
+        width: 90
+        height: 72
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -162,9 +162,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 108
-        width: 60
-        height: 54
+        y: 72
+        width: 90
+        height: 72
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,10 +182,10 @@ TextureImporter:
       name: ruins_stairs1_3
       rect:
         serializedVersion: 2
-        x: 60
-        y: 108
-        width: 60
-        height: 54
+        x: 90
+        y: 72
+        width: 90
+        height: 72
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -203,10 +203,10 @@ TextureImporter:
       name: ruins_stairs1_4
       rect:
         serializedVersion: 2
-        x: 120
-        y: 108
-        width: 60
-        height: 54
+        x: 0
+        y: 0
+        width: 90
+        height: 72
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -224,10 +224,10 @@ TextureImporter:
       name: ruins_stairs1_5
       rect:
         serializedVersion: 2
-        x: 0
-        y: 54
-        width: 60
-        height: 54
+        x: 90
+        y: 0
+        width: 90
+        height: 72
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -237,111 +237,6 @@ TextureImporter:
       bones: []
       spriteID: 230354c7bd7665243a7703ff9d0ecf10
       internalID: 566434047
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ruins_stairs1_6
-      rect:
-        serializedVersion: 2
-        x: 60
-        y: 54
-        width: 60
-        height: 54
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6376bd5b42d6e0e43bbd30e85d243d36
-      internalID: 339816120
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ruins_stairs1_7
-      rect:
-        serializedVersion: 2
-        x: 120
-        y: 54
-        width: 60
-        height: 54
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5fe39617f4366be498ebdfc61bdf4da9
-      internalID: -1542909102
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ruins_stairs1_8
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 60
-        height: 54
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d1e60e1fea679a5469a3263c38b86ebb
-      internalID: 1032493658
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ruins_stairs1_9
-      rect:
-        serializedVersion: 2
-        x: 60
-        y: 0
-        width: 60
-        height: 54
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4c43cac8fea08eb479e085170f0cca9d
-      internalID: -1004449960
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ruins_stairs1_10
-      rect:
-        serializedVersion: 2
-        x: 120
-        y: 0
-        width: 60
-        height: 54
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8e755ad17e190cb4cbd2ac1708e18b23
-      internalID: -2021182509
       vertices: []
       indices: 
       edges: []
@@ -359,15 +254,10 @@ TextureImporter:
     nameFileIdTable:
       ruins_stairs1_4: -296678519
       ruins_stairs1_1: -129110680
-      ruins_stairs1_7: -1542909102
       ruins_stairs1_3: 2143828525
       ruins_stairs1_0: 2119341186
       ruins_stairs1_2: 1026557759
       ruins_stairs1_5: 566434047
-      ruins_stairs1_10: -2021182509
-      ruins_stairs1_9: -1004449960
-      ruins_stairs1_6: 339816120
-      ruins_stairs1_8: 1032493658
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
