@@ -37,6 +37,22 @@ public class EquipmentManager : MonoBehaviour
 
     }
 
+    public bool ContainsEquipment(Item equip)
+    {
+        foreach (Equipment item in currentEquipment)
+        {
+            if (item == null)
+                continue;
+
+            Debug.Log("Testing");
+            if (item.itemName == equip.itemName)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void Update()
     {
         //Metrics Functions
@@ -61,11 +77,11 @@ public class EquipmentManager : MonoBehaviour
 
         Equipment oldItem = null;
 
-        if (currentEquipment[index] != null)
-        {
-            oldItem = currentEquipment[index];
-            inventory.AddItem(oldItem);
-        }
+        //if (currentEquipment[index] != null)
+        //{
+        //    oldItem = currentEquipment[index];
+        //    inventory.AddItem(oldItem);
+        //}
 
         currentEquipment[index] = item;
 
@@ -78,7 +94,7 @@ public class EquipmentManager : MonoBehaviour
         if (currentEquipment[slotIndex] != null)
         {
             Equipment oldItem = currentEquipment[slotIndex];
-            inventory.AddItem(oldItem);
+            //inventory.AddItem(oldItem);
             currentEquipment[slotIndex] = null;
 
 

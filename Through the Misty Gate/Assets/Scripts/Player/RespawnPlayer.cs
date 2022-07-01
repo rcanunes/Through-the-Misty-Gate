@@ -5,7 +5,7 @@ using UnityEngine;
 public class RespawnPlayer : MonoBehaviour
 {
     [SerializeField] private GameObject respawnCanvas;
-    private GameObject spawnPoint;
+    public GameObject spawnPoint;
     private PlayerController player;
     private GameObject canvas;
     

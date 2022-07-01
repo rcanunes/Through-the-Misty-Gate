@@ -4,12 +4,21 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UI_Inventory : MonoBehaviour
+public class UI_Inventory : MonoBehaviour, IPointerExitHandler
 {
     private Transform itemSlot;
     private Transform itemSlotContainer;
-    private Transform infoBox;
+    [SerializeField] Transform infoBox;
     Inventory inventory;
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (eventData.pointerCurrentRaycast.gameObject.transform.IsChildOf(transform))
+            return;
+
+        if (infoBox.gameObject.activeSelf)
+            infoBox.GetComponent<SmallAnimation>().OnCLose();
+    }
 
     private void Start()
     {

@@ -24,7 +24,11 @@ public class Inventory : MonoBehaviour
 
     [SerializeField] RectTransform lorePage;
 
-
+    private void Start()
+    {
+        EquipmentManager equipmentManager = EquipmentManager.instance;
+        equipmentManager.modifyEquipment += InvokeMethod;
+    }
     //public int slots = 20;
 
     public bool AddItem(Item item)
@@ -43,6 +47,11 @@ public class Inventory : MonoBehaviour
     
 
         return true;
+    }
+
+    public void InvokeMethod(Equipment newItem, Equipment oldItem)
+    {
+        ModifyInventory?.Invoke();
     }
 
     public void RemoveItem(Item item)
