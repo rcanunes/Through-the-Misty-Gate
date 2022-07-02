@@ -100,7 +100,7 @@ public class EquipmentManager : MonoBehaviour
 
             modifyEquipment?.Invoke(null, oldItem);
 
-    }
+        }
     }
 
     public void UnequipAll()

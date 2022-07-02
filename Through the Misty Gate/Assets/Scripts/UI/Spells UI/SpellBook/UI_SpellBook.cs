@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UI_SpellBook : MonoBehaviour, IDropHandler, IPointerExitHandler
+public class UI_SpellBook : MonoBehaviour, IDropHandler, IPointerExitHandler, IDeselectHandler, IPointerDownHandler
 {
     private Transform spellSlotTemplate;
     private Transform spellSlotContainer;
@@ -21,7 +21,16 @@ public class UI_SpellBook : MonoBehaviour, IDropHandler, IPointerExitHandler
     [SerializeField] Transform spellInfo;
 
 
-
+    private void OnEnable()
+    {
+        UpdateSpellBookVisual();
+        EventSystem.current.SetSelectedGameObject(gameObject);
+    }
+    public void OnDeselect(BaseEventData eventData)
+    {
+        if (!LevelManager.instance.IsPointerOverUIElement("UI_Spells"))
+            gameObject.SetActive(false);
+    }
 
     private void Awake() {
         spellSlotContainer = transform.Find("ScrollView/Viewport/SpellSlotContainer");
@@ -32,11 +41,6 @@ public class UI_SpellBook : MonoBehaviour, IDropHandler, IPointerExitHandler
         canvas = GetComponentInParent<Canvas>();
 
     }
-
-    //public void OnDrag(PointerEventData eventData) {
-    //    rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
-
-    //}
 
     public void SetSpellBookSystem(SpellBookSystem spellBookSystem, HotKeySystem hotKeySystem) {
         this.spellBookSystem = spellBookSystem;
@@ -49,11 +53,6 @@ public class UI_SpellBook : MonoBehaviour, IDropHandler, IPointerExitHandler
     private void SpellBookSystem_OnSpellChange(object sender, EventArgs e) {
         if(LevelManager.instance.spellBookUI.activeSelf)
             UpdateSpellBookVisual();
-    }
-
-    private void OnEnable()
-    {
-        UpdateSpellBookVisual();
     }
 
     private void UpdateSpellBookVisual() {
@@ -94,23 +93,20 @@ public class UI_SpellBook : MonoBehaviour, IDropHandler, IPointerExitHandler
             spellInfo.GetComponent<SmallAnimation>().OnCLose();
     }
 
-    //public void OnPointerExit(PointerEventData eventData)
-    //{
-    //    if (eventData.pointerCurrentRaycast.gameObject != null)
-    //    {
-    //        if (eventData.pointerCurrentRaycast.gameObject.transform.IsChildOf(transform))
-    //        {
-    //            DisableSpellInfo();
-    //            return;
-    //        }
-    //    }
-    //}
-
     public void OnPointerExit(PointerEventData eventData)
     {
+        if (eventData.pointerCurrentRaycast.gameObject == null)
+            return;
+
         if (eventData.pointerCurrentRaycast.gameObject.transform.IsChildOf(transform))
             return;
 
         DisableSpellInfo();
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        EventSystem.current.SetSelectedGameObject(gameObject);
+
     }
 }

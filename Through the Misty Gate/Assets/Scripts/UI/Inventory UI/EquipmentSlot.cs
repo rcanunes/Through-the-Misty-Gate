@@ -19,6 +19,10 @@ public class EquipmentSlot : MonoBehaviour, IPointerExitHandler
 
     public void UnequipItem()
     {
+        if (item == null)
+        {
+            return;
+        }
         EquipmentManager.instance.Unequip((int)item.type);
     }
 
