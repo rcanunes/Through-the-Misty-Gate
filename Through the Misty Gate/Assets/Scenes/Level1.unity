@@ -9466,7 +9466,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 3.4340837, y: 1}
+    m_SensorSize: {x: 3.7074652, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -29505,6 +29505,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1386206062, guid: b81a7dee52b524d4e9791d41104d6c27, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685108315, guid: b81a7dee52b524d4e9791d41104d6c27, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 105175606771894588, guid: b81a7dee52b524d4e9791d41104d6c27, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -29523,7 +29531,7 @@ PrefabInstance:
       objectReference: {fileID: 280101765}
     - target: {fileID: 2422644190641851394, guid: b81a7dee52b524d4e9791d41104d6c27, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2422644190818542676, guid: b81a7dee52b524d4e9791d41104d6c27, type: 3}
       propertyPath: m_Pivot.x
@@ -29615,35 +29623,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2422644190945396828, guid: b81a7dee52b524d4e9791d41104d6c27, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2422644190945396828, guid: b81a7dee52b524d4e9791d41104d6c27, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2422644190945396828, guid: b81a7dee52b524d4e9791d41104d6c27, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 200.293
       objectReference: {fileID: 0}
     - target: {fileID: 2422644190945396828, guid: b81a7dee52b524d4e9791d41104d6c27, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 237.3187
       objectReference: {fileID: 0}
     - target: {fileID: 2422644190945396828, guid: b81a7dee52b524d4e9791d41104d6c27, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -0.000030517578
       objectReference: {fileID: 0}
     - target: {fileID: 2422644191144942859, guid: b81a7dee52b524d4e9791d41104d6c27, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2422644191144942859, guid: b81a7dee52b524d4e9791d41104d6c27, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2422644191144942859, guid: b81a7dee52b524d4e9791d41104d6c27, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 0.4930082
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b81a7dee52b524d4e9791d41104d6c27, type: 3}
@@ -51502,7 +51510,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 3.4340837, y: 1}
+    m_SensorSize: {x: 3.7074652, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

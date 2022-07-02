@@ -94,15 +94,23 @@ public class UI_SpellBook : MonoBehaviour, IDropHandler, IPointerExitHandler
             spellInfo.GetComponent<SmallAnimation>().OnCLose();
     }
 
+    //public void OnPointerExit(PointerEventData eventData)
+    //{
+    //    if (eventData.pointerCurrentRaycast.gameObject != null)
+    //    {
+    //        if (eventData.pointerCurrentRaycast.gameObject.transform.IsChildOf(transform))
+    //        {
+    //            DisableSpellInfo();
+    //            return;
+    //        }
+    //    }
+    //}
+
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (eventData.pointerCurrentRaycast.gameObject != null)
-        {
-            if (eventData.pointerCurrentRaycast.gameObject.transform.IsChildOf(transform))
-            {
-                DisableSpellInfo();
-                return;
-            }
-        }
+        if (eventData.pointerCurrentRaycast.gameObject.transform.IsChildOf(transform))
+            return;
+
+        DisableSpellInfo();
     }
 }

@@ -85,12 +85,12 @@ public class LevelManager : MonoBehaviour
 
     private bool ToogleInventoryKeysDown()
     {
-        return Input.GetKeyDown(KeyCode.I);
+        return Input.GetKeyDown(KeyCode.E);
     }
 
     private bool ToogleSpellBookKeysDown()
     {
-        return Input.GetKeyDown(KeyCode.T);
+        return Input.GetKeyDown(KeyCode.Tab);
     }
 
 
