@@ -15,6 +15,15 @@ public class ItemSlot : MonoBehaviour, IPointerExitHandler
         item = _item;
         transform.Find("ItemIcon").GetComponent<Image>().sprite = item.image;
 
+        if (EquipmentManager.instance.ContainsEquipment(item))
+        {
+            Debug.Log("Testing2");
+
+            Color test = Color.white;
+            test.a = 0.2f;
+            transform.Find("ItemIcon").GetComponent<Image>().color = test;
+        }
+
     }
 
     public void UseItem()
@@ -95,8 +104,8 @@ public class ItemSlot : MonoBehaviour, IPointerExitHandler
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if(itemInfo.gameObject.activeSelf)
-            itemInfo.GetComponent<SmallAnimation>().OnCLose();
+        //if(itemInfo.gameObject.activeSelf)
+        //    itemInfo.GetComponent<SmallAnimation>().OnCLose();
     }
 
 }

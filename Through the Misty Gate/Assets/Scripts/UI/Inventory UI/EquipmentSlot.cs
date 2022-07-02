@@ -77,8 +77,8 @@ public class EquipmentSlot : MonoBehaviour, IPointerExitHandler
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (itemInfo.gameObject.activeSelf)
-            itemInfo.GetComponent<SmallAnimation>().OnCLose();
+        //if (itemInfo.gameObject.activeSelf)
+        //    itemInfo.GetComponent<SmallAnimation>().OnCLose();
     }
 
 }

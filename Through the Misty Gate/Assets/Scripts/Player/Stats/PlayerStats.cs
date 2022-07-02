@@ -55,6 +55,9 @@ public class PlayerStats : MonoBehaviour
         spellCaster = GetComponent<SpellCaster>();
 
         _respawnPlayer = transform.GetComponent<RespawnPlayer>();
+
+        transform.position = _respawnPlayer.spawnPoint.transform.position;
+
     }
 
     public void TakeDamage(int originalDamage, string enemyType)
