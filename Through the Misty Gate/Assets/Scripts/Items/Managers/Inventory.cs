@@ -21,6 +21,7 @@ public class Inventory : MonoBehaviour
 
     public delegate void EventHandler();
     public event EventHandler ModifyInventory;
+    public event EventHandler AddToInventory;
 
     [SerializeField] RectTransform lorePage;
 
@@ -39,6 +40,7 @@ public class Inventory : MonoBehaviour
         //    return false;
         //}
         items.Add(item);
+        AddToInventory?.Invoke();
         ModifyInventory?.Invoke();
         if (item is LoreItem)
         {

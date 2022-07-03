@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
-    private int maxHitPoints = 1000;
+    private int originalMaxHitPoints = 1000;
+    private int currentMaxHitPoints = 1000;
     public int currentHitPoints;
 
     private int maxExtraHitPoints = 1000;
@@ -40,8 +41,10 @@ public class PlayerStats : MonoBehaviour
     {
         image = GetComponent<SpriteRenderer>();
         metricsSaveData = MetricsSaveData.instance;
-        currentHitPoints = maxHitPoints;
-        healthBar.SetMaxHealth(maxHitPoints, currentHitPoints);
+        currentMaxHitPoints = originalMaxHitPoints;
+
+        currentHitPoints = currentMaxHitPoints;
+        healthBar.SetMaxHealth(currentMaxHitPoints, currentHitPoints);
 
         extraLife.SetMaxHealth(maxExtraHitPoints, 0);
 
@@ -88,7 +91,7 @@ public class PlayerStats : MonoBehaviour
 
 
         currentHitPoints -= damage;
-        currentHitPoints = Mathf.Clamp(currentHitPoints, 0, maxHitPoints);
+        currentHitPoints = Mathf.Clamp(currentHitPoints, 0, currentMaxHitPoints);
 
         healthBar.SetHealth(currentHitPoints);
 
@@ -112,7 +115,7 @@ public class PlayerStats : MonoBehaviour
 
     private void Die()
     {
-        currentHitPoints = maxHitPoints;
+        currentHitPoints = currentMaxHitPoints;
         healthBar.SetHealth(currentHitPoints, 0.1f);
         _respawnPlayer.Respawn();
     }
@@ -151,7 +154,8 @@ public class PlayerStats : MonoBehaviour
 
     void SetMaxHitPoints()
     {
-        healthBar.SetMaxHealth((int)(maxHitPoints * healthModifer.GetValue()), currentHitPoints);
+        currentMaxHitPoints = (int)(originalMaxHitPoints * healthModifer.GetValue());
+        healthBar.SetMaxHealth(currentMaxHitPoints, currentHitPoints);
     }
 
     private void RemoveModifiers(StatsBlock modifiers)
@@ -207,9 +211,9 @@ public class PlayerStats : MonoBehaviour
     {
 
         float originalHitPonts = currentHitPoints;
-
+        Debug.Log("Max hit points" + currentMaxHitPoints);
         currentHitPoints += heal;
-        currentHitPoints = Mathf.Clamp(currentHitPoints, 0, maxHitPoints);
+        currentHitPoints = Mathf.Clamp(currentHitPoints, 0, currentMaxHitPoints);
 
         healthBar.SetHealth(currentHitPoints, timeToHeal);
 
