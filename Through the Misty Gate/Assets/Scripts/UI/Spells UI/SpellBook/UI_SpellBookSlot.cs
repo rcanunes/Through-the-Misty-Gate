@@ -10,6 +10,7 @@ public class UI_SpellBookSlot : MonoBehaviour, IPointerDownHandler
     private RectTransform rectTransform;
     private Vector2 startAnchoredPosition;
 
+
     private SpellBookSystem spellBookSystem;
     private HotKeySystem hotKeySystem;
     public UI_ItemManager.HotKeyAbility hotKeyAbility;

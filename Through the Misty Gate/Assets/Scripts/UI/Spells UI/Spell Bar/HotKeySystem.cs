@@ -109,10 +109,22 @@ public class HotKeySystem {
         return -1;
     }
 
-    internal void RemoveSpell(UI_ItemManager.HotKeyAbility hotKeyAbility) {
-        
-        spells.Remove(hotKeyAbility);
+    private void Remove(String spellName)
+    {
+        for (int i = 0; i < spells.Count; i++)
+        {
+            if (spells[i].spell.spellName == spellName)
+            {
+                spells.RemoveAt(i);
+                return;
+            }
+        }
+    }
 
+    internal void RemoveSpell(UI_ItemManager.HotKeyAbility hotKeyAbility) {
+
+       
+        Remove(hotKeyAbility.spell.spellName);
         if (GetCurrentSpell() == hotKeyAbility.spell) {
             if(spells.Count > 0)
             {
