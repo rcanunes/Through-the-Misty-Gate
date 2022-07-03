@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1199c009fdea4424189fa8a5f35e2011, type: 3}
   m_Name: Earthquake Spell Effects
   m_EditorClassIdentifier: 
+  speedModifier: 0.5
+  speedModifierDuration: 5
   damage: 0
   knockback: 0
   damageType: 2

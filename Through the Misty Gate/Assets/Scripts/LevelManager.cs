@@ -85,7 +85,7 @@ public class LevelManager : MonoBehaviour
 
     private bool ToogleInventoryKeysDown()
     {
-        return Input.GetKeyDown(KeyCode.I);
+        return Input.GetKeyDown(KeyCode.E);
     }
 
     private bool ToogleSpellBookKeysDown()
@@ -110,7 +110,37 @@ public class LevelManager : MonoBehaviour
         return spellBookUI.activeSelf;
     }
 
-    
+    public List<RaycastResult> GetEventSystemRaycastResults()
+    {
+        PointerEventData eventData = new PointerEventData(EventSystem.current);
+        eventData.position = Input.mousePosition;
+        List<RaycastResult> raysastResults = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventData, raysastResults);
+        return raysastResults;
+    }
+
+    public bool IsPointerOverUIElement(string layer)
+    {
+
+        int uiLayer = LayerMask.NameToLayer(layer);
+
+        if (uiLayer == -1)
+        {
+            Debug.Log("Nope Layer");
+            return false;
+        }
+
+        List<RaycastResult> eventSystemRaysastResults = GetEventSystemRaycastResults();
+
+        for (int index = 0; index < eventSystemRaysastResults.Count; index++)
+        {
+            RaycastResult curRaysastResult = eventSystemRaysastResults[index];
+            if (curRaysastResult.gameObject.layer == uiLayer)
+                return true;
+        }
+        return false;
+    }
+
 
 
 }

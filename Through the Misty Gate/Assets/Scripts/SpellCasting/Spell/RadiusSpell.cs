@@ -17,12 +17,11 @@ public class RadiusSpell : Spell
     {
         base.Cast(player);
 
-           
-
         Collider2D[] affected = Physics2D.OverlapCircleAll(player.transform.position, radius);
 
         foreach (Collider2D item in affected)
         {
+            Debug.Log("Affecting " + item.name);
             if (item.CompareTag("Enemy"))
                 spellEffect.EffectOnEnemy(item, player, player.GetComponent<PlayerStats>(), spellName);
             else

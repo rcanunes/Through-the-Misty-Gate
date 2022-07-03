@@ -68,7 +68,17 @@ public class HotKeySystem {
         int index = GetIndex(GetCurrentSpell());
 
         if (index == -1)
-            return;
+        {
+            if (spells.Count > 0)
+            {
+                spells[0].activateSpell();
+                OnAbilityListChange?.Invoke(this, EventArgs.Empty);
+            }
+ 
+            else
+                return;
+        }
+
 
         if (Input.GetAxisRaw("Mouse ScrollWheel") < 0f) {
             if (index < spells.Count - 1)
@@ -104,7 +114,12 @@ public class HotKeySystem {
         spells.Remove(hotKeyAbility);
 
         if (GetCurrentSpell() == hotKeyAbility.spell) {
-            player.SetCurrentSpell(null);
+            if(spells.Count > 0)
+            {
+                spells[0].activateSpell();
+            }
+            else
+                player.SetCurrentSpell(null);
         }
         
 

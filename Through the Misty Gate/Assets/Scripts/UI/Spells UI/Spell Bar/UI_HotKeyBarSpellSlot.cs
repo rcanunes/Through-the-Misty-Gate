@@ -111,7 +111,7 @@ public class UI_HotKeyBarSpellSlot : MonoBehaviour, IDragHandler, IDropHandler, 
 
     public void OnPointerDown(PointerEventData eventData) {
 
-        if (eventData.button == PointerEventData.InputButton.Right && hotKeyAbility != null &&
+        if (eventData.button == PointerEventData.InputButton.Left && hotKeyAbility != null &&
             LevelManager.instance.spellBookUI.activeSelf) {
             hotKeySystem.RemoveSpell(hotKeyAbility);
             spellBookSystem.InvokeOnSpellChange();

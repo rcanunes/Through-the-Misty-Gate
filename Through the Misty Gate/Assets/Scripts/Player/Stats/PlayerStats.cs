@@ -15,6 +15,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] HealthBar healthBar;
     [SerializeField] HealthBar extraLife;
     [SerializeField] ParticleSystem healingParticles;
+    private SpriteRenderer image;
 
     private RespawnPlayer _respawnPlayer;
 
@@ -34,8 +35,10 @@ public class PlayerStats : MonoBehaviour
     public BoolStat doubleJumpModifier;
     public BoolStat grabWallModifier;
 
+
     private void Start()
     {
+        image = GetComponent<SpriteRenderer>();
         metricsSaveData = MetricsSaveData.instance;
         currentHitPoints = maxHitPoints;
         healthBar.SetMaxHealth(maxHitPoints, currentHitPoints);
@@ -96,10 +99,15 @@ public class PlayerStats : MonoBehaviour
             metricsSaveData.metricsData.AddDeathCount();
 
         }
+        else
+        {
+            StartCoroutine(Flicker());
+        }
 
         if (spellCaster.currentSpell != null)
             if(spellCaster.currentSpell.damageStopsCasting)
                 spellCaster.StopCasting();
+
     }
 
     private void Die()
@@ -192,10 +200,6 @@ public class PlayerStats : MonoBehaviour
             AddExtraLife(300);    
         }
 
-
-       
-        
-
     }
 
 
@@ -223,5 +227,20 @@ public class PlayerStats : MonoBehaviour
         duration.duration = timeToHeal;
 
         healingParticles.Play();
+    }
+
+    IEnumerator Flicker()
+    {
+        image.color = new Color(1f, 1f, 1f, 0.5f);
+        yield return new WaitForSeconds(0.1f);
+        image.color = Color.white;
+        yield return new WaitForSeconds(0.1f);
+        image.color = new Color(1f, 1f, 1f, 0.5f);
+        yield return new WaitForSeconds(0.1f);
+        image.color = Color.white;
+        yield return new WaitForSeconds(0.1f);
+        image.color = new Color(1f, 1f, 1f, 0.5f);
+        yield return new WaitForSeconds(0.1f);
+        image.color = Color.white;
     }
 }

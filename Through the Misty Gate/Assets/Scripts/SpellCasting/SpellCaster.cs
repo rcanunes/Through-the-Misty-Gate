@@ -161,5 +161,6 @@ public class SpellCaster : MonoBehaviour
     public void SetCurrentSpell(Spell spell)
     {
         currentSpell = spell;
+        StopCasting();
     }
 }

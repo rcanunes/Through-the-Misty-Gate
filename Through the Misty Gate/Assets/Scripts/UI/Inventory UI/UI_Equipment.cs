@@ -53,9 +53,4 @@ public class UI_Equipment : MonoBehaviour
         }
     }
 
-    private void UpdateInventoryVisual()
-    {
-
-
-    }
 }
