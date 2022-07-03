@@ -8,6 +8,8 @@ using UnityEngine;
 
 public class SpellEffect: ScriptableObject
 {
+    public float speedModifier = 0;
+    public float speedModifierDuration = 0;
     public float damage = 0;
     public float knockback = 0;
     public DamageTypes damageType = DamageTypes.Default;
@@ -18,7 +20,7 @@ public class SpellEffect: ScriptableObject
         Effect(enemy, projectile);
         if (damage > 0)
             DealDamage(enemy, player, spellName);
-      
+        DealModifiers(enemy.gameObject);
     }
 
     public void Effect(Collider2D enemy, GameObject projectile)
@@ -44,6 +46,13 @@ public class SpellEffect: ScriptableObject
         EquipmentManager.instance.AddDamageDEaltWhileEquiped(damage);
 
         Debug.Log("Adding Damage to " + enemy.gameObject.name + "  Damage: " + damage);
+
+    }
+
+    private void DealModifiers(GameObject enemy)
+    {
+        if (speedModifier != 0)
+            enemy.GetComponent<Enemy>().SetSpeedModifier(speedModifier, speedModifierDuration);
 
     }
 

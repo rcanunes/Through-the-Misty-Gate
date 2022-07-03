@@ -248,8 +248,21 @@ namespace Enemies.EnemyTypes {
             }
         }
 
-        public void SetSpeedModifier(float modifier) {
+        public void SetSpeedModifier(float modifier, float duration) {
+
+            float aux = SpeedModifier;
+            
             SpeedModifier -= modifier;
+
+            StartCoroutine(ResetSpeedModifier(aux, duration));
+        }
+
+
+
+        IEnumerator ResetSpeedModifier(float speedModifier, float duration)
+        {
+            yield return new WaitForSeconds(duration);
+            SpeedModifier = speedModifier;
         }
 
         public void IgnoreMovement()
