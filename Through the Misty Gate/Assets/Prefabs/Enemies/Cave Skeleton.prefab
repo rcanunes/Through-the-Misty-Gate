@@ -756,6 +756,8 @@ MonoBehaviour:
   JumpingSound: {fileID: 0}
   AttackSound: {fileID: 786460638711581049}
   DeathSound: {fileID: 786460639067575730}
+  ignoreMovement: 0
+  destryAnimation: {fileID: 682749745596762346, guid: d893ee8b0a76cad4e954b51eeb3f261d, type: 3}
   WalkingSound2: {fileID: 5781066432911939433}
   WalkingSound3: {fileID: 6537877349045580853}
 --- !u!50 &786460639106876944

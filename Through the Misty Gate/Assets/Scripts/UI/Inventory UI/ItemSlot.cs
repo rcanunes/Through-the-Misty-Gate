@@ -53,31 +53,38 @@ public class ItemSlot : MonoBehaviour, IPointerExitHandler
 
             if (equip.modifiers.healthModifer != 0)
             {
-                extraDescription += "It modifies the health of the wearer by " + equip.modifiers.healthModifer + "%\n";
+                extraDescription += IncreasesDecresases(equip.modifiers.healthModifer);
+                extraDescription += " the health of the wearer by " + equip.modifiers.healthModifer + "%\n";
             }
             if (equip.modifiers.armourModifier != 0)
             {
-                extraDescription += "It modifies the damage taken by " + equip.modifiers.armourModifier + "%\n";
+                extraDescription += IncreasesDecresases(equip.modifiers.armourModifier);
+                extraDescription += " the damage taken by " + equip.modifiers.armourModifier + "%\n";
             }
             if (equip.modifiers.jumpModifier != 0)
             {
-                extraDescription += "It modifies the jump height by " + equip.modifiers.jumpModifier + "%\n";
+                extraDescription += IncreasesDecresases(equip.modifiers.jumpModifier);
+                extraDescription += " the jump height by " + equip.modifiers.jumpModifier + "%\n";
             }
             if (equip.modifiers.speedModifier != 0)
             {
-                extraDescription += "It modifies the moement speed by " + equip.modifiers.speedModifier + "%\n";
+                extraDescription += IncreasesDecresases(equip.modifiers.speedModifier);
+                extraDescription += " the movement speed by " + equip.modifiers.speedModifier + "%\n";
             }
             if (equip.modifiers.baseDamageModifier != 0)
             {
-                extraDescription += "It modifies the damage dealt by " + equip.modifiers.baseDamageModifier + "%\n";
+                extraDescription += IncreasesDecresases(equip.modifiers.baseDamageModifier);
+                extraDescription += " the damage dealt by " + equip.modifiers.baseDamageModifier + "%\n";
             }
             if (equip.modifiers.fireDamageModifer != 0)
             {
-                extraDescription += "It modifies the fire damage dealt by " + equip.modifiers.fireDamageModifer + "%\n";
+                extraDescription += IncreasesDecresases(equip.modifiers.fireDamageModifer);
+                extraDescription += " the fire damage dealt by " + equip.modifiers.fireDamageModifer + "%\n";
             }
             if (equip.modifiers.iceDamageModifier != 0)
             {
-                extraDescription += "It modifies the ice damage dealt by " + equip.modifiers.iceDamageModifier + "%\n";
+                extraDescription += IncreasesDecresases(equip.modifiers.iceDamageModifier);
+                extraDescription += " the ice damage dealt by " + equip.modifiers.iceDamageModifier + "%\n";
             }
 
         }
@@ -100,6 +107,16 @@ public class ItemSlot : MonoBehaviour, IPointerExitHandler
 
         itemInfo.gameObject.SetActive(true);
 
+    }
+
+    private string IncreasesDecresases(float modifier)
+    {
+        if (modifier > 0)
+        {
+            return "Increases";
+        }
+
+        return "Decreases";
     }
 
     public void OnPointerExit(PointerEventData eventData)

@@ -61,6 +61,7 @@ namespace Enemies.EnemyTypes {
         protected float WalkingSoundCooldown = 3.0f;
 
         public bool ignoreMovement = false;
+        private SpriteRenderer image;
 
         // Player and Manager
         protected PlayerController Player { get; private set; }
@@ -80,7 +81,9 @@ namespace Enemies.EnemyTypes {
             
             Manager = GameObject.FindObjectOfType<GameManager>();
             Player = GameObject.FindObjectOfType<PlayerController>();
-            
+
+            image = GetComponent<SpriteRenderer>();
+
             RigidBody = GetComponent<Rigidbody2D>();
             
             // Set audio sources
@@ -227,7 +230,7 @@ namespace Enemies.EnemyTypes {
 
 
             CurrentHealth -= damage;
-
+            StartCoroutine(Flicker());
             if (CurrentHealth < 0) {
                 Debug.Log("Die");
 
@@ -260,6 +263,21 @@ namespace Enemies.EnemyTypes {
 
             yield return new WaitForSeconds(0.2f);
             ignoreMovement = false;
+        }
+
+        IEnumerator Flicker()
+        {
+            image.color = new Color(1f, 1f, 1f, 0.5f);
+            yield return new WaitForSeconds(0.1f);
+            image.color = Color.white;
+            yield return new WaitForSeconds(0.1f);
+            image.color = new Color(1f, 1f, 1f, 0.5f);
+            yield return new WaitForSeconds(0.1f);
+            image.color = Color.white;
+            yield return new WaitForSeconds(0.1f);
+            image.color = new Color(1f, 1f, 1f, 0.5f);
+            yield return new WaitForSeconds(0.1f);
+            image.color = Color.white;
         }
     }
 }

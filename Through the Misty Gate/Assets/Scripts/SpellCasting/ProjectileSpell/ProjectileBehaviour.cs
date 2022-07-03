@@ -85,8 +85,8 @@ public class ProjectileBehaviour : MonoBehaviour
     {
         if(projectileStats.spellEfectsOnCollision != null) {
             Vector3 position = transform.position;
-            position.z = -10;
-            var aux = Instantiate(projectileStats.spellEfectsOnCollision, position, transform.rotation);
+            var aux = Instantiate(projectileStats.spellEfectsOnCollision, transform.position, transform.rotation);
+            Debug.Log(position.ToString() + transform.rotation.ToString());
             Destroy(aux.gameObject, 1f);
         }
             

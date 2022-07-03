@@ -49,9 +49,4 @@ public class SpellBookSystem {
         OnSpellChange?.Invoke(this, EventArgs.Empty);
     }
 
-    public void AddSpell()
-    {
-        
-    }
-
 }

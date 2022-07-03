@@ -627,7 +627,7 @@ MonoBehaviour:
   AttackSound: {fileID: 2190976566813455268}
   DeathSound: {fileID: 2190976565659830480}
   ignoreMovement: 0
-  destryAnimation: {fileID: 0}
+  destryAnimation: {fileID: 3409860097949910776, guid: d4f80df742925ab40ab3e54d114a06c5, type: 3}
 --- !u!70 &2190976567671309908
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

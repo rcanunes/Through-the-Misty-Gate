@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour {
    
 
     // Spell Casting Variables
-    private float knockbackAmount;
+    private float knockbackAmount = 5;
     private float knockbackBurst;
     private bool ignoreInput = false;
 
@@ -260,14 +260,6 @@ public class PlayerController : MonoBehaviour {
         ignoreInput = false;
     }
 
-
-    public void SetKnockback(float amount, float burst) {
-        knockbackAmount = amount;
-        knockbackBurst = burst;
-        Debug.Log("KnockbakAmount " + knockbackAmount.ToString() + " - KnockBackBurst" + knockbackBurst.ToString());
-    }
-
-
     private static bool GetJumpKeysDown() {
         return Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Z);
     }
@@ -296,7 +288,28 @@ public class PlayerController : MonoBehaviour {
     // Ouchie Methods
     public void BeAttacked(Enemy enemy, int damage) {
         playerStats.TakeDamage(damage, enemy.GetName());
+
+        KnockBack(   GetKnockbackVector(enemy.transform) );
+
         Debug.Log("I was attacked by " + enemy.GetName() + " for " + damage);
+    }
+
+    private Vector2 GetKnockbackVector(Transform enemy)
+    {
+        Vector3 direction = GetDirection(enemy);
+        return new Vector2(direction.x, direction.y) * knockbackAmount;
+
+
+    }
+
+    private Vector3 GetDirection(Transform enemy)
+    {
+        Vector3 target = gameObject.transform.position;
+        target.z = 0;
+        Vector3 origin = enemy.transform.position;
+        origin.z = 0;
+        Vector3 direction = target - origin;
+        return direction.normalized;
     }
 
     public void BeSpiked() {
